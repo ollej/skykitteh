@@ -36,8 +36,6 @@ __DATA__
 </head>
 <body>
 
-<?php print "test"; ?>
-
 <form action="" method="post">
 	<div style="display: block; padding: 4px">
 		<textarea name="code" rows="46" style="font-family: monospace; width: 100%; height: 100%"><%= $code %></textarea>
