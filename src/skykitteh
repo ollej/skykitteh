@@ -48,6 +48,7 @@ __DATA__
 				#E8E8E8 63%
 			);
 			height:50px;
+			text-align: center;
 		}
 		h1 {
 		font-family: "Myriad pro", helvetica;
