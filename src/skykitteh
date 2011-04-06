@@ -1,5 +1,17 @@
 #!/usr/bin/perl
 
+# Skykitteh at github: http://github.com/ollej/skykitteh
+# Mojolicious documentation: http://mojolicio.us/
+#
+# Neat things to add:
+# * Perl check before new code is saved.
+# * Checksum for file added to output and checked before saving.
+# * Revision control, rollback to earlier version.
+# * Syntax highlighting
+# * Logo
+# * Move html layout into separate template
+# * AJAX updating / JSON responses for backend
+
 use warnings;
 use strict;
 use Mojolicious::Lite;
@@ -14,14 +26,11 @@ get '/' => sub {
 
 post '/' => sub {
 	my $self = shift;
-
 	my $code = $self->param('code');
 	$code =~ s/\r$//gm;
 	write_file($0, { binmode => ':utf8', atomic => 1 }, $code);
 	$self->redirect_to('/');
-
 };
-
 
 app->start;
 __DATA__
@@ -32,7 +41,7 @@ __DATA__
  
 <head> 
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
-	<title>Skykitteh works!</title>
+	<title>Skykitteh</title>
 	<style type="text/css">
 		#header {
 			background-image: -webkit-gradient(
