@@ -59,7 +59,7 @@ __DATA__
 			height:50px;
 			text-align: center;
 		}
-		h1 {
+		h1,a {
 		font-family: "Myriad pro", helvetica;
 		}
 	</style>
