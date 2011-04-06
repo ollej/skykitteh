@@ -75,6 +75,7 @@ __DATA__
 		<textarea name="code" rows="46" style="font-family: monospace; width: 100%; height: 100%"><%= $code %></textarea>
 	</div>
 	<input type="submit" name="submit" value="Evolve!" />
+	<a href="http://github.com/ollej/skykitteh">http://github.com/ollej/skykitteh</a>
 </form>
 </body>
 </html>
