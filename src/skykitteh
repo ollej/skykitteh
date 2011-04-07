@@ -8,7 +8,7 @@
 # * Checksum for file added to output and checked before saving.
 # * Revision control, rollback to earlier version.
 # * Syntax highlighting
-# * Logo
+# * Logo - Kitty smiley in cloud?
 # * Move html layout into separate template
 # * AJAX updating / JSON responses for backend
 
