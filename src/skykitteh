@@ -77,9 +77,6 @@ __DATA__
 	<input type="submit" name="submit" value="Evolve!" />
 	<a href="http://github.com/ollej/skykitteh">http://github.com/ollej/skykitteh</a>
 
-<iframe title="YouTube video player" width="480" height="390" src="http://www.youtube.com/embed/EtZifLb7g5M?rel=0" frameborder="0" allowfullscreen></iframe>
-
-
 </form>
 </body>
 </html>
