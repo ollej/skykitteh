@@ -78,7 +78,12 @@ __DATA__
 <div id="header">
 	<h1>=^..^= Skykitteh =^..^=</h1>
 </div>
+
+
 <center><img src="http://img189.imageshack.us/img189/5056/skykitteh.jpg" border=5 alt="SKYKITTEH!"/> </center>
+<div align=center>It's a bird!.<p> It's a plane! <p> It's.... SKYKITTEH!</div>
+
+
 <%= content %>
 </body>
 </html>
