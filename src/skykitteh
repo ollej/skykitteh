@@ -5,13 +5,11 @@
 #
 # Neat things to add:
 # * Perl check before new code is saved.
-# * Checksum for file added to output and checked before saving.
 # * Revision control, rollback to earlier version.
 # * Syntax highlighting
 # * Logo - Kitty smiley in cloud?
 # * Move html layout into separate template
 # * AJAX updating / JSON responses for backend
-# test
 
 use warnings;
 use strict;
@@ -40,7 +38,7 @@ post '/' => sub {
 	write_file($0, { binmode => ':utf8', atomic => 1 }, $code);
         my @compile = `perl -c $0 2>&1`;
 	if (!grep {/syntax OK/} @compile) {
-	        write_file($0, { binmode => ':utf8', atomic => 1 }, $oldcode);
+	        #write_file($0, { binmode => ':utf8', atomic => 1 }, $oldcode);
 		$self->stash('msg' => "New SkyKitteh did not compile.");
 		$self->render('error');
 		return;
@@ -51,17 +49,13 @@ post '/' => sub {
 app->start;
 __DATA__
 
-@@ error.html.ep
-<h1>Error!</h1>
-<p><%= $msg %></p>
-
-@@ showform.html.ep
+@@ layouts/default.html.ep
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
 <html xmlns="http://www.w3.org/1999/xhtml"> 
  
 <head> 
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
-	<title>Skykitteh</title>
+	<title><%= title %></title>
 	<style type="text/css">
 		#header {
 			background-image: -webkit-gradient(
@@ -85,11 +79,22 @@ __DATA__
 	</style>
 </head>
 <body>
-
 <div id="header">
 	<h1>=^..^= Skykitteh =^..^=</h1>
 </div>
+<%= content %>
+</body>
+</html>
 
+@@ error.html.ep
+% layout 'default';
+% title 'Error';
+<h1>Error!</h1>
+<p><%= $msg %></p>
+
+@@ showform.html.ep
+% layout 'default';
+% title 'Skykitteh';
 <form action="" method="post">
 	<div style="display: block; padding: 4px">
 		<textarea name="code" rows="45" style="font-family: monospace; width: 100%; height: 100%"><%= $code %></textarea>
@@ -99,5 +104,3 @@ __DATA__
 	<a href="http://github.com/ollej/skykitteh">http://github.com/ollej/skykitteh</a>
 
 </form>
-</body>
-</html>
