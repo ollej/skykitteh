@@ -78,6 +78,7 @@ __DATA__
 <div id="header">
 	<h1>=^..^= Skykitteh =^..^=</h1>
 </div>
+<img src="http://img189.imageshack.us/img189/5056/skykitteh.jpg" alt="SKYKITTEH!"/> 
 <%= content %>
 </body>
 </html>
