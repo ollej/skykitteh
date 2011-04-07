@@ -85,7 +85,7 @@ __DATA__
 
 <form action="" method="post">
 	<div style="display: block; padding: 4px">
-		<textarea name="code" rows="45" style="font-family: monospace; width: 100%; height: 80%"><%= $code %></textarea>
+		<textarea name="code" rows="45" style="font-family: monospace; width: 100%; height: 50%"><%= $code %></textarea>
 	</div>
 	<input type="hidden" name="checksum" value="<%= $checksum %>" />
 	<input type="submit" name="submit" value="Evolve!" />
