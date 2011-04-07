@@ -70,6 +70,8 @@ __DATA__
 	<h1>=^..^= Skykittehboots! =^..^=</h1>
 </div>
 
+<iframe title="YouTube video player" width="640" height="390" src="http://www.youtube.com/embed/9oFpP6bF-v0?rel=0" frameborder="0" allowfullscreen></iframe>
+
 <form action="" method="post">
 	<div style="display: block; padding: 4px">
 		<textarea name="code" rows="45" style="font-family: monospace; width: 100%; height: 100%"><%= $code %></textarea>
