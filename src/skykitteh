@@ -16,13 +16,13 @@ use warnings;
 use strict;
 use Mojolicious::Lite;
 use File::Slurp qw(read_file write_file);
-use Digest::MD5 qw(md5);
+use Digest::MD5 qw(md5_hex);
 
 get '/' => sub {
 	my $self = shift;
 	my $code = read_file($0);
 	$self->stash('code' => $code);
-	$self->stash('checksum', md5($code));
+	$self->stash('checksum', md5_hex($code));
 	$self->render(template => 'showform');
 };
 
