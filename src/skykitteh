@@ -32,7 +32,7 @@ post '/' => sub {
 	my $code = $self->param('code');
 	$code =~ s/\r$//gm;
 	my $oldcode = read_file($0);
-	if ($self->param('checksum') != md5_hex($oldcode)) {
+	if ($self->param('checksum') ne md5_hex($oldcode)) {
 		$self->stash('msg' => "Code has been updated since you loaded the page, the MD5 checksum didn't match.");
 		$self->render('error');
 		return;
