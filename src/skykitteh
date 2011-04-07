@@ -11,6 +11,7 @@
 # * Logo - Kitty smiley in cloud?
 # * Move html layout into separate template
 # * AJAX updating / JSON responses for backend
+# * See more in issues on github page. See above.
 
 use warnings;
 use strict;
@@ -79,7 +80,7 @@ __DATA__
 </div>
 
 
-<div align=center; padding-top: 5px; pading-bottom: 5px>
+<div align=center>
 <img src="http://img189.imageshack.us/img189/5056/skykitteh.jpg" border=5 alt="SKYKITTEH!"/> <br>
 It's a bird!.<p> It's a plane! <p> It's.... SKYKITTEH! <p> ta-ta-ta-taaaaaaa!</div>
 
