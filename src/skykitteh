@@ -40,7 +40,7 @@ post '/' => sub {
 	write_file($0, { binmode => ':utf8', atomic => 1 }, $code);
 	my @compile = `perl -c $0 2>&1`;
 	if (!grep {/syntax OK/} @compile) {
-	    #write_file($0, { binmode => ':utf8', atomic => 1 }, $oldcode); # Just test for now.
+	    write_file($0, { binmode => ':utf8', atomic => 1 }, $oldcode);
 	    $self->stash('msg' => "New SkyKitteh did not compile.");
 	    $self->render('error');
 	    return;
