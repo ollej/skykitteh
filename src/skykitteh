@@ -15,6 +15,8 @@ use strict;
 use Mojolicious::Lite;
 use File::Slurp qw(read_file write_file);
 use Digest::MD5 qw(md5_hex);
+use HTTP::Request::Common qw(GET);
+use LWP;
 
 get '/' => sub {
 	my $self = shift;
@@ -49,8 +51,28 @@ post '/' => sub {
 	    $self->render('error');
 	    return;
 	}
+
+	if (!prod_kitteh()) {
+	    $self->stash('msg' => "Please don't kill SkyKitteh.");
+	    $self->render('error');
+	    return;
+	}
+
 	$self->redirect_to('/');
 };
+
+sub prod_kitteh
+{
+        my $browser = LWP::UserAgent->new();
+        $browser->agent('SkyKitteh');
+        $browser->timeout(5);
+
+        my $request = GET 'http://www.skykitteh.com/';
+        my $response = $browser->request($request);
+
+        return !$response->is_error;
+}
+
 
 app->start;
 __DATA__
