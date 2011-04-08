@@ -90,7 +90,7 @@ get '/motd' => sub {
 
     $self->stash('msg' => $motd);
     $self->render('motd');
-}
+};
 
 sub prod_kitteh
 {
