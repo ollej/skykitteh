@@ -22,7 +22,6 @@ use Digest::MD5 qw(md5_hex);
 get '/' => sub {
 	my $self = shift;
 	my $code = read_file($0);
-	my @files = read_dir( '/path/to/dir' ) ;
 	$self->stash('code' => $code);
 	$self->stash('checksum', md5_hex($code));
 	$self->render('showform');
@@ -107,11 +106,6 @@ It's a bird!.<p> It's a plane! <p> It's.... SKYKITTEH! <p> ta-ta-ta-taaaaaaa! <p
 % layout 'default';
 % title 'Skykitteh';
 
-<%= @files = <*>;
- foreach $file (@files) {
-   print $file . "\n";
- } %>
- 
 <form action="/" method="post">
 	<div style="display: block; padding: 4px">
 		<textarea name="code" rows="45" style="font-family: monospace; width: 100%; height: 100%"><%= $code %></textarea>
