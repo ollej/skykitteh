@@ -35,6 +35,9 @@ post '/' => sub {
 	    return;
 	}
 
+	my $commit_message = $self->param('commit_message');
+	write_file("commit_message.txt", $commit_message);
+	
 	my $oldcode = read_file($0);
 	if ($self->param('checksum') ne md5_hex($oldcode)) {
 		$self->stash('msg' => "Code has been updated since you loaded the page, the MD5 checksum didn't match.");
@@ -166,14 +169,14 @@ It's a bird!.<p> It's a plane! <p> It's.... SKYKITTEH! <p> ta-ta-ta-taaaaaaa! <p
 		<textarea name="code" rows="45" style="font-family: monospace; width: 100%; height: 100%"><%= $code %></textarea>
 	</div>
 	<input type="hidden" name="checksum" value="<%= $checksum %>" />
-	<input type="submit" name="submit" value="Evolve!" />
+	<input type="text" value="" name="commit_message" />
 	<a href="http://github.com/ollej/skykitteh">http://github.com/ollej/skykitteh</a>
-</form>
 
-<form action="/upload" method="post">
 <h2>Upload File:</h2>
 <input type="file" name="file" value="" />
-<input type="submit" name="submit" value="Upload" />
+
+<br />
+	<input type="submit" name="submit" value="Evolve!" />
 </form>
 
 <h2>Files</h2>
