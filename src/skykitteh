@@ -63,6 +63,12 @@ post '/' => sub {
 	$self->redirect_to('/');
 };
 
+post '/upload' => sub {
+    my $self = shift;
+    my $file = $self->req->upload('file');
+    $file->move_to('./' . $file->filename);
+};
+
 sub prod_kitteh
 {
         my $browser = LWP::UserAgent->new();
@@ -134,6 +140,7 @@ It's a bird!.<p> It's a plane! <p> It's.... SKYKITTEH! <p> ta-ta-ta-taaaaaaa! <p
 % layout 'default';
 % title 'SkyKitteh';
 
+<h2>Edit SkyKitteh</h2>
 <form action="/" method="post">
 	<div style="display: block; padding: 4px">
 		<textarea name="code" rows="45" style="font-family: monospace; width: 100%; height: 100%"><%= $code %></textarea>
@@ -141,4 +148,10 @@ It's a bird!.<p> It's a plane! <p> It's.... SKYKITTEH! <p> ta-ta-ta-taaaaaaa! <p
 	<input type="hidden" name="checksum" value="<%= $checksum %>" />
 	<input type="submit" name="submit" value="Evolve!" />
 	<a href="http://github.com/ollej/skykitteh">http://github.com/ollej/skykitteh</a>
+</form>
+
+<form action="/upload" method="post">
+<h2>Upload File:</h2>
+<input type="file" name="file" value="" />
+<input type="submit" name="submit" value="Upload" />
 </form>
