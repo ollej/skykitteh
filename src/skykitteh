@@ -25,6 +25,15 @@ get '/' => sub {
 	$self->render('showform');
 };
 
+get '/edit/:filename' => sub {
+	my $self = shift;
+        my $filename = $self->stash('filename');
+	my $code = read_file($filename);
+	$self->stash('code' => $code);
+	$self->stash('checksum', md5_hex($code));
+	$self->render('showform');
+};
+
 post '/' => sub {
 	my $self = shift;
 	my $filename = $self->param('filename');
@@ -196,6 +205,6 @@ It's a bird!.<p> It's a plane! <p> It's.... SKYKITTEH! <p> ta-ta-ta-taaaaaaa! <p
 <ul>
 % my @files = <*>;
 % foreach my $f (@files) {
-<li><%= $f %></li>
+<li><a href="/edit/<%= $f %>"><%= $f %></a></li>
 % }
 </ul>
