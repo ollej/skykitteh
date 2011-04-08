@@ -36,7 +36,7 @@ post '/' => sub {
 	}
 
 	my $commit_message = $self->param('commit_message');
-	write_file("commit_message.txt", $commit_message);
+	write_file("/tmp/commit_message.txt", $commit_message);
 	
 	my $oldcode = read_file($0);
 	if ($self->param('checksum') ne md5_hex($oldcode)) {
@@ -177,8 +177,9 @@ It's a bird!.<p> It's a plane! <p> It's.... SKYKITTEH! <p> ta-ta-ta-taaaaaaa! <p
 <input type="file" name="file" value="" />
 
 <br />
-	Evolushion comment: <input type="text" size="200" value="" name="commit_message" />
-<br />
+	<h3>Evolushion comment</h3>
+<textarea name="commit_message" rows="3" cols="80"></textarea>
+<br /><br />
 	<input type="submit" name="submit" value="Evolve!" />
 </form>
 
