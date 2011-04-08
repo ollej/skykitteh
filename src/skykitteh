@@ -178,10 +178,6 @@ It's a bird!.<p> It's a plane! <p> It's.... SKYKITTEH! <p> ta-ta-ta-taaaaaaa! <p
 
 <h2>Files</h2>
 <ul>
-<%
-my @files = <*>;
-foreach my $file (@files) {
-    print "<li>$file</li>\n";
-}
-%>
+% my @files = <*>;
+<%= @files %>
 </ul>
