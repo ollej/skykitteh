@@ -15,8 +15,6 @@ use strict;
 use Mojolicious::Lite;
 use File::Slurp qw(read_file write_file);
 use Digest::MD5 qw(md5_hex);
-use HTTP::Request::Common qw(GET);
-use LWP;
 
 get '/' => sub {
 	my $self = shift;
@@ -99,19 +97,6 @@ sub store_motd
 	close MOTD;
     }
 }
-
-sub prod_kitteh
-{
-        my $browser = LWP::UserAgent->new();
-        $browser->agent('SkyKitteh');
-        $browser->timeout(5);
-
-        my $request = GET 'http://www.skykitteh.com/';
-        my $response = $browser->request($request);
-
-        return $response;#!$response->is_error;
-}
-
 
 app->start;
 __DATA__
