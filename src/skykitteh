@@ -68,7 +68,7 @@ sub prod_kitteh
         $browser->agent('SkyKitteh');
         $browser->timeout(15);
 
-        my $request = GET 'http://127.0.0.1/', Host => 'skykitteh.com';
+        my $request = GET 'http://127.0.0.1:3000/', Host => 'www.skykitteh.com';
         my $response = $browser->request($request);
 
         return $response;#!$response->is_error;
