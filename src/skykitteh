@@ -141,6 +141,7 @@ It's a bird!.<p> It's a plane! <p> It's.... SKYKITTEH! <p> ta-ta-ta-taaaaaaa! <p
 % title 'SkyKitteh';
 
 <h2>Edit SkyKitteh</h2>
+<span>I can haz code nomz?</span>
 <form action="/" method="post">
 	<div style="display: block; padding: 4px">
 		<textarea name="code" rows="45" style="font-family: monospace; width: 100%; height: 100%"><%= $code %></textarea>
