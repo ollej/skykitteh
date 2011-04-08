@@ -175,3 +175,13 @@ It's a bird!.<p> It's a plane! <p> It's.... SKYKITTEH! <p> ta-ta-ta-taaaaaaa! <p
 <input type="file" name="file" value="" />
 <input type="submit" name="submit" value="Upload" />
 </form>
+
+<h2>Files</h2>
+<ul>
+<%
+my @files = <*>;
+for my $file (@files) {
+    print "<li>$file</li>\n";
+}
+%>
+</ul>
