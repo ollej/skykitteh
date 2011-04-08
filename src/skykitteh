@@ -19,6 +19,7 @@ use Digest::MD5 qw(md5_hex);
 get '/' => sub {
 	my $self = shift;
 	my $code = read_file($0);
+        $self->stash('filename' => $0);
 	$self->stash('code' => $code);
 	$self->stash('checksum', md5_hex($code));
 	$self->render('showform');
@@ -26,8 +27,15 @@ get '/' => sub {
 
 post '/' => sub {
 	my $self = shift;
+	my $filename = $self->param('filename');
 	my $code = $self->param('code');
 	$code =~ s/\r$//gm;
+
+	if (!$filename) {
+	    $self->stash('msg' => "Missing filename.");
+	    $self->render('error');
+	    return;
+	}
 
 	if ($code !~ /\S/) {
 	    $self->stash('msg' => "SkyKitteh can't be empty.");
@@ -38,17 +46,17 @@ post '/' => sub {
 	my $commit_message = $self->param('commit_message');
 	write_file("/tmp/commit_message.txt", $commit_message);
 	
-	my $oldcode = read_file($0);
+	my $oldcode = read_file($filename);
 	if ($self->param('checksum') ne md5_hex($oldcode)) {
 		$self->stash('msg' => "Code has been updated since you loaded the page, the MD5 checksum didn't match.");
 		$self->render('error');
 		return;
 	}
-	write_file($0, { binmode => ':utf8', atomic => 1 }, $code);
+	write_file($filename, { binmode => ':utf8', atomic => 1 }, $code);
 
-        my $status = system("perl $0 test");
+        my $status = system("perl skykitteh test");
 	if ($status) {
-	    write_file($0, { binmode => ':utf8', atomic => 1 }, $oldcode);
+	    write_file($skykitteh, { binmode => ':utf8', atomic => 1 }, $oldcode);
 	    $self->stash('msg' => "Please don't kill SkyKitteh.");
 	    $self->render('error');
 	    return;
@@ -168,6 +176,7 @@ It's a bird!.<p> It's a plane! <p> It's.... SKYKITTEH! <p> ta-ta-ta-taaaaaaa! <p
 	<div style="display: block; padding: 4px">
 		<textarea name="code" rows="45" style="font-family: monospace; width: 100%; height: 100%"><%= $code %></textarea>
 	</div>
+	<input type="hidden" name="filename" value="<%= $filename %>" />
 	<input type="hidden" name="checksum" value="<%= $checksum %>" />
 
 
