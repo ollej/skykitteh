@@ -19,6 +19,7 @@ use Digest::MD5 qw(md5_hex);
 get '/' => sub {
 	my $self = shift;
 	my $code = read_file($0);
+	unlink "commit_message.txt";
 	$self->stash('code' => $code);
 	$self->stash('checksum', md5_hex($code));
 	$self->render('showform');
