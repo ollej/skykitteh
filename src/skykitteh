@@ -181,5 +181,5 @@ It's a bird!.<p> It's a plane! <p> It's.... SKYKITTEH! <p> ta-ta-ta-taaaaaaa! <p
 % my @files = <*>;
 % foreach $f (@files) {
 <%= $f %>
-# }
+% }
 </ul>
