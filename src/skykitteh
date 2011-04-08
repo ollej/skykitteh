@@ -56,7 +56,7 @@ post '/' => sub {
 
         my $status = system("perl skykitteh test");
 	if ($status) {
-	    write_file($skykitteh, { binmode => ':utf8', atomic => 1 }, $oldcode);
+	    write_file($filename, { binmode => ':utf8', atomic => 1 }, $oldcode);
 	    $self->stash('msg' => "Please don't kill SkyKitteh.");
 	    $self->render('error');
 	    return;
