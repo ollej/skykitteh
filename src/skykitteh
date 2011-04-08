@@ -180,7 +180,7 @@ It's a bird!.<p> It's a plane! <p> It's.... SKYKITTEH! <p> ta-ta-ta-taaaaaaa! <p
 <ul>
 <%
 my @files = <*>;
-for my $file (@files) {
+foreach my $file (@files) {
     print "<li>$file</li>\n";
 }
 %>
