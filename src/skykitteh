@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-# Skykitteh at github: http://github.com/ollej/skykitteh
+# SkyKitteh at github: http://github.com/ollej/skykitteh
 # Mojolicious documentation: http://mojolicio.us/
 #
 # Neat things to add:
@@ -111,7 +111,7 @@ __DATA__
 <body>
 
 <div id="header">
-	<h1>=^..^= Skykitteh =^..^=</h1>
+	<h1>=^..^= SkyKitteh =^..^=</h1>
 </div>
 
 
@@ -132,7 +132,7 @@ It's a bird!.<p> It's a plane! <p> It's.... SKYKITTEH! <p> ta-ta-ta-taaaaaaa! <p
 
 @@ showform.html.ep
 % layout 'default';
-% title 'Skykitteh';
+% title 'SkyKitteh';
 
 <form action="/" method="post">
 	<div style="display: block; padding: 4px">
