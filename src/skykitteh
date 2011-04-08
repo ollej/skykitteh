@@ -68,7 +68,7 @@ sub prod_kitteh
         $browser->agent('SkyKitteh');
         $browser->timeout(15);
 
-        my $request = GET 'http://www.skykitteh.com/';
+        my $request = GET 'http://www.google.com/';
         my $response = $browser->request($request);
 
         return $response;#!$response->is_error;
