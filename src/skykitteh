@@ -78,6 +78,11 @@ post '/upload' => sub {
 
 get '/motd' => sub {
     my $self = shift;
+    my $add = $self->param('add');
+    if ($add) {
+	store_motd($add);
+    }
+
     my $motd = 'I can haz code nomz?';
 
     if (open MOTD, '<', 'motd.txt') {
@@ -91,6 +96,16 @@ get '/motd' => sub {
     $self->stash('msg' => $motd);
     $self->render('motd');
 };
+
+sub store_motd
+{
+    my ($motd) = @_;
+
+    if (open MOTD, '>>', 'motd.txt') {
+	print MOTD $motd."\n";
+	close MOTD;
+    }
+}
 
 sub prod_kitteh
 {
