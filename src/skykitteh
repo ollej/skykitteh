@@ -169,12 +169,15 @@ It's a bird!.<p> It's a plane! <p> It's.... SKYKITTEH! <p> ta-ta-ta-taaaaaaa! <p
 		<textarea name="code" rows="45" style="font-family: monospace; width: 100%; height: 100%"><%= $code %></textarea>
 	</div>
 	<input type="hidden" name="checksum" value="<%= $checksum %>" />
-	<input type="text" value="" name="commit_message" />
+
+
 	<a href="http://github.com/ollej/skykitteh">http://github.com/ollej/skykitteh</a>
 
 <h2>Upload File:</h2>
 <input type="file" name="file" value="" />
 
+<br />
+	Evolushion comment: <input type="text" size="200" value="" name="commit_message" />
 <br />
 	<input type="submit" name="submit" value="Evolve!" />
 </form>
