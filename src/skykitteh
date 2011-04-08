@@ -52,8 +52,9 @@ post '/' => sub {
 	    return;
 	}
 
-	if (!prod_kitteh()) {
-	    $self->stash('msg' => "Please don't kill SkyKitteh.");
+	my $response_code = prod_kitteh();
+	if ($response_code != 200) {
+	    $self->stash('msg' => "Please don't kill SkyKitteh. ($response_code)");
 	    $self->render('error');
 	    return;
 	}
@@ -70,7 +71,7 @@ sub prod_kitteh
         my $request = GET 'http://www.skykitteh.com/';
         my $response = $browser->request($request);
 
-        return !$response->is_error;
+        return $response->code;#!$response->is_error;
 }
 
 
