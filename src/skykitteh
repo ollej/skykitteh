@@ -52,12 +52,13 @@ post '/' => sub {
 	    return;
 	}
 
-	my $response = prod_kitteh();
-	if ($response->code != 200) {
-	    $self->stash('msg' => "Please don't kill SkyKitteh. ".$response->message);
-	    $self->render('error');
-	    return;
-	}
+	# Disabled, can't handle recursive access.
+	#my $response = prod_kitteh();
+	#if ($response->code != 200) {
+	#    $self->stash('msg' => "Please don't kill SkyKitteh. ".$response->message);
+	#    $self->render('error');
+	#    return;
+	#}
 
 	$self->redirect_to('/');
 };
@@ -66,9 +67,9 @@ sub prod_kitteh
 {
         my $browser = LWP::UserAgent->new();
         $browser->agent('SkyKitteh');
-        $browser->timeout(15);
+        $browser->timeout(5);
 
-        my $request = GET 'http://127.0.0.1:3000/', Host => 'www.skykitteh.com';
+        my $request = GET 'http://www.skykitteh.com/';
         my $response = $browser->request($request);
 
         return $response;#!$response->is_error;
