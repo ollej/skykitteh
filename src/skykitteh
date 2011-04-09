@@ -34,7 +34,8 @@ get '/' => sub {
   if ($format eq 'json') {
     $self->render_json($data);
   } else {
-    $self->render('showform', $data);
+    $self->stash($data);
+    $self->render('showform');
   }
 };
 
