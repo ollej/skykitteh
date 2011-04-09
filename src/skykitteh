@@ -50,7 +50,7 @@ post '/' => sub {
 	$code =~ s/\r$//gm;
 
     # Uploadz
-    my $uploadfile = $self->req->upload('uploadfile');
+    my $uploadfile = $self->req->param('uploadfile');
 app->log->info("upload: " . $self->req->param('uploadfile'));
     if ($uploadfile) {
         app->log->info("Upload file:" . $uploadfile->file);
