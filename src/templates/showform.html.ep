@@ -1,6 +1,11 @@
 % layout 'default';
 % title 'SkyKitteh';
 
+<div id="skykitteh-toolbar">
+<button id="btn_editsource" type="button">Edit da sourz</button>
+<button id="btn_viewsource" type="button">See code nomz</button>
+</div>
+
 <div id="skykitteh-edit">
 <h2>Edit SkyKitteh</h2>
 <span>I can haz code nomz? (<%= $filename %>)</span>
@@ -26,12 +31,10 @@
 %= include 'filelist'
 
 <button id="btn_newfile" type="button">Moar code nomz</button>
-<%= javascript begin %>
-$('#btn_newfile').click(function() {
-  var filename = prompt('Dah naem of new code nomz:');
-  if (filename) {
-    document.location = '/edit/' + filename;
-  }
-});
-<% end %>
+</div>
+
+<div id="skykitteh-view">
+<pre class="prettyprint">
+<%== $code %>
+</pre>
 </div>
