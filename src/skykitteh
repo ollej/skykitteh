@@ -30,7 +30,7 @@ get '/' => sub {
     'checksum', md5_hex($code),
     'code' => $code,
   };
-  my $format = $self->param('format') || '';
+  my $format = $self->param('format') || "";
   if ($format eq 'json') {
     $self->render_json($data);
   } else {
