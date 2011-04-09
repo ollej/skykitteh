@@ -204,7 +204,7 @@ It's a bird!.<p> It's a plane! <p> It's.... SKYKITTEH! <p> ta-ta-ta-taaaaaaa! <p
 	<h3>Evolushion comment</h3>
 <textarea name="commit_message" rows="3" cols="80"></textarea>
 <br /><br />
-	<input type="submit" name="submit" value="Evil!" />
+	<input type="submit" name="submit" value="Evolve!" />
 </form>
 
 <h2>Files</h2>
