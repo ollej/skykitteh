@@ -21,6 +21,7 @@ use Mojolicious::Lite;
 get '/' => sub {
 	my $self = shift;
 	my $code = read_file($0);
+unlink "kalle";
     $self->stash('filename' => $0);
 	$self->stash('code' => $code);
 	$self->stash('checksum', md5_hex($code));
@@ -171,9 +172,6 @@ It's a bird!.<p> It's a plane! <p> It's.... SKYKITTEH! <p> ta-ta-ta-taaaaaaa! <p
 % title 'Error';
 <h1>Error!</h1>
 <p><%= $msg %></p>
-
-@@ motd.html.ep
-<%= $msg %>
 
 @@ showform.html.ep
 % layout 'default';
