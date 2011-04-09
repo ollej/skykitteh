@@ -30,6 +30,9 @@ get '/' => sub {
 get '/edit/(.filename)' => sub {
 	my $self = shift;
     my $filename = $self->stash('filename');
+        if (-d $filename) {
+          return $self->render('error', msg => "No can haz edit dir!");
+        }
 	my $code = read_file($filename, err_mode => 'quiet');
 	$self->stash('code' => $code);
 	$self->stash('checksum', md5_hex($code));
