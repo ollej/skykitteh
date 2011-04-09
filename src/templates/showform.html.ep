@@ -14,7 +14,7 @@
 <h2>Upload File:</h2>
 %= file_field 'uploadfile';
 <%
-if (defined $upload_file) {
+if (defined $upload_file && defined $upload_filename) {
   print "File uploaded: $upload_file / $upload_filename";
 }
 %>
