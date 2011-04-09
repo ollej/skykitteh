@@ -62,8 +62,8 @@ post '/' => sub {
 	}
 	write_file($filename, { binmode => ':utf8', atomic => 1 }, $code);
 
-        my $status = system("perl skykitteh.t");
-	if ($status) {
+        my $report = `perl skykitteh.t`;
+	if ($? || $report !~ /ok \d/) {
 	    write_file($filename, { binmode => ':utf8', atomic => 1 }, $oldcode);
 	    $self->stash('msg' => "Please don't kill SkyKitteh.");
 	    $self->render('error');
