@@ -30,12 +30,8 @@ app->helper(showform => sub {
 });
 
 get '/' => sub {
-	my $self = shift;
-	my $code = read_file($0);
-        $self->stash('filename' => $0);
-	$self->stash('code' => $code);
-	$self->stash('checksum', md5_hex($code));
-	$self->render('showform');
+  my $self = shift;
+  $self->showform($0);
 };
 
 get '/edit/(.filename)' => sub {
