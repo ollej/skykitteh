@@ -21,7 +21,7 @@ use Mojo::Base 'Mojolicious::Controller';
 
 sub works { shift->render(text => 'It works!') }
 
-package SkyKitteh;
+package main;
 use Mojolicious::Lite;
 
 get '/' => sub {
