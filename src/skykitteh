@@ -19,6 +19,8 @@ use Digest::MD5 qw(md5_hex);
 get '/' => sub {
 	my $self = shift;
 	my $code = read_file($0);
+        my @files = <*>;
+        $self->stash('files' => @files);
         $self->stash('filename' => $0);
 	$self->stash('code' => $code);
 	$self->stash('checksum', md5_hex($code));
@@ -29,6 +31,8 @@ get '/edit/(.filename)' => sub {
 	my $self = shift;
         my $filename = $self->stash('filename');
 	my $code = read_file($filename, err_mode => 'quiet');
+        my @files = <*>;
+        $self->stash('files' => @files);
 	$self->stash('code' => $code);
 	$self->stash('checksum', md5_hex($code));
 	$self->render('showform');
@@ -197,7 +201,6 @@ It's a bird!.<p> It's a plane! <p> It's.... SKYKITTEH! <p> ta-ta-ta-taaaaaaa! <p
 
 <h2>Files</h2>
 <ul>
-% my @files = <*>;
 % foreach my $f (@files) {
 <li><a href="/edit/<%= $f %>"><%= $f %></a></li>
 % }
