@@ -20,9 +20,7 @@ app->helper(showform => sub {
   my $self  = shift;
   my ($filename) = @_;
   my($basename, $directories, $suffix) = fileparse($filename);
-  my @files = <*>;
   my $code = read_file($filename);
-  $self->stash('files' => @files);
   $self->stash('basename' => $basename);
   $self->stash('code' => $code);
   $self->stash('checksum', md5_hex($code));
