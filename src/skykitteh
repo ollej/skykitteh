@@ -16,7 +16,7 @@ use strict;
 use File::Slurp qw(read_file write_file);
 use Digest::MD5 qw(md5_hex);
 
-package SkyKitteh::File;
+package SkyKitteh::Foo;
 use Mojo::Base 'Mojolicious::Controller';
 
 sub works { shift->render(text => 'It works!') }
@@ -25,7 +25,7 @@ package main;
 use Mojolicious::Lite;
 
 app->routes->namespace('SkyKitteh');
-app->routes->route('/foo/:action')->via('get')->to('file#works');
+app->routes->route('/foo/:action')->via('get')->to('foo#works');
 
 get '/' => sub {
 	my $self = shift;
