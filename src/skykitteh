@@ -23,18 +23,12 @@ plugin 'console_logger';
 $ENV{MOJO_TMPDIR} = '/tmp/';
 
 get '/' => sub {
-  my $self = shift;
-  my $code = read_file($0);
-  my $data = {
-    'filename' => $0,
-    'checksum', md5_hex($code),
-    'code' => $code,
-  };
-  if ($self->param('format') eq 'json') {
-    $self->render_json($data);
-  } else {
-    $self->render('showform', $data);
-  }
+	my $self = shift;
+	my $code = read_file($0);
+    $self->stash('filename' => $0);
+	$self->stash('code' => $code);
+	$self->stash('checksum', md5_hex($code));
+	$self->render('showform');
 };
 
 get '/edit/(*filename)' => sub {
