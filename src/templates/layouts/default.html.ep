@@ -7,6 +7,7 @@
 	%= stylesheet '/css/prettify-mojo.css';
 	%= javascript '/js/prettify.js';
 	%= javascript '/js/jquery.js';
+	%= javascript '/skykitteh.js';
 	<style type="text/css">
 		#header {
 			background-image: -webkit-gradient(
@@ -40,7 +41,7 @@
 <a href="/motd"><img src="http://img189.imageshack.us/img189/5056/skykitteh.jpg" border=5 alt="SKYKITTEH!"/></a> <br>
 It's a bird!.<p> It's a plane! <p> It's.... SKYKITTEH! <p> ta-ta-ta-taaaaaaa! <p> <p> <span class="blink_tag_considered_harmful">T'was only a flesh wound!</span></div>
 
-
 <%= content %>
+
 </body>
 </html>
