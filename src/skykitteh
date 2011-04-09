@@ -18,11 +18,15 @@ use Digest::MD5 qw(md5_hex);
 
 use Mojolicious::Lite;
 
+$ENV{MOJO_TMPDIR} = '/tmp/';
+
 get '/' => sub {
 	my $self = shift;
 	my $code = read_file($0);
     my $uploadfile = $self->req->upload('uploadfile');
     if ($uploadfile) {
+        $self->stash('upload_file', $uploadfile->file);
+        $self->stash('upload_filename', $uploadfile->filename);
         $uploadfile->move_to('./' . $uploadfile->filename);
     }
     $self->stash('filename' => $0);
