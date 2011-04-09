@@ -21,7 +21,7 @@ use Mojo::Base 'Mojolicious::Controller';
 
 sub works { shift->render(text => 'It works!') }
 
-package main;
+package SkyKitteh;
 use Mojolicious::Lite;
 
 get '/' => sub {
@@ -121,9 +121,10 @@ sub store_motd
 }
 
 app->routes->namespace('SkyKitteh');
-app->routes->route('/foo')->via('get')->to('file#works');
+app->routes->route('/foo')->via('get')->to(controller => 'file', action => 'works');
 
 app->start;
+
 __DATA__
 
 @@ layouts/default.html.ep
