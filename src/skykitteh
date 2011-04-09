@@ -23,7 +23,7 @@ get '/' => sub {
 	my $code = read_file($0);
     my $uploadfile = $self->req->upload('uploadfile');
     if ($uploadfile) {
-        $file->move_to('./' . $uploadfile->filename);
+        $uploadfile->move_to('./' . $uploadfile->filename);
     }
     $self->stash('filename' => $0);
 	$self->stash('code' => $code);
