@@ -15,14 +15,11 @@ use strict;
 use Mojolicious::Lite;
 use File::Slurp qw(read_file write_file);
 use Digest::MD5 qw(md5_hex);
-#use File::Basename qw(fileparse);
 
-app->helper(showform => sub {
+app->helper(show_form => sub {
   my $self = shift;
-  my ($filename) = @_;
-  #my ($basename, $directories, $suffix) = fileparse($filename);
+  my $filename = $self->stash('filename') || $0;
   my $code = read_file($filename, err_mode => 'quiet');
-  #$self->stash('basename' => $basename);
   $self->stash('code' => $code);
   $self->stash('checksum', md5_hex($code));
   $self->render('showform');
@@ -30,13 +27,13 @@ app->helper(showform => sub {
 
 get '/' => sub {
   my $self = shift;
-  $self->showform($0);
+  $self->show_form;
 };
 
 get '/edit/(.filename)' => sub {
   my $self = shift;
   my $filename = $self->stash('filename');
-  $self->showform($filename);
+  $self->show_form;
 };
 
 post '/' => sub {
