@@ -16,11 +16,6 @@ use strict;
 use File::Slurp qw(read_file write_file);
 use Digest::MD5 qw(md5_hex);
 
-package SkyKitteh::File;
-use Mojo::Base 'Mojolicious::Controller';
-
-sub works { shift->render(text => 'It works!') }
-
 package main;
 use Mojolicious::Lite;
 
@@ -121,9 +116,15 @@ sub store_motd
 }
 
 app->routes->namespace('SkyKitteh');
-app->routes->route('/foo')->via('get')->to('file#works');
+app->routes->route('/foo')->via('get')->to(controller => 'file', action => 'works');
 
 app->start;
+
+package SkyKitteh::File;
+use Mojo::Base 'Mojolicious::Controller';
+
+sub works { shift->render(text => 'It works!') }
+
 __DATA__
 
 @@ layouts/default.html.ep
