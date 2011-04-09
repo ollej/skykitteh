@@ -46,12 +46,6 @@ post '/' => sub {
 	    return;
 	}
 
-	if ($code !~ /\S/) {
-	    $self->stash('msg' => "SkyKitteh can't be empty.");
-	    $self->render('error');
-	    return;
-	}
-
 	my $commit_message = $self->param('commit_message');
 	write_file("/tmp/commit_message.txt", $commit_message);
 	
@@ -65,7 +59,7 @@ post '/' => sub {
 
         my $status = system("perl skykitteh.t");
 	if ($status) {
-	    #write_file($filename, { binmode => ':utf8', atomic => 1 }, $oldcode);
+	    write_file($filename, { binmode => ':utf8', atomic => 1 }, $oldcode);
 	    $self->stash('msg' => "Please don't kill SkyKitteh.");
 	    $self->render('error');
 	    return;
