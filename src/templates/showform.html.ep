@@ -25,17 +25,12 @@
 <h2>Files</h2>
 %= include 'filelist'
 
-<button id="btn_newfile" />
+<button id="btn_newfile" value="Moar code nomz" />
 <%= javascript begin %>
 $('#btn_newfile').click(function() {
-/*
-  jPrompt('Type something:', 'Prefilled value', 'Prompt Dialog', function(r) {
-    if( r ) alert('You entered ' + r);
-  });
-*/
-  var filename = prompt('Enter name of new file:');
+  var filename = prompt('Dah naem of new code nomz:');
   if (filename) {
-    window.location('/edit/' + filename);
+    document.location('/edit/' + filename);
   }
 });
 <% end %>
