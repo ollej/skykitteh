@@ -18,6 +18,8 @@ use Digest::MD5 qw(md5_hex);
 
 use Mojolicious::Lite;
 
+plugin 'console_logger';
+
 $ENV{MOJO_TMPDIR} = '/tmp/';
 
 get '/' => sub {
@@ -25,8 +27,11 @@ get '/' => sub {
 	my $code = read_file($0);
     my $uploadfile = $self->req->upload('uploadfile');
     if ($uploadfile) {
-        $self->stash('upload_file', $uploadfile->file);
-        $self->stash('upload_filename', $uploadfile->filename);
+        app->log->info("Upload file:" . $uploadfile->file);
+        app->log->info("Upload file:" . $uploadfile->filename);
+        if ( -f './' . $uploadfile->filename) {
+            return $self->render('error', 'msg' => 'Already haz file!');
+        }
         $uploadfile->move_to('./' . $uploadfile->filename);
     }
     $self->stash('filename' => $0);
