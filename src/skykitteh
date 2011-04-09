@@ -205,6 +205,7 @@ It's a bird!.<p> It's a plane! <p> It's.... SKYKITTEH! <p> ta-ta-ta-taaaaaaa! <p
 <ul>
 % my @files = <*>;
 % foreach my $f (@files) {
+  % next if -d $f;
 <li><a href="/edit/<%= $f %>"><%= $f %></a></li>
 % }
 </ul>
