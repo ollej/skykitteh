@@ -1,0 +1,33 @@
+% layout 'default';
+% title 'SkyKitteh';
+
+<h2>Edit SkyKitteh</h2>
+<span>I can haz code nomz? (<%= $filename %>)</span>
+<form action="/" method="post">
+	<div style="display: block; padding: 4px">
+		<textarea name="code" rows="45" style="font-family: monospace; width: 100%; height: 100%"><%= $code %></textarea>
+	</div>
+	<input type="hidden" name="filename" value="<%= $filename %>" />
+	<input type="hidden" name="checksum" value="<%= $checksum %>" />
+
+
+	<a href="http://github.com/ollej/skykitteh">http://github.com/ollej/skykitteh</a>
+
+<h2>Upload File:</h2>
+<input type="file" name="file" value="" />
+
+<br />
+	<h3>Evolushion comment</h3>
+<textarea name="commit_message" rows="3" cols="80"></textarea>
+<br /><br />
+	<input type="submit" name="submit" value="Evolve!" />
+</form>
+
+<h2>Files</h2>
+<ul>
+% my @files = <*>;
+% foreach my $f (@files) {
+  % next if -d $f;
+<li><a href="/edit/<%= $f %>"><%= $f %></a></li>
+% }
+</ul>
