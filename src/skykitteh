@@ -12,9 +12,17 @@
 
 use warnings;
 use strict;
-use Mojolicious::Lite;
+
 use File::Slurp qw(read_file write_file);
 use Digest::MD5 qw(md5_hex);
+
+package MyApp::Foo;
+use Mojo::Base 'Mojolicious::Controller';
+
+sub index { shift->render(text => 'It works!') }
+
+package main;
+use Mojolicious::Lite;
 
 get '/' => sub {
 	my $self = shift;
@@ -111,6 +119,10 @@ sub store_motd
 	close MOTD;
     }
 }
+
+app->routes->namespace('SkyKitteh');
+app->routes->route('/foo/:action')->via('get')->to('foo#index');
+
 
 app->start;
 __DATA__
