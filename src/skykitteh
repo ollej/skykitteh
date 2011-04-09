@@ -24,6 +24,9 @@ sub works { shift->render(text => 'It works!') }
 package main;
 use Mojolicious::Lite;
 
+app->routes->namespace('SkyKitteh');
+app->routes->route('/foo/:action')->via('get')->to('file#works');
+
 get '/' => sub {
 	my $self = shift;
 	my $code = read_file($0);
@@ -119,9 +122,6 @@ sub store_motd
 	close MOTD;
     }
 }
-
-app->routes->namespace('SkyKitteh');
-app->routes->route('/foo/:action')->via('get')->to('file#works');
 
 app->start;
 
