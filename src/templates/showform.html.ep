@@ -1,6 +1,7 @@
 % layout 'default';
 % title 'SkyKitteh';
 
+<div id="skykitteh-edit">
 <h2>Edit SkyKitteh</h2>
 <span>I can haz code nomz? (<%= $filename %>)</span>
 <%= form_for '/' => (method => 'post') => begin %>
@@ -23,3 +24,19 @@
 
 <h2>Files</h2>
 %= include 'filelist'
+
+<button id="btn_newfile" />
+<%= javascript begin %>
+$('#btn_newfile').click(function() {
+/*
+  jPrompt('Type something:', 'Prefilled value', 'Prompt Dialog', function(r) {
+    if( r ) alert('You entered ' + r);
+  });
+*/
+  var filename = prompt('Enter name of new file:');
+  if (filename) {
+    window.location('/edit/' + filename);
+  }
+});
+<% end %>
+</div>
