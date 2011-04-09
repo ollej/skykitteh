@@ -28,7 +28,7 @@ get '/' => sub {
 get '/edit/(.filename)' => sub {
 	my $self = shift;
         my $filename = $self->stash('filename');
-	my $code = read_file($filename);
+	my $code = read_file($filename, err_mode => 'quiet');
 	$self->stash('code' => $code);
 	$self->stash('checksum', md5_hex($code));
 	$self->render('showform');
@@ -55,7 +55,7 @@ post '/' => sub {
 	my $commit_message = $self->param('commit_message');
 	write_file("/tmp/commit_message.txt", $commit_message);
 	
-	my $oldcode = read_file($filename);
+	my $oldcode = read_file($filename, err_mode => 'quiet');
 	if ($self->param('checksum') ne md5_hex($oldcode)) {
 		$self->stash('msg' => "Code has been updated since you loaded the page, the MD5 checksum didn't match.");
 		$self->render('error');
