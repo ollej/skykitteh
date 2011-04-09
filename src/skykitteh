@@ -121,7 +121,7 @@ sub store_motd
 }
 
 app->routes->namespace('SkyKitteh');
-app->routes->route('/foo')->via('get')->to(controller => 'File', action => 'works');
+app->routes->route('/foo')->via('get')->to(c'file#works');
 
 app->start;
 __DATA__
