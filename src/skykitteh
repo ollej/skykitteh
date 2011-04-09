@@ -21,6 +21,10 @@ use Mojolicious::Lite;
 get '/' => sub {
 	my $self = shift;
 	my $code = read_file($0);
+    my $uploadfile = $self->req->upload('uploadfile');
+    if ($uploadfile) {
+        $file->move_to('./' . $uploadfile->filename);
+    }
     $self->stash('filename' => $0);
 	$self->stash('code' => $code);
 	$self->stash('checksum', md5_hex($code));
@@ -71,19 +75,6 @@ post '/' => sub {
 	}
 
 	$self->redirect_to('/');
-};
-
-post '/upload' => sub {
-    my $self = shift;
-    my $file = $self->req->upload('file');
-    if (!$file) {
-	    $self->stash('msg' => "Upload failed.");
-	    $self->render('error');
-	    return;
-    }
-    my $filename = $file->filename;
-    $file->move_to('./' . $filename);
-    $self->redirect_to('/');
 };
 
 get '/motd' => sub {
