@@ -1,4 +1,5 @@
-use Test::More tests => 3;
+# SkyKitteh lifeboat!
+use Test::More tests => 5;
 use Test::Mojo;
 
 use FindBin;
@@ -7,3 +8,4 @@ require "$ENV{MOJO_HOME}/skykitteh";
 
 my $t = Test::Mojo->new;
 $t->get_ok('/')->status_is(200)->content_like(qr/SkyKitteh/);
+$t->post_ok('/')->status_is(200);
