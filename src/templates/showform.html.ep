@@ -30,7 +30,7 @@
 $('#btn_newfile').click(function() {
   var filename = prompt('Dah naem of new code nomz:');
   if (filename) {
-    document.location('/edit/' + filename);
+    document.location = '/edit/' + filename;
   }
 });
 <% end %>
