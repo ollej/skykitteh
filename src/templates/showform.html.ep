@@ -3,25 +3,23 @@
 
 <h2>Edit SkyKitteh</h2>
 <span>I can haz code nomz? (<%= $filename %>)</span>
-<form action="/" method="post">
+<%= form_for '/' => (method => 'post') => begin %>
 	<div style="display: block; padding: 4px">
-		<textarea name="code" rows="45" style="font-family: monospace; width: 100%; height: 100%"><%= $code %></textarea>
+		<%= text_area 'code', rows => '45', style => 'font-family: monospace; width: 100%; height: 100%', begin %><%= $code %><% end %>
 	</div>
-	<input type="hidden" name="filename" value="<%= $filename %>" />
-	<input type="hidden" name="checksum" value="<%= $checksum %>" />
-
-
+	%= hidden_field 'filename', $filename;
+	%= hidden_field 'checksum', $checksum;
 	<a href="http://github.com/ollej/skykitteh">http://github.com/ollej/skykitteh</a>
 
 <h2>Upload File:</h2>
-<input type="file" name="file" value="" />
+%= file_field 'uploadfile';
 
 <br />
 	<h3>Evolushion comment</h3>
-<textarea name="commit_message" rows="3" cols="80"></textarea>
+%= text_area 'commit_message', rows => 3, cols => 80;
 <br /><br />
-	<input type="submit" name="submit" value="Evolve!" />
-</form>
+%= submit_button 'Evolve!';
+<% end %>
 
 <h2>Files</h2>
 <ul>
