@@ -19,7 +19,7 @@ use Digest::MD5 qw(md5_hex);
 package MyApp::Foo;
 use Mojo::Base 'Mojolicious::Controller';
 
-sub index { shift->render(text => 'It works!') }
+sub works { shift->render(text => 'It works!') }
 
 package main;
 use Mojolicious::Lite;
@@ -121,8 +121,7 @@ sub store_motd
 }
 
 app->routes->namespace('MyApp');
-app->routes->route('/foo/:action')->via('get')->to('foo#index');
-
+app->routes->route('/foo/:action')->via('get')->to('Foo#works');
 
 app->start;
 __DATA__
