@@ -1,0 +1,7 @@
+<ul>
+% my @files = `find . -type f`;
+% foreach my $f (@files) {
+  % chomp $f;
+<li><a href="/edit/<%= $f %>"><%= $f %></a></li>
+% }
+</ul>
