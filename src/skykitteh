@@ -21,7 +21,6 @@ use Mojolicious::Lite;
 get '/' => sub {
 	my $self = shift;
 	my $code = read_file($0);
-mkdir "layouts";
     $self->stash('filename' => $0);
 	$self->stash('code' => $code);
 	$self->stash('checksum', md5_hex($code));
