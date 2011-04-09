@@ -15,7 +15,8 @@ use strict;
 
 use File::Slurp qw(read_file write_file);
 use Digest::MD5 qw(md5_hex);
-use File::Find::Rule;
+
+use Text::Diff;
 
 use Mojolicious::Lite;
 
