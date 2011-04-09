@@ -26,7 +26,7 @@ get '/' => sub {
 	my $self = shift;
 	my $code = read_file($0);
     my $uploadfile = $self->req->upload('uploadfile');
-app->log_info($self->req);
+app->log->info($self->req);
     if ($uploadfile) {
         app->log->info("Upload file:" . $uploadfile->file);
         app->log->info("Upload file:" . $uploadfile->filename);
