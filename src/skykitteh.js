@@ -24,7 +24,10 @@ $(document).ready(function() {
   });
 
   // Hide all functionality
-  if (!document.location.match(/skykitteh.com\/edit\//)) {
+  if (document.location.toString().match(/skykitteh.com\/edit\//)) {
+    // Scroll down to edit area
+    scrollTo(#skykitteh-edit');
+  } else {
     // Don't hide edit source on the edit page.
     $('#skykitteh-edit').hide();
   }
