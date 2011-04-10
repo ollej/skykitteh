@@ -14,6 +14,7 @@ use warnings;
 use strict;
 
 use Text::Diff;
+use File::Path 'mkpath';
 use File::Slurp qw(read_file write_file);
 use Digest::MD5 qw(md5_hex);
 
@@ -85,12 +86,12 @@ post '/' => sub {
 	    return;
 	}
 
-	if ($filename =~ m{^(?:\./)?((?:[^/\.]+/)+)[^/]+$}) {
-            my $path = '';
-            foreach (split(m{/}, $1)) {
-                $path .= "$_/";
-  	        mkdir $path unless(-x $path);
-            }
+	if ($filename =~ m{^(.+/)[^/]+$} && ! -d $1) {
+	    unless (mkpath($1, {error => \my $err}) && -d $1) {
+		$self->stash('msg' => "Don't confuse the kitteh.");
+		$self->render('error');
+		return;
+	    }
 	}
 
 	my $commit_message = $self->param('commit_message');
