@@ -3,7 +3,7 @@
 <span>I can haz code nomz? (<%= $filename %>)</span>
 <%= form_for '/' => (method => 'post') => begin %>
 <div style="display: block; padding: 4px">
-<%= text_area 'code', rows => '35', 'id' => 'skykitteh-editcode' class => 'skykitteh-editcode', begin %><%= $code %><% end %>
+<%= text_area 'code', rows => '35', id => 'skykitteh-editcode', class => 'skykitteh-editcode', begin %><%= $code %><% end %>
 </div>
 %= hidden_field 'base', $code;
 %= hidden_field 'filename', $filename;
