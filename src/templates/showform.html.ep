@@ -5,6 +5,8 @@
 <div id="skykitteh-toolbar">
 <button id="btn_editsource" type="button">Edit da sourz</button>
 <button id="btn_viewsource" type="button">See code nomz</button>
+<button id="btn_listfiles" type="button">List da filez</button>
+<button id="btn_newfile" type="button">Moar code nomz</button>
 <button id="btn_listmodules" type="button">Availubal modulz</button>
 </div>
 
@@ -18,10 +20,6 @@
 	%= hidden_field 'base', $code;
 	%= hidden_field 'filename', $filename;
 	%= hidden_field 'checksum', $checksum;
-	<a href="http://github.com/ollej/skykitteh">http://github.com/ollej/skykitteh</a>
-
-<h2>Upload File:</h2>
-%= file_field 'uploadfile';
 
 <br />
 	<h3>Evolushion comment</h3>
@@ -30,16 +28,22 @@
 %= submit_button 'Evolve!';
 <% end %>
 
-<h2>Files</h2>
-%= include 'filelist'
-
-<button id="btn_newfile" type="button">Moar code nomz</button>
 </div>
 
 <div id="skykitteh-view">
 <pre class="prettyprint">
 <%= $code %>
 </pre>
+</div>
+
+<div id="skykitteh-files">
+<h2>Files</h2>
+%= include 'filelist'
+</div>
+
+<div id="skykitteh-upload">
+<h2>Upload File:</h2>
+%= file_field 'uploadfile';
 </div>
 
 <div id="skykitteh-modules">
