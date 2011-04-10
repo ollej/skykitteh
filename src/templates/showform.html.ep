@@ -1,5 +1,6 @@
 % layout 'default';
 % title 'SkyKitteh';
+%= include 'header'
 
 <div id="skykitteh-toolbar">
 <button id="btn_editsource" type="button">Edit da sourz</button>
