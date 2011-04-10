@@ -27,7 +27,7 @@ $(document).ready(function() {
   if (document.location.toString().match(/skykitteh.com\/edit\//)) {
     // Scroll down to edit area
     scrollTo('#skykitteh-edit');
-  }Â else {
+  } else {
     // Don't hide edit source on the edit page.
     $('#skykitteh-edit').hide();
   }
