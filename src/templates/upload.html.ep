@@ -1,0 +1,4 @@
+<div id="skykitteh-upload">
+<h2>Gimmeh Nomz:</h2>
+%= file_field 'uploadfile';
+</div>
