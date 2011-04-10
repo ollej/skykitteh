@@ -2,9 +2,17 @@
 
 $(document).ready(function() {
 
+  // Automatically scroll page to given element.
   function scrollTo(sel) {
     var destination = $(sel).offset().top;
     $("html:not(:animated),body:not(:animated)").animate({ scrollTop: destination-20}, 500 );
+  }
+
+  function setupToggleButton(btn, el) {
+    $(btn).click(function() {
+      $(el).toggle();
+      scrollTo(el);
+    });
   }
 
   // Handle create file button
@@ -15,22 +23,20 @@ $(document).ready(function() {
     }
   });
 
-  // Hide edit and view source
-  $('#skykitteh-edit').hide();
+  // Hide all functionality
+  if (!document.location.match(/skykitteh.com\/edit\//) {
+    // Don't hide edit source on the edit page.
+    $('#skykitteh-edit').hide();
+  }
   $('#skykitteh-view').hide();
+  $('#skykitteh-files').hide();
+  $('#skykitteh-upload').hide();
   $('#skykitteh-modules').hide();
   
-  $('#btn_editsource').click(function() {
-    $('#skykitteh-edit').toggle();
-    scrollTo('#skykitteh-edit');
-  });
-  $('#btn_viewsource').click(function() {
-    $('#skykitteh-view').toggle();
-    scrollTo('#skykitteh-view');
-  }); 
-  $('#btn_listmodules').click(function() {
-    $('#skykitteh-modules').toggle();
-    scrollTo('#skykitteh-modules');
-  });
+  setupToggleButton('#btn_editsource', '#skykitteh-edit');
+  setupToggleButton('#btn_viewsource', '#skykitteh-view');
+  setupToggleButton('#btn_listfiles', '#skykitteh-files');
+  setupToggleButton('#btn_upload', '#skykitteh-upload');
+  setupToggleButton('#btn_listmodules', '#skykitteh-modules');
 
 });
