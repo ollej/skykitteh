@@ -18,6 +18,7 @@ $(document).ready(function() {
   // Hide edit and view source
   $('#skykitteh-edit').hide();
   $('#skykitteh-view').hide();
+  $('#skykitteh-modules').hide();
   
   $('#btn_editsource').click(function() {
     $('#skykitteh-edit').toggle();
@@ -27,5 +28,9 @@ $(document).ready(function() {
     $('#skykitteh-view').toggle();
     scrollTo('#skykitteh-view');
   }); 
+  $('#btn_listmodules').click(function() {
+    $('#skykitteh-modules').toggle();
+    scrollTo('#skykitteh-modules');
+  });
 
 });
