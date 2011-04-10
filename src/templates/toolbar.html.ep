@@ -1,4 +1,5 @@
 <div id="skykitteh-toolbar">
+<a href="#skykitteh-edit" class="nyroModal">Edit da sourz</a>
 <button id="btn_editsource" type="button">Edit da sourz</button>
 <button id="btn_viewsource" type="button">See code nomz</button>
 <button id="btn_listfiles" type="button">List da filez</button>
