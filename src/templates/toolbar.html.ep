@@ -1,8 +1,8 @@
 <div id="skykitteh-toolbar">
-<a href="#skykitteh-edit" class="nyroModal">Edit da sourz</a> |
-<a href="#skykitteh-view" class="nyroModal">See code nomz</a> |
-<a href="#skykitteh-files" class="nyroModal">List da filez</a> |
-<a href="#skykitteh-upload" class="nyroModal">Moar code nomz</a> |
+<a href="#skykitteh-edit-modal" class="nyroModal">Edit da sourz</a> |
+<a href="#skykitteh-view-modal" class="nyroModal">See code nomz</a> |
+<a href="#skykitteh-filelist-modal" class="nyroModal">List da filez</a> |
+<a href="#skykitteh-upload-modal" class="nyroModal">Moar code nomz</a> |
 <a href="#" id="newfile">Can haz nomz?</a> |
-<a href="#skykitteh-modules" class="nyroModal">Availubal modulz</a>
+<a href="#skykitteh-modulelist-modal" class="nyroModal">Availubal modulz</a>
 </div>
