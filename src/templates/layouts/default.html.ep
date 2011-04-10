@@ -28,6 +28,21 @@
 		h1,a {
 		font-family: "Myriad pro", helvetica;
 		}
+      #skykitteh-view {
+        background-color: #1a1a1a;
+        background: url(/mojolicious-pinstripe.gif);
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        font-family: 'Menlo', 'Monaco', Courier, monospace !important;
+        font-size: 1.0em;
+        margin: 0;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 0.5em;
+        padding-left: 1em;
+        text-align: left;
+        width: 800px;
+      }
 	</style>
 </head>
 <body onload="prettyPrint();">
