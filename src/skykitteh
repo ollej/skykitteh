@@ -118,7 +118,7 @@ post '/' => sub {
 	
 	my $oldcode = read_file($filename, err_mode => 'quiet');
 	if ($self->param('checksum') ne md5_hex($oldcode)) {
-		$self->stash('msg' => "Code has been updated since you loaded the page, the MD5 checksum didn't match.");
+		$self->stash('msg' => "Code nomz changed, MD5 checksum mismatch.");
 		my @diff = split(/\n/, diff(\$base, \$oldcode));
 		$self->stash('diff' => \@diff);
 		$self->render('error');
