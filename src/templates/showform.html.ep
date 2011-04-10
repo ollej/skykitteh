@@ -7,6 +7,7 @@
 <button id="btn_viewsource" type="button">See code nomz</button>
 <button id="btn_listfiles" type="button">List da filez</button>
 <button id="btn_newfile" type="button">Moar code nomz</button>
+<button id="btn_upload" type="button">Can haz nomz?</button>
 <button id="btn_listmodules" type="button">Availubal modulz</button>
 </div>
 
@@ -14,15 +15,14 @@
 <h2>Edit SkyKitteh</h2>
 <span>I can haz code nomz? (<%= $filename %>)</span>
 <%= form_for '/' => (method => 'post') => begin %>
-	<div style="display: block; padding: 4px">
-		<%= text_area 'code', rows => '45', class => 'prettyprint', style => 'font-family: monospace; width: 100%; height: 100%', begin %><%= $code %><% end %>
-	</div>
-	%= hidden_field 'base', $code;
-	%= hidden_field 'filename', $filename;
-	%= hidden_field 'checksum', $checksum;
+<div style="display: block; padding: 4px">
+<%= text_area 'code', rows => '45', class => 'prettyprint', style => 'font-family: monospace; width: 100%; height: 100%', begin %><%= $code %><% end %>
+</div>
+%= hidden_field 'base', $code;
+%= hidden_field 'filename', $filename;
+%= hidden_field 'checksum', $checksum;
 
-<br />
-	<h3>Evolushion comment</h3>
+<h3>Evolushion comment</h3>
 %= text_area 'commit_message', rows => 3, cols => 80;
 <br /><br />
 %= submit_button 'Evolve!';
