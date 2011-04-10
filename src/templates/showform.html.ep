@@ -35,16 +35,11 @@
 </pre>
 </div>
 
-<div id="skykitteh-files">
-<h2>Files</h2>
 %= include 'filelist'
-</div>
 
 <div id="skykitteh-upload">
 <h2>Upload File:</h2>
 %= file_field 'uploadfile';
 </div>
 
-<div id="skykitteh-modules">
 %= include 'modulelist'
-</div>
