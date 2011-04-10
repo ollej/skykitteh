@@ -49,15 +49,24 @@ get '/skykitteh.js' => sub {
 };
 
 get '/edit/(*filename)' => sub {
-	my $self = shift;
-    my $filename = $self->stash('filename');
-        if (-d $filename) {
-          return $self->render('error', msg => "No can haz edit dir!");
-        }
-	my $code = read_file($filename, err_mode => 'quiet');
-	$self->stash('code' => $code);
-	$self->stash('checksum', md5_hex($code));
-	$self->render('showform');
+  my $self = shift;
+  my $filename = $self->stash('filename');
+  if (-d $filename) {
+    return $self->render('error', msg => "No can haz edit dir!");
+  }
+  my $code = read_file($filename, err_mode => 'quiet');
+  my $data = {
+    'checksum', md5_hex($code),
+    'code' => $code,
+    'modules' => list_modules(),
+  };
+  my $format = $self->param('format') || '';
+  if ($format eq 'json') {
+    $self->render_json($data);
+  } else {
+    $self->stash($data);
+    $self->render('showform');
+  }
 };
 
 post '/' => sub {
