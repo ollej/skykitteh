@@ -48,4 +48,9 @@ $(document).ready(function() {
     $('#skykitteh-editcode').tabby();
   });
 
+  // Setup nyroModal
+  $(function() {
+    $('.nyroModal').nyroModal();
+  });
+
 });
