@@ -18,6 +18,8 @@ use Digest::MD5 qw(md5_hex);
 
 use Mojolicious::Lite;
 
+use NoRealPackage::TestingRollbackMessage;
+
 #plugin 'console_logger';
 
 $ENV{MOJO_TMPDIR} = '/tmp/';
