@@ -13,6 +13,7 @@
 use warnings;
 use strict;
 
+use Text::Diff;
 use File::Slurp qw(read_file write_file);
 use Digest::MD5 qw(md5_hex);
 
@@ -61,19 +62,21 @@ post '/' => sub {
 	my $self = shift;
 	my $filename = $self->param('filename');
 	my $code = $self->param('code');
+	my $base = $self->param('base');
 	$code =~ s/\r$//gm;
+	$base =~ s/\r$//gm;
 
-    # Uploadz
-    my $uploadfile = $self->req->upload('uploadfile');
-app->log->info("upload: " . $self->req->param('uploadfile'));
-    if ($uploadfile) {
-        app->log->info("Upload file:" . $uploadfile->file);
-        app->log->info("Upload file:" . $uploadfile->filename);
-        if ( -f './' . $uploadfile->filename) {
-            return $self->render('error', 'msg' => 'Already haz file!');
-        }
-        $uploadfile->move_to('./' . $uploadfile->filename);
-    }
+	# Uploadz
+	my $uploadfile = $self->req->upload('uploadfile');
+	app->log->info("upload: " . $self->req->param('uploadfile'));
+	if ($uploadfile) {
+	    app->log->info("Upload file:" . $uploadfile->file);
+	    app->log->info("Upload file:" . $uploadfile->filename);
+	    if ( -f './' . $uploadfile->filename) {
+		return $self->render('error', 'msg' => 'Already haz file!');
+	    }
+	    $uploadfile->move_to('./' . $uploadfile->filename);
+	}
 
 	if (!$filename) {
 	    $self->stash('msg' => "Missing filename.");
@@ -95,6 +98,8 @@ app->log->info("upload: " . $self->req->param('uploadfile'));
 	my $oldcode = read_file($filename, err_mode => 'quiet');
 	if ($self->param('checksum') ne md5_hex($oldcode)) {
 		$self->stash('msg' => "Code has been updated since you loaded the page, the MD5 checksum didn't match.");
+		my @diff = split(/\n/, diff(\$base, \$oldcode));
+		$self->stash('diff' => \@diff);
 		$self->render('error');
 		return;
 	}
