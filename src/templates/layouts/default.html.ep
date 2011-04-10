@@ -29,7 +29,7 @@
 		h1,h2,h3,h4,h5,h6,a,p,button,input {
 		font-family: "Myriad pro", helvetica;
 		}
-      #skykitteh-view, #skykitteh-editcode {
+      #skykitteh-view, .skykitteh-editcode {
         background-color: #1a1a1a;
         background: url(/mojolicious-pinstripe.gif);
         -moz-border-radius: 5px;
@@ -46,8 +46,9 @@
       #skykitteh-view {
         width: 800px;
       }
-      #skykitteh-editcode {
+      .skykitteh-editcode {
         color: #D5B57C;
+        width: 100%;
       }
 	</style>
 </head>
