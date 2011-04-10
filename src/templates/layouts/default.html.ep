@@ -6,11 +6,13 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
 	<title><%= title %></title>
 	%= stylesheet '/css/prettify-mojo.css';
+	%= stylesheet '/css/skykitteh.css';
+	%= stylesheet '/css/nyroModal.css';
 	%= javascript '/js/prettify.js';
 	%= javascript '/js/jquery.js';
-	%= javascript '/public/js/jquery.textarea.js';
+	%= javascript '/js/jquery.textarea.js';
+	%= javascript '/js/jquery.nyroModal.custom.js'
 	%= javascript '/skykitteh.js';
-	%= stylesheet '/css/skykitteh.css';
 </head>
 <body onload="prettyPrint();">
 
