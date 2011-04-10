@@ -16,7 +16,7 @@
 <span>I can haz code nomz? (<%= $filename %>)</span>
 <%= form_for '/' => (method => 'post') => begin %>
 <div style="display: block; padding: 4px">
-<%= text_area 'code', rows => '45', class => 'prettyprint', style => 'font-family: monospace; width: 100%; height: 100%', begin %><%= $code %><% end %>
+<%= text_area 'code', rows => '40', style => 'font-family: monospace; width: 100%; height: 100%', begin %><%= $code %><% end %>
 </div>
 %= hidden_field 'base', $code;
 %= hidden_field 'filename', $filename;
@@ -27,7 +27,6 @@
 <br /><br />
 %= submit_button 'Evolve!';
 <% end %>
-
 </div>
 
 <div id="skykitteh-view">
