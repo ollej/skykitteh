@@ -3,8 +3,24 @@
 %= include 'header'
 
 %= include 'toolbar'
+
+<div id="skykitteh-edit-modal">
 %= include 'editform'
+</div>
+
+<div id="skykitteh-view-modal">
 %= include 'viewcode'
+</div>
+
+<div id="skykitteh-filelist-modal">
 %= include 'filelist'
+</div>
+
+<div id="skykitteh-upload-modal">
 %= include 'upload'
+</div>
+
+<div id="skykitteh-modulelist-modal">
 %= include 'modulelist'
+</div>
+
