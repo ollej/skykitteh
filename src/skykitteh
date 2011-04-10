@@ -30,6 +30,7 @@ get '/' => sub {
     'filename' => $0,
     'checksum', md5_hex($code),
     'code' => $code,
+    'modules' => list_modules(),
   };
   my $format = $self->param('format') || '';
   if ($format eq 'json') {
@@ -146,6 +147,14 @@ sub store_motd
 	print MOTD $motd."\n";
 	close MOTD;
     }
+}
+
+sub list_modules
+{
+  use ExtUtils::Installed;
+  my $inst = ExtUtils::Installed->new;
+  my @modules = $inst->modules;
+  return \@modules;
 }
 
 app->start;
