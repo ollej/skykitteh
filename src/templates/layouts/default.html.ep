@@ -35,7 +35,6 @@
         -moz-border-radius: 5px;
         border-radius: 5px;
         font-family: 'Menlo', 'Monaco', Courier, monospace !important;
-        font-size: 1.0em;
         margin: 0;
         margin-left: auto;
         margin-right: auto;
@@ -44,11 +43,13 @@
         text-align: left;
       }
       #skykitteh-view {
+        font-size: 1.0em;
         width: 800px;
       }
       .skykitteh-editcode {
+        font-size: 0.75em;
         color: #D5B57C;
-        width: 100%;
+        width: 98%;
       }
 	</style>
 </head>
