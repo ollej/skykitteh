@@ -41,7 +41,7 @@ get '/' => sub {
 
 get '/skykitteh.js' => sub {
     my $self = shift;
-    my $code = read_file('javascript.js');
+    my $code = read_file('skykitteh.js');
     $self->render(text => $code, format => 'js');
 };
 
