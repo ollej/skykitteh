@@ -1,3 +1,5 @@
+<div id="skykitteh-files">
+<h2>Files</h2>
 <ul>
 % my @files = `find . -type f`;
 % foreach my $f (@files) {
@@ -5,3 +7,4 @@
 <li><a href="/edit/<%= $f %>"><%= $f %></a></li>
 % }
 </ul>
+</div>
