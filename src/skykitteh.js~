@@ -45,10 +45,8 @@ $(document).ready(function() {
   });
 
   // Setup nyroModal
-/*
   $(function() {
     $('.nyroModal').nyroModal();
   });
-*/
 
 });
