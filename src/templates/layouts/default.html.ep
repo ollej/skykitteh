@@ -26,10 +26,10 @@
 			height:50px;
 			text-align: center;
 		}
-		h1,a {
+		h1,h2,h3,h4,h5,h6,a,p,button,input {
 		font-family: "Myriad pro", helvetica;
 		}
-      #skykitteh-view {
+      #skykitteh-view, #skykitteh-editcode {
         background-color: #1a1a1a;
         background: url(/mojolicious-pinstripe.gif);
         -moz-border-radius: 5px;
@@ -42,7 +42,12 @@
         padding: 0.5em;
         padding-left: 1em;
         text-align: left;
+      }
+      #skykitteh-view {
         width: 800px;
+      }
+      #skykitteh-editcode {
+        color: #D5B57C;
       }
 	</style>
 </head>
