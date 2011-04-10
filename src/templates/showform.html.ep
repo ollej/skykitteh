@@ -35,6 +35,6 @@
 
 <div id="skykitteh-view">
 <pre class="prettyprint">
-<%== $code %>
+<%= $code %>
 </pre>
 </div>
