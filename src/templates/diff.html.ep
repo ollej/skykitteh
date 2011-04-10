@@ -1,5 +1,7 @@
 <h2>This changed while you were working:</h2>
+<div style="font-family: monospace; width: 100%;">
 % foreach my $line (@{stash->{diff}}) {
 %     my $color = ($line =~ /^(\+|\-)/) ? {'+' => 'green', '-' => 'red'}->{$1} : 'black';
 <span style="color: <%= $color %>"><%= $line %></span><br/>
 % }
+</div>
