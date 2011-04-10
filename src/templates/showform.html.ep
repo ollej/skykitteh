@@ -29,12 +29,7 @@
 <% end %>
 </div>
 
-<div id="skykitteh-view">
-<pre class="prettyprint">
-<%= $code %>
-</pre>
-</div>
-
+%= include 'viewcode'
 %= include 'filelist'
 
 <div id="skykitteh-upload">
