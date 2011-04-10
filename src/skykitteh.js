@@ -28,15 +28,8 @@ $(document).ready(function() {
     $('#skykitteh-edit').hide();
   }
 
-  // Setup buttonz  
-  setupToggleButton('#btn_editsource', '#skykitteh-edit');
-  setupToggleButton('#btn_viewsource', '#skykitteh-view');
-  setupToggleButton('#btn_listfiles', '#skykitteh-files');
-  setupToggleButton('#btn_upload', '#skykitteh-upload');
-  setupToggleButton('#btn_listmodules', '#skykitteh-modules');
-
   // Handle create file button
-  $('#btn_newfile').click(function() {
+  $('#newfile').click(function() {
     var filename = prompt('Dah naem of new code nomz:');
     if (filename) {
       document.location = '/edit/' + filename;
