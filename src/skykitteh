@@ -102,6 +102,7 @@ app->log->info("upload: " . $self->req->param('uploadfile'));
 
         my $report = `perl skykitteh.t`;
 	if ($? || $report !~ /ok \d/) {
+	    write_file("/tmp/commit_message.txt", 'Near deth experiuns.');
 	    write_file($filename, { binmode => ':utf8', atomic => 1 }, $oldcode);
 	    $self->stash('msg' => "Please don't kill SkyKitteh.");
 	    $self->render('error');
