@@ -43,9 +43,23 @@ get '/' => sub {
 };
 
 get '/skykitteh.js' => sub {
-    my $self = shift;
-    my $code = read_file('skykitteh.js');
-    $self->render(text => $code, format => 'js');
+  my $self = shift;
+  my $code = read_file('skykitteh.js');
+  $self->render(text => $code, format => 'js');
+};
+
+get '/public/js/(:filename)' => sub {
+  my $self = shift;
+  my $filename = $self->stash('filename');
+  my $code = read_file($filename);
+  $self->render(text => $code, format => 'js');
+};
+
+get '/public/css/(:filename)' => sub {
+  my $self = shift;
+  my $filename = $self->stash('filename');
+  my $code = read_file($filename);
+  $self->render(text => $code, format => 'css');
 };
 
 get '/edit/(*filename)' => sub {
