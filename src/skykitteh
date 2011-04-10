@@ -40,12 +40,6 @@ get '/' => sub {
   }
 };
 
-get '/skykitteh.js' => sub {
-  my $self = shift;
-  my $static = Mojolicious::Static->new;
-  return $static->serve($self, 'skykitteh.js');
-};
-
 get '/edit/(*filename)' => sub {
 	my $self = shift;
     my $filename = $self->stash('filename');
