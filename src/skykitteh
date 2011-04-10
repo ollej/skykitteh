@@ -81,6 +81,14 @@ app->log->info("upload: " . $self->req->param('uploadfile'));
 	    return;
 	}
 
+	if ($filename =~ m{^(?:\./)?((?:[^/\.]+/)+)[^/]+$}) {
+            my $path = '';
+            foreach (split(m{/}, $1)) {
+                $path .= "$_/";
+  	        mkdir $path unless(-x $path);
+            }
+	}
+
 	my $commit_message = $self->param('commit_message');
 	write_file("/tmp/commit_message.txt", $commit_message);
 	
