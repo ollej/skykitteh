@@ -47,6 +47,6 @@ $(document).ready(function() {
   });
 
   // Setup lined textarea
-  //$("#skykitteh-editcode").linedtextarea();
+  $("#skykitteh-editcode").linedtextarea();
 
 });
