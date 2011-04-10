@@ -1,4 +1,4 @@
 % layout 'default';
 % title 'Message of the Day';
-<h1>Message of the Day</h1>
+<h2>Message of the Day</h2>
 <p><%= $msg %></p>
