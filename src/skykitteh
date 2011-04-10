@@ -17,7 +17,6 @@ use File::Slurp qw(read_file write_file);
 use Digest::MD5 qw(md5_hex);
 
 use Mojolicious::Lite;
-use Mojolicious::Static;
 
 plugin 'console_logger';
 
@@ -38,6 +37,12 @@ get '/' => sub {
     $self->stash($data);
     $self->render('showform');
   }
+};
+
+get '/skykitteh.js' => sub {
+    my $self = shift;
+    my $code = read_file('javascript.js');
+    $self->render(text => $code, format => 'js');
 };
 
 get '/edit/(*filename)' => sub {
