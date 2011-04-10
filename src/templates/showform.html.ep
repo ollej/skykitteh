@@ -42,5 +42,5 @@
 </div>
 
 <div id="skykitteh-modules">
-%= include modulelist
+%= include 'modulelist'
 </div>
