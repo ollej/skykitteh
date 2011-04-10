@@ -30,7 +30,7 @@
 <% end %>
 
 <h2>Files</h2>
-%= include 'filelist';
+%= include 'filelist'
 
 <button id="btn_newfile" type="button">Moar code nomz</button>
 </div>
@@ -42,5 +42,5 @@
 </div>
 
 <div id="skykitteh-modules">
-%= include modulelist;
+%= include modulelist
 </div>
