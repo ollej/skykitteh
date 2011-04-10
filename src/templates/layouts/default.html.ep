@@ -8,6 +8,7 @@
 	%= stylesheet '/css/prettify-mojo.css';
 	%= javascript '/js/prettify.js';
 	%= javascript '/js/jquery.js';
+	%= javascript '/public/js/jquery.textarea.js';
 	%= javascript '/skykitteh.js';
 	%= stylesheet '/css/skykitteh.css';
 </head>
