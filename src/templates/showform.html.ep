@@ -31,10 +31,5 @@
 
 %= include 'viewcode'
 %= include 'filelist'
-
-<div id="skykitteh-upload">
-<h2>Upload File:</h2>
-%= file_field 'uploadfile';
-</div>
-
+%= include 'upload'
 %= include 'modulelist'
