@@ -1,5 +1,8 @@
 <div id="skykitteh-view">
+<h2>Code nomz</h2>
+<div id="skykitteh-viewcode">
 <pre class="prettyprint">
 <%= $code %>
 </pre>
+</div>
 </div>
