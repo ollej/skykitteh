@@ -4,6 +4,7 @@
 <div id="skykitteh-toolbar">
 <button id="btn_editsource" type="button">Edit da sourz</button>
 <button id="btn_viewsource" type="button">See code nomz</button>
+<button id="btn_listmodules" type="button">Availubal modulz</button>
 </div>
 
 <div id="skykitteh-edit">
@@ -29,7 +30,7 @@
 <% end %>
 
 <h2>Files</h2>
-%= include 'filelist'
+%= include 'filelist';
 
 <button id="btn_newfile" type="button">Moar code nomz</button>
 </div>
@@ -38,4 +39,8 @@
 <pre class="prettyprint">
 <%= $code %>
 </pre>
+</div>
+
+<div id="skykitteh-modules">
+%= include modulelist;
 </div>
