@@ -36,6 +36,9 @@ $(document).ready(function() {
     }
   });
 
+  // Setup lined textarea
+  $('#skykitteh-editcode').linedtextarea();
+
   // Setup tabby on textarea to allow tabbing
   jQuery(document).ready(function () {
     $('#skykitteh-editcode').tabby();
@@ -45,8 +48,5 @@ $(document).ready(function() {
   $(function() {
     $('.nyroModal').nyroModal();
   });
-
-  // Setup lined textarea
-  //$("#skykitteh-editcode").linedtextarea();
 
 });
