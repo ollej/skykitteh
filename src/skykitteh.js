@@ -46,4 +46,7 @@ $(document).ready(function() {
     $('.nyroModal').nyroModal();
   });
 
+  // Setup lined textarea
+  $("#skykitteh-editcode").linedtextarea();
+
 });
