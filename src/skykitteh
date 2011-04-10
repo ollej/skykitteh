@@ -50,8 +50,8 @@ get '/skykitteh.js' => sub {
 
 get '/public/(.format)/(*filename)' => sub {
   my $self = shift;
-  my $filename = $self->stash('filename');
   my $format = $self->stash('format');
+  my $filename = "./public/$format/" . $self->stash('filename');
   my $code = read_file($filename);
   $self->render(text => $code, format => $format);
 };
