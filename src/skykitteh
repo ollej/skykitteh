@@ -26,6 +26,7 @@ $ENV{MOJO_TMPDIR} = '/tmp/';
 
 get '/' => sub {
   my $self = shift;
+  rename 'skykitteh.js', 'public/js/skykitteh.js';
   my $code = read_file($0);
   my $data = {
     'filename' => $0,
@@ -47,14 +48,6 @@ get '/skykitteh.js' => sub {
   my $self = shift;
   my $code = read_file('skykitteh.js');
   $self->render(text => $code, format => 'js');
-};
-
-get '/public/(.format)/(*filename)' => sub {
-  my $self = shift;
-  my $format = $self->stash('format');
-  my $filename = "./public/$format/" . $self->stash('filename');
-  my $code = read_file($filename);
-  $self->render(text => $code, format => $format);
 };
 
 get '/edit/(*filename)' => sub {
