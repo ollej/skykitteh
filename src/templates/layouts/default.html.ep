@@ -14,6 +14,7 @@
 	%= javascript '/js/jquery.textarea.js';
 	%= javascript '/js/jquery.nyroModal.custom.js';
 	%= javascript '/js/jquery.alerts.js';
+	%= javascript '/js/ace.js';
 	%= javascript '/js/skykitteh.js';
 </head>
 <body onload="prettyPrint();">
