@@ -1,4 +1,4 @@
 <div id="skykitteh-modules">
 <h3>Availubal modulz</h3>
-<%= $modules %>
+<%== $modules %>
 </div>
