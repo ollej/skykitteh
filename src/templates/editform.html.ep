@@ -1,6 +1,6 @@
 <div id="skykitteh-edit">
 <h2>Edit SkyKitteh</h2>
-<span>I can haz code nomz? (<%= $filename %>)</span>
+<span>I can haz code nomz? (<%= $filename %>) <a href="javascript:void();" id="aceeditor">Ace Editor</a></span>
 <%= form_for '/' => (method => 'post') => begin %>
 <div style="display: block; padding: 4px">
 <%= text_area 'code', rows => '35', id => 'skykitteh-editcode', class => 'skykitteh-editcode', spellcheck => 'false', begin %><%= $code %><% end %>
