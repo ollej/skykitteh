@@ -42,4 +42,8 @@ $(document).ready(function() {
   // Setup tabby on textarea to allow tabbing
   $('#skykitteh-editcode').tabby();
 
+  $('#aceeditor').click(function() {
+    var editor = ace.edit("skykitteh-viewcode-pre");
+  });
+
 });
