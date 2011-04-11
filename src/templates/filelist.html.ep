@@ -2,7 +2,7 @@
 <h2>Files</h2>
 <ul>
 % my @files = `find . -type f`;
-% foreach my $f (@files) {
+% foreach my $f (sort { $a cmp $b } @files) {
   % chomp $f;
 <li><a href="/edit/<%= $f %>"><%= $f %></a></li>
 % }
