@@ -43,7 +43,9 @@ $(document).ready(function() {
   $('#skykitteh-editcode').tabby();
 
   $('#aceeditor').click(function() {
-    var editor = ace.edit("skykitteh-viewcode-pre");
+    var ace = window.__ace_shadowed__;
+    ace.transformTextarea(document.getElementById('skykitteh-editcode'));
+    return false;
   });
 
 });
