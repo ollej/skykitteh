@@ -171,9 +171,13 @@ sub store_motd
 
 sub list_modules
 {
-  use HTML::Perlinfo;
-  $m = HTML::Perlinfo::Modules->new( full_page => 0 );
-  return $m->print_modules();
+  use ExtUtils::Installed;
+  my $inst = ExtUtils::Installed->new;
+  my @modules = $inst->modules;
+  return \@modules;
+  #use HTML::Perlinfo;
+  #$m = HTML::Perlinfo::Modules->new( full_page => 0 );
+  #return $m->print_modules();
 }
 
 app->start;
