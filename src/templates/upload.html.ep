@@ -1,4 +1,6 @@
 <div id="skykitteh-upload">
 <h2>Gimmeh Nomz:</h2>
+<%= form_for '/' => (method => 'post') => (enctype => 'multipart/form-data') => begin %>
 %= file_field 'uploadfile';
+<% end %>
 </div>
