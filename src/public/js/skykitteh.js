@@ -15,17 +15,19 @@ $(document).ready(function() {
     });
   }
 
+  // Setup nyroModal
+  $(function() {
+    $('.nyroModal').nyroModal();
+  });
+
   // Hide all functionality
   $('#skykitteh-view').hide();
   $('#skykitteh-files').hide();
   $('#skykitteh-upload').hide();
   $('#skykitteh-modules').hide();
+  $('#skykitteh-edit').hide();
   if (document.location.toString().match(/skykitteh.com\/edit\//)) {
-    // Scroll down to edit area
-    scrollTo('#skykitteh-edit');
-  } else {
-    // Don't hide edit source on the edit page.
-    $('#skykitteh-edit').hide();
+    $.nmManual('#skykitteh-edit');
   }
 
   // Handle create file button
@@ -39,11 +41,6 @@ $(document).ready(function() {
   // Setup tabby on textarea to allow tabbing
   jQuery(document).ready(function () {
     $('#skykitteh-editcode').tabby();
-  });
-
-  // Setup nyroModal
-  $(function() {
-    $('.nyroModal').nyroModal();
   });
 
 });
