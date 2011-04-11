@@ -46,9 +46,9 @@ $(document).ready(function() {
     var ace = window.__ace_shadowed__;
     ace.options.showPrintMargin = "true";
     ace.options.gutter = "true";
-    var editor = ace.transformTextarea(document.getElementById('skykitteh-editcode'));
     var PerlMode = ace.require("ace/mode/perl").Mode;
-    editor.getSession().setMode(new PerlMode());
+    ace.setMode(new PerlMode());
+    var editor = ace.transformTextarea(document.getElementById('skykitteh-editcode'));
     window.aceEditor = editor;
     return false;
   });
