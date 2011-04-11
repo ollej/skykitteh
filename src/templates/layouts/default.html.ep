@@ -15,6 +15,7 @@
 	%= javascript '/js/jquery.nyroModal.custom.js'
 	%= javascript '/js/jquery-linedtextarea.js';
 	%= javascript '/skykitteh.js';
+	%= javascript '/js/skykitteh.js';
 </head>
 <body onload="prettyPrint();">
 
