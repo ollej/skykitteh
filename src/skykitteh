@@ -128,13 +128,15 @@ post '/' => sub {
 	}
 	write_file($filename, { binmode => ':utf8', atomic => 1 }, $code);
 
-        my $report = `perl skykitteh.t`;
-	if ($? || $report !~ /ok \d/) {
-	    write_file("/tmp/commit_message.txt", 'Near deth experiuns.');
-	    write_file($filename, { binmode => ':utf8', atomic => 1 }, $oldcode);
-	    $self->stash('msg' => "Please don't kill SkyKitteh.");
-	    $self->render('error');
-	    return;
+	if ($0 ne 'skykitteh.t') {
+	    my $report = `/usr/bin/perl skykitteh.t`;
+	    if ($? || $report !~ /ok \d/) {
+		write_file("/tmp/commit_message.txt", 'Near deth experiuns.');
+		write_file($filename, { binmode => ':utf8', atomic => 1 }, $oldcode);
+		$self->stash('msg' => "Please don't kill SkyKitteh.");
+		$self->render('error');
+		return;
+	    }
 	}
 
 	$self->redirect_to('/');
