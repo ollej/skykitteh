@@ -44,10 +44,10 @@ $(document).ready(function() {
 
   $('#aceeditor').click(function() {
     var ace = window.__ace_shadowed__;
-    ace.options.showPrintMargin = true;
-    ace.options.gutter = true;
+    ace.options.showPrintMargin = "true";
+    ace.options.gutter = "true";
     var editor = ace.transformTextarea(document.getElementById('skykitteh-editcode'));
-    var JavaScriptMode = require("ace/mode/perl").Mode;
+    var PerlMode = ace.require("ace/mode/perl").Mode;
     editor.getSession().setMode(new PerlMode());
     window.aceEditor = editor;
     return false;
