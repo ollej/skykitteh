@@ -1,8 +1,4 @@
 <div id="skykitteh-modules">
 <h3>Availubal modulz</h3>
-<ul>
-% foreach my $m (@{ $modules }) {
-  <li><%= $m %></li>
-% }
-</ul>
+<%= $modules %>
 </div>
