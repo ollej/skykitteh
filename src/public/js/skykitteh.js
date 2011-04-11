@@ -40,8 +40,10 @@ $(document).ready(function() {
   });
 
   // Setup tabby on textarea to allow tabbing
-  jQuery(document).ready(function () {
-    $('#skykitteh-editcode').tabby();
-  });
+  //$('#skykitteh-editcode').tabby();
+
+  $('#btn_aceeditor').click(function() {
+    var skykittehEditor = ace.edit("skykitteh-editcode");
+  }
 
 });
