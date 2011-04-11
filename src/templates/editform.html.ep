@@ -5,6 +5,7 @@
 <div style="display: block; padding: 4px">
 <%= text_area 'code', rows => '35', id => 'skykitteh-editcode', class => 'skykitteh-editcode', spellcheck => 'false', begin %><%= $code %><% end %>
 </div>
+<button id='btn_aceeditor'>Ace Editor</button>
 %= hidden_field 'base', $code;
 %= hidden_field 'filename', $filename;
 %= hidden_field 'checksum', $checksum;
