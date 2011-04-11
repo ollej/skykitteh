@@ -1,9 +1,9 @@
 <div id="skykitteh-view">
 <h2>Code nomz</h2>
-<div id="skykitteh-viewcode">
+<div id="skykitteh-viewcod">
 <pre id="skykitteh-viewcode-pre" class="prettyprin">
 <%= $code %>
 </pre>
 </div>
-<a href="#" id="aceeditor">Ace Editor</a>
+<a href="javascript:void();" id="aceeditor">Ace Editor</a>
 </div>
