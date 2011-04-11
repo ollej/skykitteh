@@ -32,7 +32,7 @@ $(document).ready(function() {
 
   // Handle create file button
   $('#newfile').click(function() {
-    jPrompt('Dah naem of new code nomz:', '', 'Moar code nomz', function(filename) {
+    jPrompt('Dah naem of new code nomz:', '', 'Can haz nomz?', function(filename) {
       if (filename) {
         document.location = '/edit/' + filename;
       }
