@@ -32,10 +32,11 @@ $(document).ready(function() {
 
   // Handle create file button
   $('#newfile').click(function() {
-    var filename = prompt('Dah naem of new code nomz:');
-    if (filename) {
-      document.location = '/edit/' + filename;
-    }
+    jPrompt('Dah naem of new code nomz:', '', 'Moar code nomz', function(filename) {
+      if (filename) {
+        document.location = '/edit/' + filename;
+      }
+    });
   });
 
   // Setup tabby on textarea to allow tabbing
