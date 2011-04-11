@@ -17,7 +17,7 @@
 h1,h2,h3,h4,h5,h6,a,p,button,input {
     font-family: "Myriad pro", helvetica;
 }
-#skykitteh-viewcode, .skykitteh-editcode {
+#skykitteh-viewcode, #skykitteh-editcode {
     background-color: #1a1a1a;
     background: url(/mojolicious-pinstripe.gif);
     -moz-border-radius: 5px;
@@ -34,10 +34,10 @@ h1,h2,h3,h4,h5,h6,a,p,button,input {
     font-size: 1.0em;
     width: 98%;
 }
-.skykitteh-editcode {
+#skykitteh-editcode {
     font-size: 0.75em;
     color: #D5B57C;
-    width: 150%;
+    width: 95%;
 }
 #skykitteh-edit {
     width: 95%;
