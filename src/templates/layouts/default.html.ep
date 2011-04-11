@@ -23,7 +23,7 @@
 </div>
 
 % if (exists stash->{motd}) {
-<span style="text-align: center;">saiz: <%= stash->{motd} %></span>
+<span style="display:block; text-align: center;">saiz: <%= stash->{motd} %></span>
 % }
 
 <%= content %>
