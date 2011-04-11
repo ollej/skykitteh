@@ -20,16 +20,20 @@ use Digest::MD5 qw(md5_hex);
 
 use Mojolicious::Lite;
 
+use constant {
+    KITTEH_NAME => 'skykitteh',
+};
+
 #plugin 'console_logger';
 
 $ENV{MOJO_TMPDIR} = '/tmp/';
 
 get '/' => sub {
   my $self = shift;
-  my $code = read_file($0);
+  my $code = read_file(KITTEH_NAME);
   my $data = {
-    'filename' => $0,
-    'checksum', md5_hex($code),
+    'filename' => KITTEH_NAME,
+    'checksum' => md5_hex($code),
     'code' => $code,
     'modules' => '',
     'motd' => get_motd(),
