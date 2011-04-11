@@ -8,12 +8,12 @@
 	%= stylesheet '/css/prettify-mojo.css';
 	%= stylesheet '/css/skykitteh.css';
 	%= stylesheet '/css/nyroModal.css';
-	%= stylesheet '/css/jquery-linedtextarea.css';
+	%= stylesheet '/css/jquery.alerts.css';
 	%= javascript '/js/prettify.js';
 	%= javascript '/js/jquery.js';
 	%= javascript '/js/jquery.textarea.js';
-	%= javascript '/js/jquery.nyroModal.custom.js'
-	%= javascript '/js/jquery-linedtextarea.js';
+	%= javascript '/js/jquery.nyroModal.custom.js';
+	%= javascript '/js/jquery.alerts.js';
 	%= javascript '/js/skykitteh.js';
 </head>
 <body onload="prettyPrint();">
