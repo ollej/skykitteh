@@ -67,19 +67,22 @@ get '/edit/(*filename)' => sub {
 
 # Can haz uploadz
 post '/upload' => sub {
-	my $self = shift;
-	my $uploadfile = $self->req->upload('uploadfile');
-	app->log->info("upload: " . $self->req->param('uploadfile'));
-	my $filename = './' . $uploadfile->filename;
-	if ($uploadfile) {
-	    if ( -e $filename ) {
-		return $self->render('error', 'msg' => 'Already haz file!');
-	    }
-	    $uploadfile->move_to($filename);
-	    return $self->redirect_to('/');
-	} else {
-		return $self->render('error', 'msg' => 'No can haz file?!');
-	}
+  my $self = shift;
+  my $uploadfile = $self->req->upload('uploadfile');
+  my $path = $self->param('path');
+  if ($uploadfile) {
+    app->log->info("upload: " . $self->req->param('uploadfile') . " path: " . $path);
+    $path =~ s/\/*$//;
+    my $filename = "./$path/$uploadfile->filename";
+    if ( -e $filename ) {
+      return $self->render('error', 'msg' => 'Alraedy haz file!');
+    } else {
+      $uploadfile->move_to($filename);
+      return $self->redirect_to('/');
+    }
+  } else {
+    return $self->render('error', 'msg' => 'No can haz file?!');
+  }
 };
 
 post '/' => sub {
