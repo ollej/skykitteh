@@ -9,8 +9,3 @@
 %= include 'filelist'
 %= include 'upload'
 %= include 'modulelist'
-
-<a href="javascript:void();" id="aceeditor">Ace Editor</a>
-<pre id="skykitteh-viewcode-pre">
-<%= $code %>
-</pre>
