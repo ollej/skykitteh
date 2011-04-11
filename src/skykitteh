@@ -72,11 +72,13 @@ post '/upload' => sub {
   my $path = $self->param('path');
   if ($uploadfile) {
     app->log->info("upload: " . $self->req->param('uploadfile') . " path: " . $path);
-    $path =~ s/\/*$/\//;
-    unless (mkpath($path, {error => \my $err}) && -d $path) {
-      $self->stash('msg' => "Don't confuse teh kitteh.");
-      $self->render('error');
-      return;
+    if ($path) {
+      if (! -d $path) {
+        unless (mkpath($path, {error => \my $err}) && -d $path) {
+          return $self->render('error', 'msg' => "Don't confuse teh kitteh.");
+        }
+      }
+      $path =~ s/\/*$/\//;
     }
 
     my $filename = "./$path" . $uploadfile->filename";
