@@ -2,6 +2,9 @@
 <h2>Gimmeh Nomz:</h2>
 <%= form_for '/upload' => (method => 'post') => (enctype => 'multipart/form-data') => begin %>
 %= file_field 'uploadfile';
+<br />
+<label for="path">Path:</label> %= text_field 'path'
+<br />
 %= submit_button 'Uploadz';
 <% end %>
 </div>
