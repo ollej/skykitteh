@@ -69,8 +69,8 @@ get '/edit/(*filename)' => sub {
 post '/upload' => sub {
   my $self = shift;
   my $uploadfile = $self->req->upload('uploadfile');
-  my $path = $self->param('path');
   if ($uploadfile) {
+    my $path = $self->param('path');
     app->log->info("upload: " . $self->req->param('uploadfile') . " path: " . $path);
     if ($path) {
       if (! -d $path) {
@@ -81,7 +81,7 @@ post '/upload' => sub {
       $path =~ s/\/*$/\//;
     }
 
-    my $filename = "./$path" . $uploadfile->filename";
+    my $filename = "./$path" . $uploadfile->filename;
     if ( -e $filename ) {
       return $self->render('error', 'msg' => 'Alraedy haz file!');
     } else {
