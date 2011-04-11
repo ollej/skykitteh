@@ -168,7 +168,7 @@ sub get_motd
 	my @motds = <MOTD>;
 	close MOTD;
 	if (@motds) {
-	    $motd = @motds[int(rand(scalar(@motds))];
+	    $motd = @motds[int(rand(scalar(@motds)))];
 	}
     }
 
