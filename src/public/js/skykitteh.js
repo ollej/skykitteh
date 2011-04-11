@@ -46,10 +46,7 @@ $(document).ready(function() {
     var ace = window.__ace_shadowed__;
     ace.options.showPrintMargin = "true";
     ace.options.gutter = "true";
-    var PerlMode = ace.require("ace/mode/perl").Mode;
-    ace.setMode(new PerlMode());
-    var editor = ace.transformTextarea(document.getElementById('skykitteh-editcode'));
-    window.aceEditor = editor;
+    ace.transformTextarea(document.getElementById('skykitteh-editcode'));
     return false;
   });
 
