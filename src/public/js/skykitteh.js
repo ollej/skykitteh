@@ -44,6 +44,6 @@ $(document).ready(function() {
 
   $('#btn_aceeditor').click(function() {
     var skykittehEditor = ace.edit("skykitteh-editcode");
-  }
+  });
 
 });
