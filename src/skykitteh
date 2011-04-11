@@ -79,8 +79,9 @@ get '/edit/(*filename)' => sub {
   }
 };
 
+# Can haz uploadz
 post '/upload' => sub {
-	# Uploadz
+	my $self = shift;
 	my $uploadfile = $self->req->upload('uploadfile');
 	app->log->info("upload: " . $self->req->param('uploadfile'));
 	my $filename = './' . $uploadfile->filename;
