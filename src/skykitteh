@@ -40,7 +40,6 @@ get '/' => sub {
   if ($format eq 'json') {
     $self->render_json($data);
   } else {
-    $data->{modules} = '';
     $data->{motd} = get_motd();
     $self->stash($data);
     $self->render('showform');
@@ -57,7 +56,6 @@ get '/edit/(*filename)' => sub {
   my $data = {
     'checksum', md5_hex($code),
     'code' => $code,
-    'modules' => '',
     'motd' => get_motd(),
   };
   my $format = $self->param('format') || '';
