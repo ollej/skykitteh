@@ -79,6 +79,22 @@ get '/edit/(*filename)' => sub {
   }
 };
 
+post '/upload' => sub {
+	# Uploadz
+	my $uploadfile = $self->req->upload('uploadfile');
+	app->log->info("upload: " . $self->req->param('uploadfile'));
+	my $filename = './' . $uploadfile->filename;
+	if ($uploadfile) {
+	    if ( -e $filename ) {
+		return $self->render('error', 'msg' => 'Already haz file!');
+	    }
+	    $uploadfile->move_to($filename);
+	    return $self->redirect_to('/');
+	} else {
+		return $self->render('error', 'msg' => 'No can haz file?!');
+	}
+};
+
 post '/' => sub {
 	my $self = shift;
 	my $filename = $self->param('filename');
@@ -86,20 +102,6 @@ post '/' => sub {
 	my $base = $self->param('base');
 	$code =~ s/\r$//gm;
 	$base =~ s/\r$//gm;
-
-	# Uploadz
-	my $uploadfile = $self->req->upload('uploadfile');
-	app->log->info("upload: " . $self->req->param('uploadfile'));
-	if ($uploadfile) {
-	    app->log->info("Upload file:" . $uploadfile->file);
-	    app->log->info("Upload file:" . $uploadfile->filename);
-	    if ( -e './' . $uploadfile->filename) {
-		return $self->render('error', 'msg' => 'Already haz file!');
-	    }
-	    $uploadfile->move_to('./' . $uploadfile->filename);
-	    $self->redirect_to('/');
-	    return;
-	}
 
 	if (!$filename) {
 	    $self->stash('msg' => "Missing filename.");
