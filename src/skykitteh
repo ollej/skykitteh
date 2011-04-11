@@ -145,16 +145,7 @@ get '/motd' => sub {
 	store_motd($add);
     }
 
-    my $motd = 'I can haz code nomz?';
-
-    if (open MOTD, '<', 'motd.txt') {
-	my @motds = <MOTD>;
-	close MOTD;
-	if (@motds) {
-	    $motd = @motds[time % scalar(@motds)];
-	}
-    }
-
+    my $motd = get_motd();
     $self->stash('msg' => $motd);
     $self->render('motd');
 };
@@ -167,6 +158,21 @@ sub store_motd
 	print MOTD $motd."\n";
 	close MOTD;
     }
+}
+
+sub get_motd
+{
+    my $motd = 'I can haz code nomz?';
+
+    if (open MOTD, '<', 'motd.txt') {
+	my @motds = <MOTD>;
+	close MOTD;
+	if (@motds) {
+	    $motd = @motds[int(rand(scalar(@motds))];
+	}
+    }
+
+    return $motd;
 }
 
 sub list_modules
