@@ -161,7 +161,7 @@ get '/modules' => sub {
   my $m = HTML::Perlinfo::Modules->new( full_page => 0 );
   my $modules = $m->print_modules();
   return $self->render(text => $modules);
-}
+};
 
 sub store_motd
 {
