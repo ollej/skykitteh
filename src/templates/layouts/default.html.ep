@@ -22,11 +22,11 @@
 	<h1>=^..^= SkyKitteh =^..^=</h1>
 </div>
 
-<%= content %>
-
 % if (exists stash->{motd}) {
-<span><%= stash->{motd} %></span>
+<span style="text-align: center;">saiz: <%= stash->{motd} %></span>
 % }
+
+<%= content %>
 
 </body>
 </html>
