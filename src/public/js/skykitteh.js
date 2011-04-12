@@ -16,10 +16,6 @@ $(document).ready(function() {
   }
 
   // Setup nyroModal
-  $.nyroModalSettings({
-      resizable: true,
-      autoSizable: true
-  });
   $('.nyroModal').nyroModal();
 
   // Hide all functionality
