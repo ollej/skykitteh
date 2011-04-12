@@ -37,10 +37,10 @@ h1,h2,h3,h4,h5,h6,a,p,button,input {
 #skykitteh-editcode {
     font-size: 0.75em;
     color: #D5B57C;
-    width: 300px;
+    width: 700px;
 }
 #skykitteh-edit {
-    width: 300px;
+    width: 95%;
 }
 .skykitteh-toolbar {
     font-size: 1em;
