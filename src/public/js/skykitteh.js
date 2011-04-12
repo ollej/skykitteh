@@ -28,6 +28,10 @@ $(document).ready(function() {
     $.nmManual('#skykitteh-edit');
   }
 
+  $('#openeditor').click(function() {
+    $.nmManual('#skykitteh-edit', { size: { width: $(document).width() - 40 }});
+  });
+
   // Handle create file button
   $('#newfile').click(function() {
     jPrompt('Dah naem of new code nomz:', '', 'Can haz nomz?', function(filename) {
