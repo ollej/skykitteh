@@ -21,7 +21,7 @@ use Digest::MD5 qw(md5_hex);
 use Mojolicious::Lite;
 
 use constant {
-    KITTEH_NAME => 'skykitteh',
+    KITTEH_NAME => 'skykigdteh',
 };
 
 #plugin 'console_logger';
