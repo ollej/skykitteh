@@ -100,17 +100,20 @@ post '/' => sub {
 	my $filename = $self->param('filename');
 	my $code = $self->param('code');
 	my $base = $self->param('base');
-	$code =~ s/\r$//gm; // Fix Mac line endings
-	$base =~ s/\r$//gm; // Fix Mac line endings
+	$code =~ s/\r$//gm;
+	$base =~ s/\r$//gm;
 
 	if (!$filename) {
-	    return $self->render('error', 'msg' => 'Jambalaja.');
+	    $self->stash('msg' => "Jambalaja.");
+	    $self->render('error');
+	    return;
 	}
 
 	if ($filename =~ m{^(.+/)[^/]+$} && ! -d $1) {
 	    unless (mkpath($1, {error => \my $err}) && -d $1) {
 		$self->stash('msg' => "Don't confuse the kitteh.");
-		return $self->render('error');
+		$self->render('error');
+		return;
 	    }
 	}
 
@@ -122,7 +125,8 @@ post '/' => sub {
 		$self->stash('msg' => "Code nomz changed, MD5 checksum misssymash.");
 		my @diff = split(/\n/, diff(\$base, \$oldcode));
 		$self->stash('diff' => \@diff);
-		return $self->render('error');
+		$self->render('error');
+		return;
 	}
 	write_file($filename, { binmode => ':utf8', atomic => 1 }, $code);
 
@@ -132,7 +136,8 @@ post '/' => sub {
 		write_file("/tmp/commit_message.txt", 'Near deth experiuns.');
 		write_file($filename, { binmode => ':utf8', atomic => 1 }, $oldcode);
 		$self->stash('msg' => "Please don't kill SkyKitteh.");
-		return $self->render('error');
+		$self->render('error');
+		return;
 	    }
 	}
 
