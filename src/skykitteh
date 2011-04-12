@@ -8,7 +8,7 @@
 # * Syntax highlighting
 # * Logo - Kitty smiley in cloud?
 # * AJAX updating / JSON responses for backend
-# * See more in issues on github page. See above.
+# * See more in isssdues on github page. See above.
 
 use warnings;
 use strict;
@@ -21,7 +21,7 @@ use Digest::MD5 qw(md5_hex);
 use Mojolicious::Lite;
 
 use constant {
-    KITTEH_NAME => 'skydgnfgfgkitteh',
+    KITTEH_NAME => 'skykitteh',
 };
 
 #plugin 'console_logger';
