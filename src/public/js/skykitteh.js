@@ -16,9 +16,11 @@ $(document).ready(function() {
   }
 
   // Setup nyroModal
-  $(function() {
-    $('.nyroModal').nyroModal();
+  $.nyroModalSettings({
+      resizable: true,
+      autoSizable: true
   });
+  $('.nyroModal').nyroModal();
 
   // Hide all functionality
   $('#skykitteh-view').hide();
