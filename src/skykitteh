@@ -1,9 +1,5 @@
 #!/usr/bin/perl
 
-# 
-
-
-
 # Neat things to add:
 # * Revision control, rollback to earlier version.
 # * Syntax highlighting
@@ -20,6 +16,7 @@ use File::Slurp qw(read_file write_file);
 use Digest::MD5 qw(md5_hex);
 
 use Mojolicious::Lite;
+use Mojo::UserAgent;
 
 use constant {
     KITTEH_NAME => 'skykitteh',
@@ -117,6 +114,10 @@ post '/' => sub {
 
 	my $commit_message = $self->param('commit_message');
 	write_file("/tmp/commit_message.txt", $commit_message);
+
+	# Tweet commit!
+	my $ua = Mojo::UserAgent->new;
+	my $tx = $ua->post_form('http://localhost:4711/' => { 'status' => $commit_message });
 	
 	my $oldcode = read_file($filename, err_mode => 'quiet');
 	if ($self->param('checksum') ne md5_hex($oldcode)) {
