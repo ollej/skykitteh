@@ -161,6 +161,16 @@ get '/modules' => sub {
   return $self->render(text => $modules);
 };
 
+get '/commits' => sub {
+  my $self = shift;
+  use Net::GitHub;
+
+  my $github = Net::GitHub->new( owner => 'ollej', repo => 'skykitteh' );
+  my $commits = $github->commit->branch();
+  $self->stash('commits' => $commits);
+  return $self->render('commits');
+};
+
 sub store_motd
 {
     my ($motd) = @_;
