@@ -1,6 +1,6 @@
 <h2>Commits</h2>
 <ul>
-% foreach $c (@commits) {
+% foreach my $c (@commits) {
   <li><a href="<%= $c->{'url'} %>" title="<%= $c->{'message'} %>"><%= $c->{'committed_date'} %></a></li>
 % }
 </ul>
