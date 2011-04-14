@@ -4,5 +4,6 @@
 <a href="#skykitteh-files" class="nyroModal">List da filez</a> |
 <a href="#skykitteh-upload" class="nyroModal">Moar code nomz</a> |
 <a href="#" id="newfile">Can haz nomz?</a> |
+<a href="/commits" class="nyroModal">Commits</a> |
 <a href="/modules" class="nyroModal">Availubal modulz</a>
 </div>
