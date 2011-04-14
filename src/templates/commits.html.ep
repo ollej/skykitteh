@@ -1,6 +1,6 @@
 <h2>Commits</h2>
 <ul>
 % foreach my $c (@{stash->{commits}}) {
-  <li><a href="http://github.com/<%= $c->{'url'} %>" title="<%= $c->{'id'} %>"><%= $c->{'committed_date'} %></a> - <%= $c->{'message'} %></li>
+  <li><a href="http://github.com<%= $c->{'url'} %>" title="<%= $c->{'id'} %>"><%= $c->{'committed_date'} %></a> - <%= $c->{'message'} %></li>
 % }
 </ul>
