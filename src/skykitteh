@@ -16,7 +16,6 @@ use File::Slurp qw(read_file write_file);
 use Digest::MD5 qw(md5_hex);
 use DateTime::Format::ISO8601;
 
-
 use Mojolicious::Lite;
 use Mojo::UserAgent;
 
@@ -173,8 +172,8 @@ get '/commits' => sub {
 
   # Format dates
   foreach my $c (@{$commits}) {
-    $c->{'authored_date'} = format_date($c->{'authored_date'});
-    $c->{'committed_date'} = format_date($c->{'committed_date'});
+    $c->{'authored_date'} = format_date($c->{'authored_date'});
+    $c->{'committed_date'} = format_date($c->{'committed_date'});
   }
 
   $self->stash('commits' => $commits);
