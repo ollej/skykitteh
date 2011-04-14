@@ -115,10 +115,6 @@ post '/' => sub {
 	my $commit_message = $self->param('commit_message');
 	write_file("/tmp/commit_message.txt", $commit_message);
 
-	# Tweet commit!
-	my $ua = Mojo::UserAgent->new;
-	my $tx = $ua->post_form('http://localhost:4711/' => { 'status' => $commit_message });
-	
 	my $oldcode = read_file($filename, err_mode => 'quiet');
 	if ($self->param('checksum') ne md5_hex($oldcode)) {
 		$self->stash('msg' => "Code nomz changed, MD5 checksum misssymash.");
@@ -138,6 +134,10 @@ post '/' => sub {
 	    }
 	}
 
+	# Tweet commit!
+	my $ua = Mojo::UserAgent->new;
+	my $tx = $ua->post_form('http://localhost:4711/' => { 'status' => $commit_message });
+	
 	$self->redirect_to('/');
 };
 
