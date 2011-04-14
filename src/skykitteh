@@ -14,6 +14,8 @@ use Text::Diff;
 use File::Path 'mkpath';
 use File::Slurp qw(read_file write_file);
 use Digest::MD5 qw(md5_hex);
+use DateTime::Format::ISO8601;
+
 
 use Mojolicious::Lite;
 use Mojo::UserAgent;
@@ -165,11 +167,26 @@ get '/commits' => sub {
   my $self = shift;
   use Net::GitHub;
 
+  # Read commits
   my $github = Net::GitHub->new( owner => 'ollej', repo => 'skykitteh' );
   my $commits = $github->commit->branch();
+
+  # Format dates
+  foreach my $c (@{$commits}) {
+    $c->{'authored_date'} = format_date($c->{'authored_date'});
+    $c->{'committed_date'} = format_date($c->{'committed_date'});
+  }
+
   $self->stash('commits' => $commits);
   return $self->render('commits');
 };
+
+sub format_date
+{
+  my ($date) = @_;
+  my $dt = DateTime::Format::ISO8601->parse_datetime($date);
+  return $dt->strftime('%F %T')
+}
 
 sub store_motd
 {
