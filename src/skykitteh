@@ -19,6 +19,11 @@ use DateTime::Format::ISO8601;
 use Mojolicious::Lite;
 use Mojo::UserAgent;
 
+use FindBin;
+use lib ("$FindBin::Bin/lib/");
+
+use SkyChat;
+
 use constant {
     KITTEH_NAME => 'skykitteh',
 };
@@ -140,6 +145,42 @@ post '/' => sub {
 	my $tx = $ua->post_form('http://localhost:4711/' => { 'status' => $commit_message });
 	
 	$self->redirect_to('/');
+};
+
+get '/chat/' => sub {
+    my $self = shift;
+    my $user = $self->param('user');
+
+    $self->stash(user => $user);
+    $self->render('chat');
+};
+
+get '/chat/(:action)' => sub {
+    my $self = shift;
+    my $user = $self->param('user');
+    my $action = $self->stash('action');
+
+    my $data = {
+	status => 1,
+    };
+
+    if($action eq 'login') {
+	SkyChat::login($user);
+    }
+    elsif($action eq 'logout') {
+	SkyChat::logout($user);
+    }
+    elsif($action eq 'broadcast') {
+	SkyChat::broadcast($user, $self->param('message'));
+    }
+    elsif($action eq 'poll') {
+	$data->{messages} = SkyChat::poll($user);
+    }
+    else {
+	$data->{status} = 0;
+    }
+
+    $self->render_json($data);
 };
 
 get '/motd' => sub {
