@@ -37,6 +37,15 @@ $(document).ready(function() {
     });
   });
 
+  // Open chat window
+  $('#chat').click(function() {
+    jPrompt('Naem:', '', 'Identify yourself', function(username) {
+      if (username) {
+        window.open('/chat/?user=' + username;
+      }
+    });
+  });
+
   // Setup tabby on textarea to allow tabbing
   $('#skykitteh-editcode').tabby();
 
