@@ -10,6 +10,7 @@ sub login
     my ($user) = @_;
 
     $users{$user} = [] unless($user eq 'skykitteh');
+    broadcast('skykitteh', $user.' lurkz in shadwoz.')
 }
 
 sub logout
