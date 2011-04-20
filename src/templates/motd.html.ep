@@ -1,5 +1,70 @@
-% layout 'default';
-% title 'Message of the Day';
-<h2>Message of the Day</h2>
-<p><%= $msg %></p>
+<html>
+  <head>
 
+    <script type="text/javascript" src="http://www.skykitteh.com/js/jquery.js"></script>
+  </head>
+  <body>
+    <textarea id="stdout" rows="45" readonly="READONLY" style="background-color: black; color: white; font-family: monospace; width: 100%; height: 95%"></textarea>
+
+    <input type="text" id="stdin" onchange="broadcast(this);" style="background-color: black; color: white; font-family: monospace; width: 100%;"/>
+
+    <script type="text/javascript">
+
+     var user = '<%= $user %>';
+
+function log(msg)
+{
+    $('#stdout')[0].value += msg+"\n";
+}
+
+function send(action, data, handler)
+{
+    $.getJSON('/chat/'+action, data, handler);
+}
+
+function login(user)
+{
+    send('login', { user: user }, function(data) {
+	    window.setTimeout("poll(true)", 500);
+	});
+}
+
+function logout(user)
+{
+    alert('logout');
+    send('logout', { user: user });
+}
+
+function poll(queue)
+{
+    send('poll', { user: user }, function(data) {
+	    for(var i = 0; i < data.messages.length; ++i)
+		log(data.messages[i][0]+': '+data.messages[i][1]);
+
+	    if(queue)
+		window.setTimeout("poll(true)", 500);
+	});
+}
+
+
+function broadcast(input)
+{
+    var text = input.value;
+    input.value = '';
+    send('broadcast', { user: user, message: text }, function(data) { poll(); } );
+}
+
+
+$(document).ready(function() {
+	login(user);
+});
+
+$(window).unload(function() {
+	logout(user);
+});
+
+    </script>
+
+
+  </body>
+</html>
