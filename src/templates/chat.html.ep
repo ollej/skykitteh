@@ -31,7 +31,6 @@ function login(user)
 
 function logout(user)
 {
-    alert('logout');
     send('logout', { user: user });
 }
 
