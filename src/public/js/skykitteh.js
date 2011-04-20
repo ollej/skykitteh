@@ -41,7 +41,7 @@ $(document).ready(function() {
   $('#chat').click(function() {
     jPrompt('Naem:', '', 'Identify yourself', function(username) {
       if (username) {
-        window.open('/chat/?user=' + username;
+        window.open('/chat/?user=' + username, 'chatpopup', '');
       }
     });
   });
