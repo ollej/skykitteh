@@ -2,6 +2,7 @@ package SkyChat;
 
 use strict;
 use warnings;
+use Digest::MD5 qw(md5_hex);
 
 my %users = ();
 
