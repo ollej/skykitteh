@@ -176,6 +176,9 @@ get '/chat/(:action)' => sub {
     elsif($action eq 'poll') {
 	$data->{messages} = SkyChat::poll($user);
     }
+    elsif($action eq 'users') {
+	$data->{users} = SkyChat::users();
+    }
     else {
 	$data->{status} = 0;
     }
