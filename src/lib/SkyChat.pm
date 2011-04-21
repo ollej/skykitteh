@@ -31,6 +31,11 @@ sub broadcast
     }
 }
 
+sub users
+{
+    return [ keys %users ];
+}
+
 sub poll
 {
     my ($user) = @_;
