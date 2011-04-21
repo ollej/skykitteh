@@ -49,6 +49,14 @@ sub poll
 
     return [] unless (exists $users{$user});
 
+    $users{$user}{time} = time;
+
+    foreach my $u (grep { $users{$_}{time} < time - 5*60 } keys %users)
+    {
+	delete $users{$u};
+	broadcast('skykitteh', $u.' outa timez.');
+    }
+
     my $msgs = $users{$user}{messages};
     $users{$user}{messages} = [];
 
