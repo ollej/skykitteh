@@ -31,7 +31,7 @@ function send(action, data, handler)
 function login(user)
 {
     send('login', { user: user }, function(data) {
-	    window.setTimeout("poll(true)", 500);
+	    window.setTimeout("poll(true)", 1000);
 	});
 }
 
@@ -50,7 +50,7 @@ function poll(queue)
 		updateUsers();
 
 	    if(queue)
-		window.setTimeout("poll(true)", 500);
+		window.setTimeout("poll(true)", 750);
 	});
 }
 
