@@ -44,10 +44,13 @@ function logout(user)
 function poll(queue)
 {
     send('poll', { user: user }, function(data) {
-	    for(var i = 0; i < data.messages.length; ++i)
+	    var checkUsers = 0;
+	    for(var i = 0; i < data.messages.length; ++i) {
+		if(data.messages[i][0] == 'skykitteh') checkUsers = 1;
 		log(data.messages[i][0]+': '+data.messages[i][1]);
+	    }
 
-	    if(data.messages.length > 0)
+	    if(checkUsers)
 		updateUsers();
 
 	    if(queue)
