@@ -21,6 +21,7 @@
 function log(msg)
 {
     $('#stdout')[0].value += msg+"\n";
+    $('#stdout')[0].scrollTop = $('#stdout')[0].scrollHeight;
 }
 
 function send(action, data, handler)
