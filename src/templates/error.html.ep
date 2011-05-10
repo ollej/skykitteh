@@ -1,0 +1,8 @@
+% layout 'default';
+% title 'Error';
+<h1 style="color: red;">Error!</h1>
+<p><%= $msg %></p>
+
+% if (exists stash->{diff}) {
+%= include 'diff'
+% }
