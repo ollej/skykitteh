@@ -22,6 +22,7 @@ use Mojo::UserAgent;
 use FindBin;
 use lib ("$FindBin::Bin/lib/");
 
+use JE;
 use SkyChat;
 
 use constant {
@@ -145,6 +146,33 @@ post '/' => sub {
 	my $tx = $ua->post_form('http://localhost:4711/' => { 'status' => $commit_message });
 	
 	$self->redirect_to('/');
+};
+
+get '/je/(:script)' => sub {
+    my $self = shift;
+    my $script = $self->param('script');
+
+    my $j = new JE;
+
+    my $code = read_file("je/$script.js", err_mode => 'quiet');
+    my $parsed = $j->parse($code);
+
+    unless(defined $parsed) {
+	$self->stash('msg' => "Failed to parse script: ".$@);
+	return $self->render('error');
+    }
+
+    my $rv = $parsed->execute();
+    my $render = $rv->value();
+
+    if($render && $render->{template}) {
+	$self->stash($_ => $render->{stash}{$_}) foreach keys %{$render->{stash} || []};
+	$self->render($render->{template});
+    }
+    else {
+	$self->stash('msg' => "Script did not return a correct result hash.");
+	return $self->render('error');
+    }
 };
 
 get '/chat/' => sub {
