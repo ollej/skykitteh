@@ -166,7 +166,8 @@ get '/je/(:script)' => sub {
     my $render = $rv->value();
 
     if($render && $render->{template} && $render->{stash}) {
-	$self->stash($_ => $render->{stash}{$_}) foreach(keys %{ $render->{stash}->value() });
+	my $stash = $render->{stash}->value();
+	$self->stash($_ => $stash->{$_}) foreach(keys %$stash);
 	$self->render($render->{template});
     }
     else {
