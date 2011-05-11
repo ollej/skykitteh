@@ -35,7 +35,7 @@ $ENV{MOJO_TMPDIR} = '/tmp/';
 
 get '/coffee' => sub {
     my $self = shift;
-    $self->render(status => 418);
+    $self->render(status => 418, text => '');
 };
 
 get '/' => sub {
