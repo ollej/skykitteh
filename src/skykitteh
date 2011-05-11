@@ -33,6 +33,11 @@ use constant {
 
 $ENV{MOJO_TMPDIR} = '/tmp/';
 
+get '/coffee' => sub {
+    my $self = shift;
+    $self->res->code(418);
+};
+
 get '/' => sub {
   my $self = shift;
   my $code = read_file(KITTEH_NAME);
