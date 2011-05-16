@@ -44,6 +44,12 @@ function logout(user)
 function poll(queue)
 {
     send('poll', { user: user }, function(data) {
+	    if(!"messages" in data) {
+		log("connection lost, reconnecting..");
+		login(user);
+		return;
+	    }
+
 	    var checkUsers = 0;
 	    for(var i = 0; i < data.messages.length; ++i) {
 		if(data.messages[i][0] == 'skykitteh') checkUsers = 1;
