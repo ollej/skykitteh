@@ -161,6 +161,16 @@ get '/je/(:script)' => sub {
 
     my $j = new JE;
 
+    $j->bind_class(
+	package => 'Mojolicious::Controller',
+	name => 'Controller',
+	methods => [
+	    'param', 'stash', 'render', 'render_json',
+	],
+	);
+
+    $j->{document}{mojo} = $self;
+
     my $code = read_file("je/$script.js", err_mode => 'quiet');
     my $parsed = $j->parse($code);
 
@@ -170,17 +180,18 @@ get '/je/(:script)' => sub {
     }
 
     my $rv = $parsed->execute();
-    my $render = $rv->value();
 
-    if($render && $render->{template} && $render->{stash}) {
-	my $stash = $render->{stash}->value();
-	$self->stash($_ => $stash->{$_}.'') foreach(keys %$stash);
-	$self->render($render->{template}.'');
-    }
-    else {
-	$self->stash('msg' => "Script did not return a correct result hash.");
+    unless(defined $rv) {
+	$self->stash('msg' => "Execution of script failed: ".$@);
 	return $self->render('error');
     }
+};
+
+get '/je_index' => sub {
+    my $self = shift;
+
+    my @scripts = glob('je/*.js');
+    $self->render(text => join("\n", map { $_ =~ s/\.js$//; qq{<a href="/$_">$_</a>} } @scripts));
 };
 
 get '/chat/' => sub {
