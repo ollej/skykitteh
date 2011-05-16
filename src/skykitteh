@@ -149,7 +149,9 @@ post '/' => sub {
 	# Tweet commit!
 	my $ua = Mojo::UserAgent->new;
 	my $tx = $ua->post_form('http://localhost:4711/' => { 'status' => $commit_message });
-	
+
+	SkyChat::broadcast('skykitteh', '(commit) '.$commit_message);
+
 	$self->redirect_to('/');
 };
 
