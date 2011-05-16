@@ -6,3 +6,301 @@
 # * Logo - Kitty smiley in cloud?
 # * AJAX updating / JSON responses for backend
 # * See more in isssues on github page. See above.
+
+use warnings;
+use strict;
+
+use Text::Diff;
+use File::Path 'mkpath';
+use File::Slurp qw(read_file write_file);
+use Digest::MD5 qw(md5_hex);
+use DateTime::Format::ISO8601;
+
+use Mojolicious::Lite;
+use Mojo::UserAgent;
+
+use FindBin;
+use lib ("$FindBin::Bin/lib/");
+
+use JE;
+use SkyChat;
+
+use constant {
+    KITTEH_NAME => 'skykitteh',
+};
+
+#plugin 'console_logger';
+
+$ENV{MOJO_TMPDIR} = '/tmp/';
+
+get '/coffee' => sub {
+    my $self = shift;
+    $self->render(status => 418, text => '');
+};
+
+get '/' => sub {
+  my $self = shift;
+  my $code = read_file(KITTEH_NAME);
+  my $data = {
+    'filename' => KITTEH_NAME,
+    'checksum' => md5_hex($code),
+    'code' => $code,
+  };
+  my $format = $self->param('format') || '';
+  if ($format eq 'json') {
+    $self->render_json($data);
+  } else {
+    $data->{motd} = get_motd();
+    $self->stash($data);
+    $self->render('showform');
+  }
+};
+
+get '/edit/(*filename)' => sub {
+  my $self = shift;
+  my $filename = $self->stash('filename');
+  if (-d $filename) {
+    return $self->render('error', msg => "No can haz edit dir!");
+  }
+  my $code = read_file($filename, err_mode => 'quiet');
+  my $data = {
+    'checksum', md5_hex($code),
+    'code' => $code,
+    'motd' => get_motd(),
+  };
+  my $format = $self->param('format') || '';
+  if ($format eq 'json') {
+    $self->render_json($data);
+  } else {
+    $self->stash($data);
+    $self->render('showform');
+  }
+};
+
+# Can haz uploadz
+post '/upload' => sub {
+  my $self = shift;
+  my $uploadfile = $self->req->upload('uploadfile');
+  if ($uploadfile) {
+    my $path = $self->param('path');
+    app->log->info("upload: " . $self->req->param('uploadfile') . " path: " . $path);
+    if ($path) {
+      if (! -d $path) {
+        unless (mkpath($path, {error => \my $err}) && -d $path) {
+          return $self->render('error', 'msg' => "Don't confuse teh kitteh.");
+        }
+      }
+      $path =~ s/\/*$/\//;
+    }
+
+    my $filename = "./$path" . $uploadfile->filename;
+    if ( -e $filename ) {
+      return $self->render('error', 'msg' => 'Alraedy haz file!');
+    } else {
+      $uploadfile->move_to($filename);
+      return $self->redirect_to('/');
+    }
+  } else {
+    return $self->render('error', 'msg' => 'No can haz file?!');
+  }
+};
+
+post '/' => sub {
+	my $self = shift;
+	my $filename = $self->param('filename');
+	my $code = $self->param('code');
+	my $base = $self->param('base');
+	$code =~ s/\r$//gm; # Fix Mac line endings
+	$base =~ s/\r$//gm; # Fix Mac line endings
+
+	if (!$filename) {
+	    return $self->render('error', 'msg' => 'Jambalaja.');
+	}
+
+	if ($filename =~ m{^(.+/)[^/]+$} && ! -d $1) {
+	    unless (mkpath($1, {error => \my $err}) && -d $1) {
+		$self->stash('msg' => "Don't confuse the kitteh.");
+		return $self->render('error');
+	    }
+	}
+
+	my $commit_message = $self->param('commit_message');
+	write_file("/tmp/commit_message.txt", $commit_message);
+
+	my $oldcode = read_file($filename, err_mode => 'quiet');
+	if ($self->param('checksum') ne md5_hex($oldcode)) {
+		$self->stash('msg' => "Code nomz changed, MD5 checksum misssymash.");
+		my @diff = split(/\n/, diff(\$base, \$oldcode));
+		$self->stash('diff' => \@diff);
+		return $self->render('error');
+	}
+	write_file($filename, { binmode => ':utf8', atomic => 1 }, $code);
+
+	if ($0 ne 'skykitteh.t') {
+	    my $report = `/usr/bin/perl skykitteh.t`;
+	    if ($? || $report !~ /ok \d/) {
+		write_file("/tmp/commit_message.txt", 'Near deth experiuns.');
+		write_file($filename, { binmode => ':utf8', atomic => 1 }, $oldcode);
+		$self->stash('msg' => "I'm afraid I can't let you do that, Dave.");
+		return $self->render('error');
+	    }
+	}
+
+	# Tweet commit!
+	my $ua = Mojo::UserAgent->new;
+	my $tx = $ua->post_form('http://localhost:4711/' => { 'status' => $commit_message });
+
+	SkyChat::broadcast('skykitteh', '(commit) '.$commit_message);
+
+	$self->redirect_to('/');
+};
+
+get '/je/(:script)' => sub {
+    my $self = shift;
+    my $script = $self->param('script');
+
+    my $j = new JE;
+
+    $j->bind_class(
+	package => 'Mojolicious::Controller',
+	name => 'Controller',
+	methods => [
+	    'param', 'stash', 'render', 'render_json',
+	],
+	);
+
+    $j->{document}{mojo} = $self;
+
+    my $code = read_file("je/$script.js", err_mode => 'quiet');
+    my $parsed = $j->parse($code);
+
+    unless(defined $parsed) {
+	$self->stash('msg' => "Failed to parse script: ".$@);
+	return $self->render('error');
+    }
+
+    my $rv = $parsed->execute();
+
+    unless(defined $rv) {
+	$self->stash('msg' => "Execution of script failed: ".$@);
+	return $self->render('error');
+    }
+};
+
+get '/je_index' => sub {
+    my $self = shift;
+
+    my @scripts = glob('je/*.js');
+    $self->render(text => join("\n", map { $_ =~ s/\.js$//; qq{<a href="/$_">$_</a>} } @scripts));
+};
+
+get '/chat/' => sub {
+    my $self = shift;
+    my $user = $self->param('user');
+
+    $self->stash(user => $user);
+    $self->render('chat');
+};
+
+get '/chat/(:action)' => sub {
+    my $self = shift;
+    my $user = $self->param('user');
+    my $action = $self->stash('action');
+
+    my $data = {
+	status => 1,
+    };
+
+    if($action eq 'login') {
+	SkyChat::login($user);
+    }
+    elsif($action eq 'logout') {
+	SkyChat::logout($user);
+    }
+    elsif($action eq 'broadcast') {
+	SkyChat::broadcast($user, $self->param('message'));
+    }
+    elsif($action eq 'poll') {
+	$data->{messages} = SkyChat::poll($user);
+    }
+    elsif($action eq 'users') {
+	$data->{users} = SkyChat::users();
+    }
+    else {
+	$data->{status} = 0;
+    }
+
+    $self->render_json($data);
+};
+
+get '/motd' => sub {
+    my $self = shift;
+    my $add = $self->param('add');
+    if ($add) {
+	store_motd($add);
+    }
+
+    my $motd = get_motd();
+    $self->stash('msg' => $motd);
+    $self->render('motd');
+};
+
+get '/modules' => sub {
+  my $self = shift;
+  use HTML::Perlinfo;
+  my $m = HTML::Perlinfo::Modules->new( full_page => 0 );
+  my $modules = $m->print_modules();
+  return $self->render(text => $modules);
+};
+
+get '/commits' => sub {
+  my $self = shift;
+  use Net::GitHub;
+
+  # Read commits
+  my $github = Net::GitHub->new( owner => 'ollej', repo => 'skykitteh' );
+  my $commits = $github->commit->branch();
+
+  # Format dates
+  foreach my $c (@{$commits}) {
+    $c->{'authored_date'} = format_date($c->{'authored_date'});
+    $c->{'committed_date'} = format_date($c->{'committed_date'});
+  }
+
+  $self->stash('commits' => $commits);
+  return $self->render('commits');
+};
+
+sub format_date
+{
+  my ($date) = @_;
+  my $dt = DateTime::Format::ISO8601->parse_datetime($date);
+  return $dt->strftime('%F %T')
+}
+
+sub store_motd
+{
+    my ($motd) = @_;
+
+    if (open MOTD, '>>', 'motd.txt') {
+	print MOTD $motd."\n";
+	close MOTD;
+    }
+}
+
+sub get_motd
+{
+    my $motd = 'I can haz code nomz?';
+
+    if (open MOTD, '<', 'motd.txt') {
+	my @motds = <MOTD>;
+	close MOTD;
+	if (@motds) {
+	    $motd = @motds[int(rand(scalar(@motds)))];
+	}
+    }
+
+    return $motd;
+}
+
+app->start;
