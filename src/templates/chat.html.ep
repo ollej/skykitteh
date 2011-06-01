@@ -1,1 +1,100 @@
-F0X59z  <a href="http://xgrtyxugzbbx.com/">xgrtyxugzbbx</a>, [url=http://xjicomotwynn.com/]xjicomotwynn[/url], [link=http://teaqkmsqqpob.com/]teaqkmsqqpob[/link], http://ixeukofrdxfg.com/
+
+<html>
+  <head>
+
+    <script type="text/javascript" src="http://www.skykitteh.com/js/jquery.js"></script>
+  </head>
+  <body>
+    <div style="width:90%; height:95%;float:left;">
+      <textarea id="stdout" rows="45" readonly="READONLY" style="background-color: black; color: white; font-family: monospace; width: 100%; height: 100%"></textarea>
+
+      <input type="text" id="stdin" onchange="broadcast(this);" style="background-color: black; color: white; font-family: monospace; width: 100%;"/>
+    </div>
+    <div style="float:right; width: 10%; ">
+      <textarea id="users" readonly="READONLY" style="background-color: black; color: white; font-family: monospace; width: 100%; height: 95%"></textarea>
+    </div>
+
+
+    <script type="text/javascript">
+
+     var user = '<%= $user %>';
+
+function log(msg)
+{
+    $('#stdout')[0].value += msg+"\n";
+    $('#stdout')[0].scrollTop = $('#stdout')[0].scrollHeight;
+}
+
+function send(action, data, handler)
+{
+    $.getJSON('/chat/'+action, data, handler);
+}
+
+function login(user)
+{
+    send('login', { user: user }, function(data) {
+	    window.setTimeout("poll(true)", 1000);
+	});
+}
+
+function logout(user)
+{
+    send('logout', { user: user });
+}
+
+function poll(queue)
+{
+    send('poll', { user: user }, function(data) {
+	    if(!"messages" in data) {
+		log("connection lost, reconnecting..");
+		login(user);
+		return;
+	    }
+
+	    var checkUsers = 0;
+	    for(var i = 0; i < data.messages.length; ++i) {
+		if(data.messages[i][0] == 'skykitteh') checkUsers = 1;
+		log(data.messages[i][0]+': '+data.messages[i][1]);
+	    }
+
+	    if(checkUsers)
+		updateUsers();
+
+	    if(queue)
+		window.setTimeout("poll(true)", 750);
+	});
+}
+
+function updateUsers()
+{
+    send('users', { user: user }, function(data) {
+	    var users = $('#users')[0];
+	    users.value = "";
+
+	    for(var i = 0; i < data.users.length; ++i)
+		users.value += data.users[i]+"\n";
+	});
+}
+
+function broadcast(input)
+{
+    var text = input.value;
+    input.value = '';
+    send('broadcast', { user: user, message: text }, function(data) { poll(); } );
+}
+
+
+$(document).ready(function() {
+	login(user);
+});
+
+$(window).unload(function() {
+	logout(user);
+});
+
+    </script>
+
+
+  </body>
+
+</html>
