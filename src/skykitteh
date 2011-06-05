@@ -123,8 +123,8 @@ post '/upload' => sub {
 post '/' => sub {
 	my $self = shift;
 	my $filename = $self->param('filename');
-	my $code = $self->param('code');
-	my $base = $self->param('base');
+	my $code = $self->param('code') || '';
+	my $base = $self->param('base') || '';
 	$code =~ s/\r$//gm; # Fix Mac line endings
 	$base =~ s/\r$//gm; # Fix Mac line endings
 
@@ -151,7 +151,7 @@ post '/' => sub {
 	    }
 	}
 
-	my $commit_message = $self->param('commit_message');
+	my $commit_message = $self->param('commit_message') || '';
 	write_file("/tmp/commit_message.txt", $commit_message);
 
 	my $oldcode = read_file($filename, err_mode => 'quiet');
@@ -182,7 +182,7 @@ post '/' => sub {
 	    if ($? || $report !~ /ok \d/) {
 		write_file("/tmp/commit_message.txt", 'Near deth experiuns.');
 		write_file($filename, { binmode => ':utf8', atomic => 1 }, $oldcode);
-		$self->stash('msg' => "I'm afraid I can't let you do that, Dave.");
+		$self->stash('msg' => "I'm afraid I can't let you do that, Dave. $report");
 		return $self->render('error');
 	    }
 	}
