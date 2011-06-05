@@ -15,6 +15,7 @@ use File::Path 'mkpath';
 use File::Slurp qw(read_file write_file);
 use Digest::MD5 qw(md5_hex);
 use DateTime::Format::ISO8601;
+use Encode qw(encode_utf8);
 
 use Mojolicious::Lite;
 use Mojo::UserAgent;
@@ -125,6 +126,11 @@ post '/' => sub {
 	my $base = $self->param('base');
 	$code =~ s/\r$//gm; # Fix Mac line endings
 	$base =~ s/\r$//gm; # Fix Mac line endings
+
+        if ($self->param('md5hash') ne md5_hex(encode_utf8($code))) {
+            my $msg = 'Awww, code checksum failed.';
+            return $self->render('error', 'msg' => $msg);
+        }
 
 	if (!$filename) {
 	    return $self->render('error', 'msg' => 'Jambalaja.');

@@ -49,6 +49,7 @@ $(document).ready(function() {
   // Setup tabby on textarea to allow tabbing
   $('#skykitteh-editcode').tabby();
 
+  // Setup ACE editor.
   $('#aceeditor').click(function() {
     var ace = window.__ace_shadowed__;
     ace.options.showPrintMargin = "true";
@@ -57,4 +58,10 @@ $(document).ready(function() {
     return false;
   });
 
+  // Add MD5 hash spam protection.
+  $('#editForm').submit( function() {
+    var md5hash = $.md5($('#skykitteh-editcode').val());
+    var input = $("<input>").attr("type", "hidden").attr("name", "md5hash").val(md5hash);
+    $('#editForm').append($(input));
+  });
 });
