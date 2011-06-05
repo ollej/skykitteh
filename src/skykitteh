@@ -199,8 +199,33 @@ post '/' => sub {
 get '/je/(:script)' => sub {
     my $self = shift;
     my $script = $self->param('script');
+
+    my $j = new JE;
+
+    $j->bind_class(
+	package => 'Mojolicious::Controller',
+	name => 'Controller',
+	methods => [
+	    'param', 'stash', 'render', 'render_json',
+	],
+	);
+
+    $j->{document}{mojo} = $self;
+
     my $code = read_file("je/$script.js", err_mode => 'quiet');
-    return run_js($self, $code);
+    my $parsed = $j->parse($code);
+
+    unless(defined $parsed) {
+	$self->stash('msg' => "Failed to parse script: ".$@);
+	return $self->render('error');
+    }
+
+    my $rv = $parsed->execute();
+
+    unless(defined $rv) {
+	$self->stash('msg' => "Execution of script failed: ".$@);
+	return $self->render('error');
+    }
 };
 
 get '/je_index' => sub {
@@ -292,7 +317,7 @@ sub identify_user
 {
     return ($0 eq 'skykitteh.t') || (defined $_[0] && md5_hex('hide'.$_[0]) eq '401270cc24f2849b7b69caf95edb5c11');
 }
-# Run javascript code.
+
 sub strip_private
 {
     unless(identify_user($_[1])) {
@@ -301,40 +326,10 @@ sub strip_private
     return $_[0];
 }
 #-Hide
-        name => 'Controller',
+
 sub format_date
 {
   my ($date) = @_;
-  my $dt = DateTime::Format::ISO8601->parse_datetime($date);
-  return $dt->strftime('%F %T')
-}
-    $j->{document}{mojo}->new_function('render_json' => sub {
-sub store_motd
-{
-    my ($motd) = @_;
-    my $code = $self->param('code');
-    if (open MOTD, '>>', 'motd.txt') {
-	print MOTD $motd."\n";
-	close MOTD;
-    }
-}
-    }
-sub get_motd
-#!/usr/bin/perl
-  # Format dates
-  foreach my $c (@{$commits}) {
-    $c->{'authored_date'} = format_date($c->{'authored_date'});
-    $c->{'committed_date'} = format_date($c->{'committed_date'});
-  }
-#!/usr/bin/perl
-  $self->stash('commits' => $commits);
-  return $self->render('commits');
-};
-#!/usr/bin/perl
-#+Hide
-sub identify_user
-{
-    return ($0 eq 'skykitteh.t') || (defined $_[0] && md5_hex('hide'.$_[0]) eq '401270cc24f2849b7b69caf95edb5c11');
   my $dt = DateTime::Format::ISO8601->parse_datetime($date);
   return $dt->strftime('%F %T')
 }
