@@ -48,3 +48,6 @@ h1,h2,h3,h4,h5,h6,a,p,button,input {
     width: 98%;
     text-align: center;
 }
+.nothingtoseehere {
+    display: none;                                                                      
+}
