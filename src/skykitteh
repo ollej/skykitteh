@@ -362,7 +362,7 @@ sub store_motd
 	close MOTD;
 
     if ('true' eq $verdict) {
-        $akismet_error = 'Akismet says you are a spammer.';
+        $akismet_error = 'Akismet sez you are a spammer.';
     }
 
     return $akismet_error;
