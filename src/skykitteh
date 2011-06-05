@@ -317,7 +317,7 @@ sub identify_user
 {
     return ($0 eq 'skykitteh.t') || (defined $_[0] && md5_hex('hide'.$_[0]) eq '401270cc24f2849b7b69caf95edb5c11');
 }
-}
+
 sub strip_private
 {
     unless(identify_user($_[1])) {
@@ -326,18 +326,18 @@ sub strip_private
     return $_[0];
 }
 #-Hide
-    }
+
 sub format_date
 {
   my ($date) = @_;
   my $dt = DateTime::Format::ISO8601->parse_datetime($date);
   return $dt->strftime('%F %T')
 }
-    if (open MOTD, '<', 'motd.txt') {
+
 sub store_motd
 {
     my ($motd) = @_;
-	    $motd = @motds[int(rand(scalar(@motds)))];
+
     if (open MOTD, '>>', 'motd.txt') {
 	print MOTD $motd."\n";
 	close MOTD;
@@ -345,27 +345,18 @@ sub store_motd
 }
 
 sub get_motd
-#!/usr/bin/perl
-sub format_date
 {
-  my ($date) = @_;
-  my $dt = DateTime::Format::ISO8601->parse_datetime($date);
-  return $dt->strftime('%F %T')
-}
-#!/usr/bin/perl
-sub store_motd
-{
-    my ($motd) = @_;
-#!/usr/bin/perl
-    if (open MOTD, '>>', 'motd.txt') {
-	print MOTD $motd."\n";
-	close MOTD;
+    my $motd = 'I can haz code nomz?';
 
-    if ('true' eq $verdict) {
-        $akismet_error = 'Akismet sez you are a spammer.';
+    if (open MOTD, '<', 'motd.txt') {
+	my @motds = <MOTD>;
+	close MOTD;
+	if (@motds) {
+	    $motd = @motds[int(rand(scalar(@motds)))];
+	}
     }
 
-    return $akismet_error;
+    return $motd;
 }
 
 app->start;
