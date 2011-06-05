@@ -16,7 +16,6 @@ use File::Slurp qw(read_file write_file);
 use Digest::MD5 qw(md5_hex);
 use DateTime::Format::ISO8601;
 use Encode qw(encode_utf8);
-use Net::Akismet;
 
 use Mojolicious::Lite;
 use Mojo::UserAgent;
@@ -143,17 +142,17 @@ post '/' => sub {
 	if (!$filename) {
 	    return $self->render('error', 'msg' => 'Jambalaja.');
 	}
-        my $akismet_error;                                                              
+
 	if ($filename =~ m{^(.+/)[^/]+$} && ! -d $1) {
 	    unless (mkpath($1, {error => \my $err}) && -d $1) {
 		$self->stash('msg' => "Don't confuse the kitteh.");
 		return $self->render('error');
 	    }
 	}
-            USER_IP                 => $self->tx->remote_address,                       
+
 	my $commit_message = $self->param('commit_message');
 	write_file("/tmp/commit_message.txt", $commit_message);
-            REFERRER                => $headers->referrer,                              
+
 	my $oldcode = read_file($filename, err_mode => 'quiet');
 	#+Hide
 	my $real_base = $oldcode;
@@ -174,9 +173,9 @@ post '/' => sub {
 	    $oldcode = $real_base;
 	}
 	#-Hide
-	}
+
 	write_file($filename, { binmode => ':utf8', atomic => 1 }, $code);
-	my $commit_message = $self->param('commit_message');
+
 	if ($0 ne 'skykitteh.t') {
 	    my $report = `/usr/bin/perl skykitteh.t`;
 	    if ($? || $report !~ /ok \d/) {
@@ -190,18 +189,18 @@ post '/' => sub {
 	# Tweet commit!
 	my $ua = Mojo::UserAgent->new;
 	my $tx = $ua->post_form('http://localhost:4711/' => { 'status' => $commit_message });
-	    my $report = `/usr/bin/perl skykitteh.t`;
+
 	SkyChat::broadcast('skykitteh', '(commit) '.$commit_message);
-		write_file("/tmp/commit_message.txt", 'Near deth experiuns.');
+
 	$self->redirect_to('/');
 };
-		return $self->render('error');
+
 get '/je/(:script)' => sub {
     my $self = shift;
     my $script = $self->param('script');
-	# Tweet commit!
+
     my $j = new JE;
-	my $tx = $ua->post_form('http://localhost:4711/' => { 'status' => $commit_message });
+
     $j->bind_class(
 	package => 'Mojolicious::Controller',
 	name => 'Controller',
@@ -209,17 +208,17 @@ get '/je/(:script)' => sub {
 	    'param', 'stash', 'render', 'render_json',
 	],
 	);
-    my $self = shift;
+
     $j->{document}{mojo} = $self;
 
     my $code = read_file("je/$script.js", err_mode => 'quiet');
     my $parsed = $j->parse($code);
-    $j->bind_class(
+
     unless(defined $parsed) {
 	$self->stash('msg' => "Failed to parse script: ".$@);
 	return $self->render('error');
     }
-	],
+
     my $rv = $parsed->execute();
 
     unless(defined $rv) {
@@ -227,18 +226,18 @@ get '/je/(:script)' => sub {
 	return $self->render('error');
     }
 };
-    unless(defined $parsed) {
+
 get '/je_index' => sub {
     my $self = shift;
-    }
+
     my @scripts = glob('je/*.js');
     $self->render(text => join("\n", map { $_ =~ s/\.js$//; qq{<a href="/$_">$_</a>} } @scripts));
 };
-    unless(defined $rv) {
+
 get '/chat/' => sub {
     my $self = shift;
     my $user = $self->param('user');
-};
+
     $self->stash(user => $user);
     $self->render('chat');
 };
@@ -247,11 +246,11 @@ get '/chat/(:action)' => sub {
     my $self = shift;
     my $user = $self->param('user');
     my $action = $self->stash('action');
-get '/chat/' => sub {
+
     my $data = {
 	status => 1,
     };
-    $self->stash(user => $user);
+
     if($action eq 'login') {
 	SkyChat::login($user);
     }
@@ -270,17 +269,17 @@ get '/chat/' => sub {
     else {
 	$data->{status} = 0;
     }
-    elsif($action eq 'broadcast') {
+
     $self->render_json($data);
 };
-    elsif($action eq 'poll') {
+
 get '/motd' => sub {
     my $self = shift;
     my $add = $self->param('add');
     if ($add) {
 	store_motd($add);
     }
-	$data->{status} = 0;
+
     my $motd = get_motd();
     $self->stash('msg' => $motd);
     $self->render('motd');
@@ -293,7 +292,7 @@ get '/modules' => sub {
   my $modules = $m->print_modules();
   return $self->render(text => $modules);
 };
-    my $motd = get_motd();
+
 get '/commits' => sub {
   my $self = shift;
   use Net::GitHub;
@@ -301,23 +300,23 @@ get '/commits' => sub {
   # Read commits
   my $github = Net::GitHub->new( owner => 'ollej', repo => 'skykitteh' );
   my $commits = $github->commit->branch();
-  my $m = HTML::Perlinfo::Modules->new( full_page => 0 );
+
   # Format dates
   foreach my $c (@{$commits}) {
     $c->{'authored_date'} = format_date($c->{'authored_date'});
     $c->{'committed_date'} = format_date($c->{'committed_date'});
   }
-  my $self = shift;
+
   $self->stash('commits' => $commits);
   return $self->render('commits');
 };
-  my $github = Net::GitHub->new( owner => 'ollej', repo => 'skykitteh' );
+
 #+Hide
 sub identify_user
 {
     return ($0 eq 'skykitteh.t') || (defined $_[0] && md5_hex('hide'.$_[0]) eq '401270cc24f2849b7b69caf95edb5c11');
 }
-    $c->{'committed_date'} = format_date($c->{'committed_date'});
+
 sub strip_private
 {
     unless(identify_user($_[1])) {
@@ -326,37 +325,37 @@ sub strip_private
     return $_[0];
 }
 #-Hide
-  my ($date) = @_;
-sub format_date
-{
-  my ($date) = @_;
-  my $dt = DateTime::Format::ISO8601->parse_datetime($date);
-  return $dt->strftime('%F %T')
+
 sub format_date
 {
   my ($date) = @_;
   my $dt = DateTime::Format::ISO8601->parse_datetime($date);
   return $dt->strftime('%F %T')
 }
-#!/usr/bin/perl
+
 sub store_motd
 {
     my ($motd) = @_;
-#!/usr/bin/perl
+
     if (open MOTD, '>>', 'motd.txt') {
 	print MOTD $motd."\n";
 	close MOTD;
     }
 }
-#!/usr/bin/perl
+
 sub get_motd
 {
     my $motd = 'I can haz code nomz?';
-#!/usr/bin/perl
+
     if (open MOTD, '<', 'motd.txt') {
 	my @motds = <MOTD>;
 	close MOTD;
 	if (@motds) {
+	    $motd = @motds[int(rand(scalar(@motds)))];
+	}
+    }
+
+    return $motd;
 }
 
 app->start;
