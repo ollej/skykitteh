@@ -127,6 +127,12 @@ post '/' => sub {
 	$code =~ s/\r$//gm; # Fix Mac line endings
 	$base =~ s/\r$//gm; # Fix Mac line endings
 
+        # Check honeypot field, it should be empty.                                     
+        if ($self->param('pooh')) {                                                     
+            $self->stash('msg' => "Mmmm. I like honey!");                               
+            return $self->render('error');                                              
+        }
+
         if ($self->param('md5hash') ne md5_hex(encode_utf8($code))) {
             my $msg = 'Awww, code checksum failed.';
             return $self->render('error', 'msg' => $msg);
