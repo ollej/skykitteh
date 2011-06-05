@@ -16,6 +16,7 @@ use File::Slurp qw(read_file write_file);
 use Digest::MD5 qw(md5_hex);
 use DateTime::Format::ISO8601;
 use Encode qw(encode_utf8);
+use Net::Akismet;
 
 use Mojolicious::Lite;
 use Mojo::UserAgent;
