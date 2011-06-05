@@ -8,6 +8,7 @@
 %= hidden_field 'base', $code;
 %= hidden_field 'filename', $filename;
 %= hidden_field 'checksum', $checksum;
+%= text_field 'pooh' => ( class => 'nothingtoseehere' );
 
 <h3>Evolushion comment</h3>
 %= text_area 'commit_message', rows => 3, cols => 80;
