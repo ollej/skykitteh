@@ -302,13 +302,17 @@ get '/commits' => sub {
   my $github = Net::GitHub->new( owner => 'ollej', repo => 'skykitteh' );
   my $commits = $github->commit->branch();
 
-  # Format dates
+  # Format dates and filter out unwanted commites
+  my @filtered_commits;
+  my @ignored_commits = ('1a2aa6c7871badd5e6a94e6a01289e8e4f32820d', '82568cde1ba7a7d05f68305d11b029889e8e2ba2', 'f3c5577d148010622e7f4679e9b92661ee2cb7c3');
   foreach my $c (@{$commits}) {
+    next if grep { $c->{'id'} eq $_ } @ignored_commits;
     $c->{'authored_date'} = format_date($c->{'authored_date'});
     $c->{'committed_date'} = format_date($c->{'committed_date'});
+    push @filtered_commits, $c;
   }
 
-  $self->stash('commits' => $commits);
+  $self->stash('commits' => \@filtered_commits);
   return $self->render('commits');
 };
 
