@@ -13,6 +13,6 @@
 <h3>Evolushion comment</h3>
 %= text_area 'commit_message', rows => 3, cols => 80;
 <br /><br />
-%= submit_button 'Evolve\!';
+%= submit_button 'Evolve!';
 <% end %>
 </div>
