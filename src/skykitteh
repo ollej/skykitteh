@@ -45,9 +45,6 @@ get '/coffee' => sub {
 get '/' => sub {
   my $self = shift;
   my $code = read_file(KITTEH_NAME);
-  #+Hide
-  $code = strip_private($code, $self->param('joshua'));
-  #-Hide
 
   my $data = {
     'filename' => KITTEH_NAME,
@@ -73,9 +70,6 @@ get '/edit/(*filename)' => sub {
     return $self->render('error', msg => "No can haz edit dir!");
   }
   my $code = read_file($filename, err_mode => 'quiet');
-  #+Hide
-  $code = strip_private($code, $self->param('joshua'));
-  #-Hide
 
   my $data = {
     'checksum', md5_hex($code),
@@ -155,25 +149,12 @@ post '/' => sub {
 	write_file("/tmp/commit_message.txt", $commit_message);
 
 	my $oldcode = read_file($filename, err_mode => 'quiet');
-	#+Hide
-	my $real_base = $oldcode;
-	$oldcode = strip_private($oldcode, $self->param('joshua'));
-	#-Hide
 	if ($self->param('checksum') ne md5_hex($oldcode)) {
 		$self->stash('msg' => "Code nomz changed, MD5 checksum misssymash.");
 		my @diff = split(/\n/, diff(\$base, \$oldcode));
 		$self->stash('diff' => \@diff);
 		return $self->render('error');
 	}
-	#+Hide
-	unless(identify_user($self->param('joshua'))) {
-	    my @merged = Algorithm::Merge::merge([split("\n", $oldcode)],
-						 [split("\n", $real_base)],
-						 [split("\n", $code)]);
-	    $code = join("\n", @merged);
-	    $oldcode = $real_base;
-	}
-	#-Hide
 
 	write_file($filename, { binmode => ':utf8', atomic => 1 }, $code);
 
@@ -315,21 +296,6 @@ get '/commits' => sub {
   $self->stash('commits' => \@filtered_commits);
   return $self->render('commits');
 };
-
-#+Hide
-sub identify_user
-{
-    return ($0 eq 'skykitteh.t') || (defined $_[0] && md5_hex('hide'.$_[0]) eq '401270cc24f2849b7b69caf95edb5c11');
-}
-
-sub strip_private
-{
-    unless(identify_user($_[1])) {
-	$_[0] =~ s/\s*#\+[H]ide.*?#\-[H]ide//gms;
-    }
-    return $_[0];
-}
-#-Hide
 
 sub format_date
 {
