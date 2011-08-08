@@ -1,0 +1,39 @@
+% layout 'ide';
+% title 'SkyKitteh - SkyDE';
+
+<div id="workspace">
+  <div id="mainArea">
+    <div id="codeArea">
+      <%= text_area 'code', rows => '45', id => 'editcode', class => 'editcode', readonly => 'readonly', spellcheck => 'false', wrap => 'off', begin %><% end %>
+    </div>
+
+    <div id="toolBar">
+      <div id="statusBar">-</div>
+      <div id="" style="display: inline; float:left"><input type="button" style="margin-left:0.25em;" onclick="closeOpenEditor(); return false;" value="&times;"/></div>
+      <div id="" style="display: inline; border-top: 1px solid black;">
+	<input type="button" class="action" onclick="startSaveFile();" name="save" value="save"/>
+	<input type="button" class="action" onclick="startRevertFile();" name="revert" value="revert"/>
+	<input type="button" class="action" onclick="startListFiles();" name="refresh_files" value="list files"/>
+	<input type="button" class="action" onclick="startDiff();" name="compare" value="diff"/>
+	<input type="button" class="action" onclick="promptNewFile();" name="new_file" value="new file"/>
+	<div id="tabBar" class="action"></div>
+      </div>
+<!-- FIXME: This is just for testing: -->
+<a href="#" style="font-size: 10px;" onclick="goAce();return false;">ace</a>
+<a href="#" style="font-size: 10px;" onclick="goCodeMirror();return false;">cm</a>
+<a href="#" style="font-size: 10px;" onclick="goTextArea();return false;">def</a>
+    </div>
+
+    <div id="yResizeHandle"></div>
+    <div id="output" spellcheck="false"></div>
+
+  </div>
+
+  <div id="xResizeHandle"></div>
+
+  <div id="sideBar">
+    <div id="files"></div>
+  </div>
+
+</div> <!-- /workspace -->
+

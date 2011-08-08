@@ -75,6 +75,7 @@ get '/edit/(*filename)' => sub {
     'checksum', md5_hex($code),
     'code' => $code,
     'motd' => get_motd(),
+    'filename' => $filename,
   };
 
   my $format = $self->param('format') || '';
@@ -116,6 +117,7 @@ post '/upload' => sub {
 
 post '/' => sub {
 	my $self = shift;
+	my $format = $self->param('format') || '';
 	my $filename = $self->param('filename');
 	my $code = $self->param('code');
 	my $base = $self->param('base');
@@ -153,17 +155,25 @@ post '/' => sub {
 		$self->stash('msg' => "Code nomz changed, MD5 checksum misssymash.");
 		my @diff = split(/\n/, diff(\$base, \$oldcode));
 		$self->stash('diff' => \@diff);
+
+		if ($format eq 'json') {
+		    return $self->render_json({status => 0, error => 'needs_merge', diff => \@diff});
+		}
 		return $self->render('error');
 	}
 
 	write_file($filename, { binmode => ':utf8', atomic => 1 }, $code);
 
 	if ($0 ne 'skykitteh.t') {
-	    my $report = `/usr/bin/perl skykitteh.t`;
+	    my $report = `/usr/bin/perl skykitteh.t 2>&1`;
 	    if ($? || $report !~ /ok \d/) {
 		write_file("/tmp/commit_message.txt", 'Near deth experiuns.');
 		write_file($filename, { binmode => ':utf8', atomic => 1 }, $oldcode);
 		$self->stash('msg' => "I'm afraid I can't let you do that, Dave.<br />$report");
+
+		if ($format eq 'json') {
+		    return $self->render_json({status => 0, error => 'test_failed', report => $report});
+		}
 		return $self->render('error');
 	    }
 	}
@@ -174,7 +184,11 @@ post '/' => sub {
 
 	SkyChat::broadcast('skykitteh', '(commit) '.$commit_message);
 
-	$self->redirect_to('/');
+	if ($format eq 'json') {
+	    $self->render_json({status => 1});
+	} else {
+	    $self->redirect_to('/');
+	}
 };
 
 get '/je/(:script)' => sub {
@@ -295,6 +309,42 @@ get '/commits' => sub {
 
   $self->stash('commits' => \@filtered_commits);
   return $self->render('commits');
+};
+
+get '/ide/' => sub {
+    my $self = shift;
+    $self->render('ide');
+};
+
+get '/ide/files' => sub {
+    my $self = shift;
+
+    my @files = `find . -type f| egrep -v '~\$'`;
+
+    my $data = {
+	status => 1,
+	files => [ sort { $a cmp $b } map { $_ =~ s/^.\///; chomp $_; $_; } @files ],
+    };
+
+    $self->render_json($data);
+};
+
+post '/ide/diff' => sub {
+    my $self = shift;
+
+    my $filename = $self->param('filename');
+    my $code = $self->param('code');
+
+    my $live = read_file($filename, err_mode => 'quiet');
+    my @diff = split(/\n/, diff(\$live, \$code));
+
+    my $data = {
+	status => 1,
+	filename => $filename,
+	diff => \@diff,
+    };
+
+    $self->render_json($data);
 };
 
 sub format_date

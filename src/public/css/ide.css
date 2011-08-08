@@ -1,0 +1,302 @@
+
+/* --- layout */
+
+html {
+    /*height: 100%;*/
+
+    overflow: hidden;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+body {
+    /*height: 100%;*/
+}
+
+div, ul {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.action {
+    display: inline;
+    float:right;
+}
+
+#workspace {
+    padding:0px;
+    margin:0px;
+}
+
+#mainArea {
+    float:left;
+
+    position:absolute;
+    bottom:10px;
+    top: 10px;
+    left: 10px;
+    right: 252px;
+
+    padding:0px;
+    margin:0px;
+}
+
+#codeArea {
+    position: absolute;
+    width: 100%;
+    top: 0px;
+    bottom: 192px;
+    border: 1px solid #CCC;
+}
+
+#editcode {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    border: 0;
+    padding:0px;
+}
+
+#toolBar {
+    height: 30px;
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+    position: absolute;
+    bottom: 162px;
+}
+
+#statusBar {
+    display: inline;
+    float:left;
+}
+
+#output {
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+    height: 150px;
+    position: absolute;
+    bottom: 0px;
+}
+
+#yResizeHandle {
+    width: 100%;
+    height: 10px;
+    position: absolute;
+    bottom: 152px;
+    cursor: row-resize;
+}
+
+#yResizeHandle:hover {
+    background: #f4e8e1;
+}
+
+#xResizeHandle {
+    width: 10px;
+    position: absolute;
+    right: 240px;
+    top: 10px;
+    bottom: 10px;
+    cursor: col-resize;
+}
+
+#xResizeHandle:hover {
+    background: #f4e8e1;
+}
+
+#sideBar {
+    /*float:right;*/
+    width: 230px;
+    overflow:auto;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    bottom: 10px;
+}
+
+#files {
+    margin-right:0px;
+    padding:0px;
+    width:100%;
+    height:100%;
+}
+
+.fileEntry {
+    white-space: nowrap;
+    list-style-type: none;
+    padding-left: 17px;
+}
+
+/* --- style */
+
+body {
+    background: #e4d8d1;
+}
+
+a, .a_file {
+    color:black;
+    text-decoration: none;
+}
+.a_file:hover {
+    text-decoration: underline;
+}
+.a_file:active {
+}
+.a_file:visited {
+}
+
+.editTab {
+    color:black;
+    text-decoration: none;
+    background: #e4d8d1;
+    padding-right: 5px;
+    padding-left: 5px;
+    padding-bottom: 2px;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+    border-top: 1px solid black;
+    overflow: hidden;
+}
+
+.selectedTab {
+    background: white;
+    color:black;
+    /*display:none; */
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+    border-top: 1px solid white;
+}
+
+#files {
+    background: white;
+}
+
+.fileEntry {
+    background: url('/images/file.png') no-repeat left center;
+}
+
+.activeFileEntry {
+    font-weight:bold;
+}
+
+.dirEntry {
+    padding-left: 17px;
+    background: url('/images/expand.png');
+    background-repeat: no-repeat;
+    background-position: left center;
+}
+
+.dirEntry:hover {
+    text-decoration: underline;
+ }
+
+.dirEntryOpen {
+    background: url('/images/collapse.png');
+    background-repeat: no-repeat;
+    background-position: left center;
+ }
+
+.dirBody {
+    padding-left: 1em;
+    background: white;
+    display: none;
+    margin-bottom: 2px;
+}
+
+#toolBar {
+    background: transparent;
+    border-top: 1px solid black;
+}
+
+#sideBar {
+    border: 1px solid black;
+    margin-left: 0px;
+    background: white;
+}
+
+#files {
+    margin-left: 0px;
+}
+
+#mainArea {
+    margin-right: 0px;
+}
+
+#codeArea {
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+
+    background: white;
+}
+
+#editcode {
+    border-bottom:none;
+    white-space: nowrap;
+    overflow:auto;
+}
+
+#output {
+    margin-right: 0px;
+    overflow:auto;
+    background: white;
+    border: 1px solid black;
+}
+
+#toolBar {
+    margin-right: 0px;
+    background: transparent;
+}
+
+#tabBar {
+    margin-right: 0.5em;
+}
+
+/* --- log-markup */
+
+span.log_out {
+    font-size: small;
+    font-family: "monospace";
+}
+
+span.log_action {
+}
+
+span.log_error {
+    color:red;
+    font-size: normal;
+}
+
+span.log_code {
+}
+
+span.log_diff_sec {
+    background: black;
+    color: white;
+}
+
+span.log_diff_add {
+    background: #a0ffa0;
+}
+
+span.log_diff_del {
+    background: #ffa0a0;
+}
+
+/* --- editors (CodeMirror, Ace, etc) */
+
+.CodeMirror-scroll {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    border: 0;
+    padding:0px;
+}

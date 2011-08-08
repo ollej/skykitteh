@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+ 
+<head> 
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+	<title><%= title %></title>
+	%= stylesheet '/css/prettify-mojo.css';
+	%= stylesheet '/css/skykitteh.css';
+	%= stylesheet '/css/nyroModal.css';
+	%= stylesheet '/css/jquery.alerts.css';
+
+	%= stylesheet '/css/codemirror.css';
+	%= stylesheet '/css/codemirror-default.css';
+
+	%= javascript '/js/prettify.js';
+	%= javascript '/js/jquery.js';
+
+	%= javascript '/js/jquery.textarea.js';
+	%= javascript '/js/jquery.nyroModal.custom.js';
+	%= javascript '/js/jquery.alerts.js';
+	%= javascript '/js/jquery.md5.js';
+
+<!--
+	 = javascript '/js/ace/ace.js';
+	 = javascript '/js/ace/mode-python.js';
+	 = javascript '/js/ace/theme-eclipse.js';
+-->
+
+	%= stylesheet '/css/ide.css';
+	%= javascript '/js/ide.js';
+	<!-- = javascript '/js/ace.js'; -->
+
+	<!-- = javascript 'http://ajaxorg.github.com/ace/textarea/src/ace.js'; -->
+	%= javascript 'http://ajaxorg.github.com/ace/build/textarea/src/ace.js';
+
+	%= javascript 'http://ajaxorg.github.com/ace/build/textarea/src/mode-perl.js'; <!-- -->
+
+	<!-- = javascript '/js/skykitteh.js'; -->
+
+	%= javascript '/js/codemirror-compressed.js';
+	%= javascript '/js/cm_perl.js';
+</head>
+<body onload="prettyPrint();">
+
+<%= content %>
+
+</body>
+</html>
