@@ -1,5 +1,5 @@
 <div class="skykitteh-toolbar">
-<a href="/ide" class="nyroModal">SkyDE</a> |
+<a href="/ide">SkyDE</a> |
 <a href="#skykitteh-edit" class="nyroModal">Edit da sourz</a> |
 <a href="#skykitteh-view" class="nyroModal">See code nomz</a> |
 <a href="#skykitteh-files" class="nyroModal">List da filez</a> |
