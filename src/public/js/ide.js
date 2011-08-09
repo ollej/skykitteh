@@ -8,7 +8,8 @@
       code: '',
       base: '',
       filename: '-',
-      checksum: ''
+      checksum: '',
+      scrollTop: 0
   };
 
   var editors = new Object();
@@ -71,6 +72,7 @@
      if(editor == newEditor || state != '') return;
 
      if(editor != null) {
+	 editor['scrollTop'] = getEdScrollTop();
 	 editor['code'] = getEdContent();
 	 var id = $.md5(editor['filename']);
 	 $('#edit_'+id).toggleClass('selectedTab', false);
@@ -79,6 +81,7 @@
 
      editor = newEditor;
      setEdContent(editor['code']);
+     setEdScrollTop(editor['scrollTop']);
      $('#statusBar').text(editor['filename']);
      $('#edit_'+$.md5(editor['filename'])).toggleClass('selectedTab', true);
      $('#file_entry_'+$.md5(editor['filename'])).toggleClass('activeFileEntry', true);
@@ -499,6 +502,16 @@ function getTextContent()
 
 function setEdMode(mode)
 {
+}
+
+function setEdScrollTop(scrollTop)
+{
+    $('#editcode')[0].scrollTop = scrollTop;
+}
+
+function getEdScrollTop()
+{
+    return $('#editcode')[0].scrollTop;
 }
 
 function disableTextEd(disabled)
