@@ -13,7 +13,6 @@
       <div id="" style="display: inline; border-top: 1px solid black;">
 	<input type="button" class="action" onclick="startSaveFile();" name="save" value="save"/>
 	<input type="button" class="action" onclick="startRevertFile();" name="revert" value="revert"/>
-	<input type="button" class="action" onclick="startListFiles();" name="refresh_files" value="list files"/>
 	<input type="button" class="action" onclick="startDiff();" name="compare" value="diff"/>
 	<input type="button" class="action" onclick="promptNewFile();" name="new_file" value="new file"/>
 	<div id="tabBar" class="action"></div>
@@ -33,6 +32,10 @@
 
   <div id="sideBar">
     <div id="files"></div>
+    <div id="filesActions">
+      <a href="#" class="filesAction" onclick="alert('not implemented'); return false;">upload</span>
+      <a href="#" class="filesAction" onclick="startListFiles(); return false;">refresh</span>
+    </div>
   </div>
 
 </div> <!-- /workspace -->
