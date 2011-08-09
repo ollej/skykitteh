@@ -198,6 +198,7 @@
       log("Reverting "+editor['filename']);
 
       var path = editor['filename'];
+      editor['scrollTop'] = getEdScrollTop();
 
       // FIXME: If reload fails, we're left in an inconsistent state (editor claims to be $path but holds invalid value and checksum).
       setEdContent('Reloading.');
@@ -241,6 +242,8 @@
       }
 
       setEdContent(data['code']);
+      setEdScrollTop(editor['scrollTop']);
+
       editor['base'] = data['code'];
       editor['filename'] = data['filename'];
       editor['checksum'] = data['checksum'];
