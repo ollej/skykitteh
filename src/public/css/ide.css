@@ -112,18 +112,50 @@ div, ul {
 #sideBar {
     /*float:right;*/
     width: 230px;
-    overflow:auto;
+    overflow: hidden;
     position: absolute;
     right: 10px;
     top: 10px;
     bottom: 10px;
+
+    margin:0px;
+    padding:0px;
 }
 
 #files {
+    overflow: auto;
+    background: white;
+    position: absolute;
+    bottom: 0px;
+    top: 0px;
+
     margin-right:0px;
     padding:0px;
     width:100%;
-    height:100%;
+    margin-bottom: 30px;
+
+    -moz-box-sizing: border-box; /* Mozilla */
+    box-sizing: border-box; /* Opera7 */
+}
+
+#filesActions {
+    width: 100%;
+    height: 25px;
+    position: absolute;
+    bottom: 0px;
+    margin:0px;
+    padding:0px;
+}
+
+.filesAction {
+    font-size:15px;
+    padding:4px;
+    margin:0px;
+    border:none;
+}
+
+.filesAction:hover {
+    background: #f4e8e1;
 }
 
 .fileEntry {
@@ -216,13 +248,12 @@ a, .a_file {
 }
 
 #sideBar {
-    border: 1px solid black;
-    margin-left: 0px;
-    background: white;
 }
 
 #files {
     margin-left: 0px;
+    border: 1px solid black;
+    background: white;
 }
 
 #mainArea {
