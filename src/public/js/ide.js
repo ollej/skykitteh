@@ -85,6 +85,7 @@
      $('#statusBar').text(editor['filename']);
      $('#edit_'+$.md5(editor['filename'])).toggleClass('selectedTab', true);
      $('#file_entry_'+$.md5(editor['filename'])).toggleClass('activeFileEntry', true);
+     $('#preview').attr('href', '/ide/preview?filename='+editor['filename']);
 
      disableEd(editor['filename'] == '-');
   }
