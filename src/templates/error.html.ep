@@ -1,6 +1,6 @@
 % layout 'default';
 % title 'Error';
-<div style="text-align: center"><img src="images/errorkitteh.jpg" alt="Errorkitteh" /></div>
+<div style="text-align: center"><img src="/images/errorkitteh.jpg" alt="Errorkitteh" /></div>
 <h1 style="color: red;">Error!</h1>
 <p><%= $msg %></p>
 
