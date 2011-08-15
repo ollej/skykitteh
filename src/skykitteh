@@ -20,6 +20,7 @@ use Net::Akismet;
 
 use Mojolicious::Lite;
 use Mojo::UserAgent;
+use Mojolicious::Static;
 
 use FindBin;
 use lib ("$FindBin::Bin/lib/");
@@ -37,7 +38,7 @@ use constant {
 
 $ENV{MOJO_TMPDIR} = '/tmp/';
 
-get 'ide/preview' => sub {
+get '/ide/preview' => sub {
     my $self = shift;
     my $filename = $self->param('filename');
     my $static = Mojolicious::Static->new();
