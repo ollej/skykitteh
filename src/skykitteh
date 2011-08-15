@@ -42,6 +42,7 @@ get '/ide/preview' => sub {
     my $self = shift;
     my $filename = $self->param('filename');
     my $static = Mojolicious::Static->new();
+$static->root($FindBin::Bin);
     my $success = $static->serve($self, $filename);
     $self->rendered;
 };
