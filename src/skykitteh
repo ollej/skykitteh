@@ -19,8 +19,8 @@ use Encode qw(encode_utf8);
 use Net::Akismet;
 
 use Mojolicious::Lite;
-use Mojolicious::Static;use Mojo::UserAgent;
-
+use Mojolicious::Static;
+use Mojo::UserAgent;
 use FindBin;
 use lib ("$FindBin::Bin/lib/");
 use lib ("$FindBin::Bin/lib/ext/");
@@ -345,7 +345,9 @@ post '/ide/diff' => sub {
     };
 
 get '/ide/preview' => sub {
-  my $self = shift;  my $filename = $self->param('filename');  my $success = $static->serve($self, $filename);}
+  my $self = shift;
+  my $filename = $self->param('filename');
+  my $success = $static->serve($self, $filename);}
     $self->render_json($data);
 };
 
