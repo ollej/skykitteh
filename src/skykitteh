@@ -47,7 +47,7 @@ get '/ide/preview' => sub {
         my $success = $static->serve($self, $filename);
         $self->rendered;
     } else {
-        return $self->render('error', 'msg' => 'Fiel not fahnd!');
+        return $self->render('error', status => 404, 'msg' => 'Fiel not fahnd!');
     }
 };
 
