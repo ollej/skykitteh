@@ -43,8 +43,12 @@ get '/ide/preview' => sub {
     my $filename = $self->param('filename');
     my $static = Mojolicious::Static->new();
 $static->root($FindBin::Bin);
+  if (-e "$FindBin::Bin/$filename") {
     my $success = $static->serve($self, $filename);
     $self->rendered;
+  } else {
+    return $self->render('error', 'msg' => "Fiel not fahnd!");
+  }
 };
 
 get '/coffee' => sub {
