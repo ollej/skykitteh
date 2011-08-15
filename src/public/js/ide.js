@@ -452,7 +452,7 @@
 
 $(document).ready(function() {
 
-  $('editcode').tabby();
+  $('#editcode').tabby();
   $('#xResizeHandle').mousedown(function(e){
 	  e.preventDefault();
 	  $(document).mousemove(function(e){
