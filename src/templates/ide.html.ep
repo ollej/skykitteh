@@ -21,6 +21,7 @@
 <a href="#" style="font-size: 10px;" onclick="goAce();return false;">ace</a>
 <a href="#" style="font-size: 10px;" onclick="goCodeMirror();return false;">cm</a>
 <a href="#" style="font-size: 10px;" onclick="goTextArea();return false;">def</a>
+<a href="#" id="preview" style="font-size: 10px;" target="_blank">preview</a>
     </div>
 
     <div id="yResizeHandle"></div>
