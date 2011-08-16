@@ -124,7 +124,8 @@ post '/upload' => sub {
     } else {
       $uploadfile->move_to($filename);
       if ($format eq 'json') {
-          return $self->render_json({status => 1});
+          #return $self->render_json({status => 1});
+	  return $self->render(text => '{status => 1}');
       } else {
           return $self->redirect_to('/');
       }
