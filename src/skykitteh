@@ -205,7 +205,7 @@ post '/' => sub {
 	}
 };
 
-get '/ide/compile' => sub {
+post '/ide/compile' => sub {
   my $self = shift;
   my $code = $self->param('code');
   $code =~ s/\r$//gm; # Fix Mac line endings
