@@ -205,9 +205,10 @@ post '/' => sub {
 	}
 };
 
-post '/compile' => sub {
+get '/ide/compile' => sub {
   my $self = shift;
   my $code = $self->param('code');
+  $code =~ s/\r$//gm; # Fix Mac line endings
   my $tmpfile = '/tmp/compiletest.pl';
   write_file($tmpfile, { binmode => ':utf8', atomic => 1 }, $code);
   system("LIB=$FinBin::Bin/lib/ ; $^X -c $tmpfile");
