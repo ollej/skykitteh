@@ -482,6 +482,7 @@
 
   function checkUploadResponse() {
     var response = $('#upload_target').contents().html();
+    console.log('checkUploadResponse()');
     if (response) {
       console.log('response: ', response);
       var data = { status: 0 };
