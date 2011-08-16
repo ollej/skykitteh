@@ -417,6 +417,7 @@
   {
       if (state != '') return;
       state = '_COMPILE_';
+      log("Compiling " + editor['filename']);
 
       $.ajax({ url: '/ide/compile',
 	       type: 'POST',
