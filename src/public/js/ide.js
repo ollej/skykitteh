@@ -382,7 +382,7 @@
   {
       if(state != '') return;
       state = '_DIFF_';
-      log('Diffing '+data['filename']+' with current version on server ...');
+      log('Diffing '+editor['filename']+' with current version on server ...');
 
       $.ajax({ url: '/ide/diff',
 	       type: 'POST',
@@ -418,7 +418,7 @@
   {
       if (state != '') return;
       state = '_COMPILE_';
-      log("Compiling " + editor['filename'] + ' ...');
+      log('Compiling ' + editor['filename'] + ' ...');
 
       $.ajax({ url: '/ide/compile',
 	       type: 'POST',
