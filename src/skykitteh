@@ -104,6 +104,7 @@ get '/edit/(*filename)' => sub {
 # Can haz uploadz
 post '/upload' => sub {
   my $self = shift;
+  my $format = $self->param('format');
   my $uploadfile = $self->req->upload('uploadfile');
   if ($uploadfile) {
     my $path = $self->param('path');
@@ -111,7 +112,7 @@ post '/upload' => sub {
     if ($path) {
       if (! -d $path) {
         unless (mkpath($path, {error => \my $err}) && -d $path) {
-          return $self->render('error', 'msg' => "Don't confuse teh kitteh.");
+          return $self->render('error', status => 400, 'msg' => "Don't confuse teh kitteh.");
         }
       }
       $path =~ s/\/*$/\//;
@@ -119,13 +120,17 @@ post '/upload' => sub {
 
     my $filename = "./$path" . $uploadfile->filename;
     if ( -e $filename ) {
-      return $self->render('error', 'msg' => 'Alraedy haz file!');
+      return $self->render('error', status => 403, 'msg' => 'Alraedy haz file!');
     } else {
       $uploadfile->move_to($filename);
-      return $self->redirect_to('/');
+      if ($format eq 'json') {
+          return $self->render_json({status => 1});
+      } else {
+          return $self->redirect_to('/');
+      }
     }
   } else {
-    return $self->render('error', 'msg' => 'No can haz file?!');
+    return $self->render('error', status => 400, 'msg' => 'No can haz file?!');
   }
 };
 
