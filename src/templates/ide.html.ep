@@ -35,7 +35,7 @@
   <div id="sideBar">
     <div id="files"></div>
     <div id="filesActions">
-      <a href="#skyde-upload" class="filesAction nyroModal">upload</span>
+      <a href="#skykitteh-upload" class="filesAction nyroModal">upload</span>
       <a href="#" class="filesAction" onclick="startListFiles(); return false;">refresh</span>
     </div>
   </div>
