@@ -14,6 +14,7 @@
 	<input type="button" class="action" onclick="startSaveFile();" name="save" value="save"/>
 	<input type="button" class="action" onclick="startRevertFile();" name="revert" value="revert"/>
 	<input type="button" class="action" onclick="startDiff();" name="compare" value="diff"/>
+	<input type="button" class="action" onclick="startCompile();" name="compile" value="compile"/>
 	<input type="button" class="action" onclick="promptNewFile();" name="new_file" value="new file"/>
 	<div id="tabBar" class="action"></div>
       </div>
