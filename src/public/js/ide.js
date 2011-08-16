@@ -481,6 +481,9 @@
 
 $(document).ready(function() {
 
+    // Setup nyroModal
+    $('.nyroModal').nyroModal();
+
   $('#editcode').tabby();
   $('#xResizeHandle').mousedown(function(e){
 	  e.preventDefault();
