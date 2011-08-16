@@ -212,7 +212,7 @@ get '/ide/compile' => sub {
   my $tmpfile = '/tmp/compiletest.pl';
   write_file($tmpfile, { binmode => ':utf8', atomic => 1 }, $code);
   my $output = `LIB=$FinBin::Bin/lib/ ; $^X -c $tmpfile 2>&1`;
-  if ($output =~ /syntax OK/) {
+  if ($output =~ qr/syntax OK$/) {
     $self->render_json({status => 1});
   } else {
     $self->render_json({status => 0});
