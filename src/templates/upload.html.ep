@@ -1,10 +1,11 @@
 <div id="skykitteh-upload">
 <h2>Gimmeh Nomz:</h2>
-<%= form_for '/upload' => (method => 'post') => (enctype => 'multipart/form-data') => begin %>
+<%= form_for '/upload' => (method => 'post') => (id => 'upload-form') => (name => 'upload_form') => (enctype => 'multipart/form-data') => begin %>
 %= file_field 'uploadfile';
 <br />
 <label for="path">Path:</label> <%= text_field 'path' %>
 <br />
 %= submit_button 'Uploadz';
 <% end %>
+<iframe id='upload_target' name='upload_target' src='' style='width:1px;height:1px;border:0'></iframe>
 </div>
