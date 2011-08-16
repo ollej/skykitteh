@@ -483,11 +483,13 @@
   function checkUploadResponse() {
     var response = $('#upload_target').contents();
     if (response) {
+      console.log('response: ', response);
       var data = { status: 0 };
       try {
         data = $.parseJSON(response);
       } catch(e) {
 	log('Unknown response from server:' + response);
+	data = { status: 0 };
       }
       if (data['status'] == 1) {
 	log('File uploaded.');
