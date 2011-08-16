@@ -35,10 +35,12 @@
   <div id="sideBar">
     <div id="files"></div>
     <div id="filesActions">
-      <a href="#" class="filesAction" onclick="alert('not implemented'); return false;">upload</span>
+      <a href="#skyde-upload" class="filesAction nyroModal">upload</span>
       <a href="#" class="filesAction" onclick="startListFiles(); return false;">refresh</span>
     </div>
   </div>
 
 </div> <!-- /workspace -->
+
+%= include 'upload'
 
