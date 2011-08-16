@@ -60,6 +60,7 @@ div, ul {
     border: 0;
     padding:0px;
 font-family: 'Menlo', 'Monaco', Courier, monospace !important;
+white-space: pre;
 }
 
 #toolBar {
