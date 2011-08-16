@@ -413,6 +413,33 @@
       state = '';
   }
 
+  function startCompile()
+  {
+      if (state != '') return;
+      state = '_COMPILE_';
+
+      $.ajax({ url: '/ide/compile',
+	       type: 'POST',
+	       dataType: 'json',
+	       data: { format:'json', filename:editor['filename'], code: getEdContent() },
+	       success: handleCompileResponse,
+	       error: handleError
+	     });
+  }
+
+  function handleCompileResponse(data)
+  {
+      if (state != '_COMPILE_') return;
+
+      if (data['status'] == 1) {
+	  log('Code compiles.');
+      } else {
+	  log('Syntax Error: Code does not compile!', 'error');
+	  log(data['error_msg'], 'code');
+      }
+      state = '';
+  }
+
   function handleError(jqXHR, textStatus, errorThrown)
   {
       if(state == '') return;
