@@ -481,8 +481,9 @@
 
 $(document).ready(function() {
 
-    // Setup nyroModal
-    $('.nyroModal').nyroModal();
+  // Setup nyroModal
+  $('.nyroModal').nyroModal();
+  $('#skyde-upload').hide();
 
   $('#editcode').tabby();
   $('#xResizeHandle').mousedown(function(e){
