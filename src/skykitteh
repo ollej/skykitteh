@@ -213,7 +213,7 @@ get '/ide/compile' => sub {
   write_file($tmpfile, { binmode => ':utf8', atomic => 1 }, $code);
   my $output = `PERL5LIB=$FindBin::Bin/lib/ $^X -c $tmpfile 2>&1`;
   if ($output =~ qr/syntax OK$/) {
-    $self->render_json({status => 1, output => $output, code => $code, x => $^X});
+    $self->render_json({status => 1});
   } else {
     $self->render_json({status => 0});
   }
