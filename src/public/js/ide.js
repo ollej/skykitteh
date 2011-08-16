@@ -137,6 +137,7 @@
 	      if(message == null) {
 		  log('Save aborted.', 'error');
 		  state = '';
+		  disableEd(false);
 		  return;
 	      }
 
