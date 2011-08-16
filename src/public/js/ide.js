@@ -137,7 +137,7 @@
 	      if(message == null) {
 		  log('Save aborted.', 'error');
 		  state = '';
-		  disableEd(false);
+      		  disableEd(false);
 		  return;
 	      }
 
@@ -480,11 +480,39 @@
       window.setTimeout("init()", 500);
   }
 
+  function checkUploadResponse() {
+    var response = $('#upload_target').contents();
+    if (response) {
+      var data = { status: 0 };
+      try {
+        data = $.parseJSON(response);
+      } catch(e) {
+	log('Unknown response from server:' + response);
+      }
+      if (data['status'] == 1) {
+	log('File uploaded.');
+      } else {
+	log('Error uploading file!', 'error');
+      }
+    } else {
+      setTimeout(checkUploadResponse, 500);
+    }
+  }
+
+  function onUploadFormSubmit() {
+    $('#upload_form').attr('target', 'upload_target');
+    $('#upload_form').append('<input type="hidden" name="format" value="json" />');
+    setTimeout(checkUploadResponse, 500);
+    log('Uploading file ...');
+    return true;
+  }
+
 $(document).ready(function() {
 
   // Setup nyroModal
   $('.nyroModal').nyroModal();
   $('#skykitteh-upload').hide();
+  $('#upload_form').submit(onUploadFormSubmit);
 
   $('#editcode').tabby();
   $('#xResizeHandle').mousedown(function(e){
