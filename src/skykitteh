@@ -211,7 +211,7 @@ post '/ide/compile' => sub {
   $code =~ s/\r$//gm; # Fix Mac line endings
   my $tmpfile = '/tmp/compiletest.pl';
   write_file($tmpfile, { binmode => ':utf8', atomic => 1 }, $code);
-  my $output = `PERL5LIB=$FindBin::Bin/lib/ $^X -c $tmpfile 2>&1`;
+  my $output = `PERL5LIB=$PERL5LIB:$FindBin::Bin/lib/ $^X -c $tmpfile 2>&1`;
   if ($output =~ qr/syntax OK$/) {
     $self->render_json({status => 1});
   } else {
