@@ -21,9 +21,9 @@
 	%= javascript '/js/jquery.alerts.js';
 	%= javascript '/js/jquery.md5.js';
 
-<!--
-	 = javascript '/js/ace/ace.js';
-	 = javascript '/js/ace/mode-python.js';
+	%= javascript '/js/ace/ace.js';
+
+<!--	 = javascript '/js/ace/mode-python.js';
 	 = javascript '/js/ace/theme-eclipse.js';
 -->
 
@@ -31,10 +31,10 @@
 	%= javascript '/js/ide.js';
 	<!-- = javascript '/js/ace.js'; -->
 
-	<!-- = javascript 'http://ajaxorg.github.com/ace/textarea/src/ace.js'; -->
-	%= javascript 'http://ajaxorg.github.com/ace/build/textarea/src/ace.js';
+	<!-- = javascript 'http://ajaxorg.github.com/ace/textarea/src/ace.js';
+	= javascript 'http://ajaxorg.github.com/ace/build/textarea/src/ace.js';
 
-	%= javascript 'http://ajaxorg.github.com/ace/build/textarea/src/mode-perl.js'; <!-- -->
+	= javascript 'http://ajaxorg.github.com/ace/build/textarea/src/mode-perl.js'; -->
 
 	<!-- = javascript '/js/skykitteh.js'; -->
 
