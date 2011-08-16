@@ -215,7 +215,7 @@ get '/ide/compile' => sub {
   if ($output =~ qr/syntax OK$/) {
     $self->render_json({status => 1});
   } else {
-    $self->render_json({status => 0});
+    $self->render_json({status => 0, error_msg => $output});
   }
   unlink $tmpfile;
 };
