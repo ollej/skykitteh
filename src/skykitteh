@@ -210,7 +210,7 @@ post '/compile' => sub {
   my $code = $self->param('code');
   my $tmpfile = '/tmp/compiletest.pl';
   write_file($tmpfile, { binmode => ':utf8', atomic => 1 }, $code);
-  system("$^X -c $tmpfile");
+  system("LIB=$FinBin::Bin/lib/ ; $^X -c $tmpfile");
   if ($? == 0) {
     $self->render_json({status => 1});
   } else {
