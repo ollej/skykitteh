@@ -502,11 +502,18 @@
     }
   }
 
+  function fileUploaded(data) {
+      if (data['status'] == 1) {
+	log('File uploaded.');
+      } else {
+	log('Error uploading file!', 'error');
+      }
+  }
+
   function onUploadFormSubmit() {
+    log('Uploading file ...');
     $('#upload_form').attr('target', 'upload_target');
     $('#upload_form').append('<input type="hidden" name="format" value="json" />');
-    setTimeout(checkUploadResponse, 500);
-    log('Uploading file ...');
     return true;
   }
 
