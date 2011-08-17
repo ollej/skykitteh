@@ -503,13 +503,15 @@
   }
 
   function fileUploaded(data) {
-      if (data['status'] == 1) {
+      if (data && data['status'] == 1) {
 	log('File uploaded.');
+        startListFiles();
       } else {
 	log('Error uploading file!', 'error');
       }
   }
 
+  // FIXME: should handle incorrect responses and timeouts.
   function onUploadFormSubmit() {
     log('Uploading file ...');
     $('#upload_form').attr('target', 'upload_target');
