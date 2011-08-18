@@ -230,6 +230,17 @@ post '/ide/compile' => sub {
   unlink $tmpfile;
 };
 
+get '/ide/checksum' => sub {
+    my $self = shift;
+    my $filename = $self->param('filename');
+    my $oldcode = read_file($filename, err_mode => 'quiet');
+    my $data = { status => 0 };
+    if ($self->param('checksum') eq md5_hex($oldcode)) {
+        $data->{status} = 1;
+    }
+    $self->render_json($data);
+};
+
 get '/je/(:script)' => sub {
     my $self = shift;
     my $script = $self->param('script');
