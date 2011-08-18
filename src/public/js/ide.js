@@ -551,6 +551,7 @@
     log('Uploading file ...');
     $('#upload_form').attr('target', 'upload_target');
     $('#upload_form').append('<input type="hidden" name="format" value="json" />');
+    $.nyroModalRemove();
     return true;
   }
 
