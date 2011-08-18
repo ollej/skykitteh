@@ -233,12 +233,13 @@ post '/ide/compile' => sub {
 get '/ide/checksum' => sub {
     my $self = shift;
     my $filename = $self->param('filename');
-    my $oldcode = read_file($filename, err_mode => 'quiet');
-    my $data = { status => 0 };
-    if ($self->param('checksum') eq md5_hex($oldcode)) {
-        $data->{status} = 1;
+    if (-e $filename) {
+        my $oldcode = read_file($filename, err_mode => 'quiet');
+        my $checksum = md5_hex($oldcode);
+        $self->render_json({ status => 1, filename => $filename, checksum => $checksum });
+    } else {
+        $self->render_json({ status => 0, error_msg => "File not found: $filename" });
     }
-    $self->render_json($data);
 };
 
 get '/je/(:script)' => sub {
