@@ -128,7 +128,7 @@ post '/upload' => sub {
               json => {status => 1},
               partial => 1
           );
-	  return $self->render(data => "<script>parent.fileUploaded($json);</script>", format => 'js');
+	  return $self->render(text => "<script>parent.fileUploaded($json);</script>");
       } else {
           return $self->redirect_to('/');
       }
