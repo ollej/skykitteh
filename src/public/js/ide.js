@@ -620,29 +620,46 @@ function setEdMode(mode)
 {
 }
 
-function setEdScrollTop(scrollTop)
-{
-    $('#editcode')[0].scrollTop = scrollTop;
-}
-
-function getEdScrollTop()
-{
-    return $('#editcode')[0].scrollTop;
-}
-
 function disableTextEd(disabled)
 {
     $('#editcode').attr('readonly', disabled ? 'readonly' : '');
 }
 
+function setTextScrollTop(scrollTop)
+{
+    $('#editcode')[0].scrollTop = scrollTop;
+}
+
+function getTextScrollTop()
+{
+    return $('#editcode')[0].scrollTop;
+}
+
+function setDummyScrollTop(scrollTop)
+{
+}
+
+function getDummyScrollTop()
+{
+    return 0;
+}
+
 var aceEd;
 
-function setAceContent()
+function setAceMode(mode)
 {
+    //var JavaScriptMode = require("ace/mode/javascript").Mode;
+    //aceEd.getSession().setMode(new JavaScriptMode());
+}
+
+function setAceContent(val)
+{
+    aceEd.getSession().setValue(val);
 }
 
 function getAceContent()
 {
+    return aceEd.getSession().getValue();
 }
 
 function setAceMode(mode)
@@ -650,6 +667,8 @@ function setAceMode(mode)
     //var JavaScriptMode = require("ace/mode/javascript").Mode;
     //aceEd.getSession().setMode(new JavaScriptMode());
 }
+
+// editor.setReadOnly(true); // FIXME: disableAceEd.
 
 var codeMirror;
 
@@ -670,18 +689,24 @@ function disableCodeMirrorEd(disabled)
 
 var getEdContent = getTextContent;
 var setEdContent = setTextContent;
+var getEdScrollTop = getTextScrollTop;
+var setEdScrollTop = setTextScrollTop;
 var disableEd    = disableTextEd;
 
 function goAce()
 {
-    alert('Fix CSS and implement setAceContent() and getAceContent().');
-  aceEd = window.__ace_shadowed__;
-  aceEd.options.showPrintMargin = "true";
-  aceEd.options.gutter = "true";
-  aceEd.transformTextarea(document.getElementById('editcode'));
-  // aceEd.edit('editcode');
-  getEdContent = getAceContent;
-  setEdContent = setAceContent;
+    alert('Fix resize and implement read-only.');
+    var text = getEdContent();
+    //aceEd = window.__ace_shadowed__;
+    //aceEd.options.showPrintMargin = "true";
+    //aceEd.options.gutter = "true";
+    //aceEd.transformTextarea(document.getElementById('editcode'));
+    aceEd = ace.edit('codeArea');
+    getEdContent = getAceContent;
+    setEdContent = setAceContent;
+    setEdScrollTop = setDummyScrollTop;
+    getEdScrollTop = getDummyScrollTop;
+    setEdContent(text);
 }
 
 
