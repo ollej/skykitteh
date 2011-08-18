@@ -4,7 +4,6 @@
 # * Revision control, rollback to earlier version.
 # * Syntax highlighting
 # * Logo - Kitty smiley in cloud?
-# * AJAX updating / JSON responses for backend
 # * See more in isssues on github page. See above.
 
 use warnings;
