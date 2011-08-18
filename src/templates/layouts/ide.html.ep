@@ -21,7 +21,7 @@
 	%= javascript '/js/jquery.alerts.js';
 	%= javascript '/js/jquery.md5.js';
 
-	%= javascript '/js/ace/ace.js';
+	%= javascript '/js/ace.js';
 
 <!--	 = javascript '/js/ace/mode-python.js';
 	 = javascript '/js/ace/theme-eclipse.js';
