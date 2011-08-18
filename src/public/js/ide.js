@@ -3,13 +3,16 @@
   // Should be replaced with a process struct which holds path and abortHandler.
   var state = '';
 
+  // ID of the interval timer that checks files for updates.
+  var checksumInterval;
+
   // editor is the active file. ed['code'] is only valid for inactive editors.
   var editor = {
       code: '',
       base: '',
       filename: '-',
       checksum: '',
-      current: true,
+      current: false,
       scrollTop: 0
   };
 
@@ -446,7 +449,6 @@
       state = '';
   }
 
-  // TODO: trigger checksum check periodically
   function checkChecksum()
   {
       if (!editor['current']) {
@@ -465,10 +467,11 @@
 
   function handleChecksumResponse(data)
   {
-      if (data['filename'] == editor['filename'] && data['checksum'] != editor['checksum']) {
+      if (data && data['status'] && 
+          data['filename'] == editor['filename'] && 
+          data['checksum'] != editor['checksum']) {
 	  log('File ' + data['filename'] + ' has been updated on server!', 'error');
           editor['current'] = false;
-          // TODO: Stop periodic check, restart when file is saved/reverted.
       }
   }
 
@@ -503,6 +506,9 @@
 	      $(window).bind('beforeunload', function(){
 		      return isEdited() ? "A file has been modified.\nDo you want to discard the changes?" : null;
 		  });
+
+              // Start checking files for updates.
+              checksumInterval = setInterval(checkChecksum, 60000);
 	  }
       }
 
