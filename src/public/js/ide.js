@@ -9,6 +9,7 @@
       base: '',
       filename: '-',
       checksum: '',
+      current: true,
       scrollTop: 0
   };
 
@@ -249,6 +250,7 @@
       editor['base'] = data['code'];
       editor['filename'] = data['filename'];
       editor['checksum'] = data['checksum'];
+      editor['current'] = true;
 
       $('#statusBar').text(data['filename']);
 
@@ -271,7 +273,8 @@
 	  code: data['code'],
 	  base: data['code'],
 	  filename: data['filename'],
-	  checksum: data['checksum']
+	  checksum: data['checksum'],
+          current: true
       };
 
       addEditor(newEditor);
@@ -446,7 +449,10 @@
   // TODO: trigger checksum check periodically
   function checkChecksum()
   {
-      log('Checking checksum of file ' + editor['filename'] + ' ...');
+      if (!editor['current']) {
+          return;
+      }
+      console.log('Checking checksum of file ' + editor['filename'] + ' ...');
 
       $.ajax({ url: '/ide/checksum',
 	       type: 'GET',
@@ -459,8 +465,9 @@
 
   function handleChecksumResponse(data)
   {
-      if (data['filename'] != editor['filename'] && data['checksum'] != editor['checksum']) {
+      if (data['filename'] == editor['filename'] && data['checksum'] != editor['checksum']) {
 	  log('File ' + data['filename'] + ' has been updated on server!', 'error');
+          editor['current'] = false;
           // TODO: Stop periodic check, restart when file is saved/reverted.
       }
   }
