@@ -552,6 +552,7 @@
     $('#upload_form').attr('target', 'upload_target');
     $('#upload_form').append('<input type="hidden" name="format" value="json" />');
     $.nmTop().close();
+    $('#upload_form').get(0).reset();
     return true;
   }
 
