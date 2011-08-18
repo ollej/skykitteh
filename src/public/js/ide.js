@@ -443,6 +443,28 @@
       state = '';
   }
 
+  // TODO: trigger checksum check periodically
+  function checkChecksum()
+  {
+      log('Checking checksum of file ' + editor['filename'] + ' ...');
+
+      $.ajax({ url: '/ide/checksum',
+	       type: 'GET',
+	       dataType: 'json',
+	       data: { format:'json', filename:editor['filename'] },
+	       success: handleChecksumResponse,
+	       error: handleError
+	     });
+  }
+
+  function handleChecksumResponse(data)
+  {
+      if (data['filename'] != editor['filename'] && data['checksum'] != editor['checksum']) {
+	  log('File ' + data['filename'] + ' has been updated on server!', 'error');
+          // TODO: Stop periodic check, restart when file is saved/reverted.
+      }
+  }
+
   function handleError(jqXHR, textStatus, errorThrown)
   {
       if(state == '') return;
