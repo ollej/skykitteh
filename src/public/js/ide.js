@@ -454,7 +454,7 @@
       if (!editor['current']) {
           return;
       }
-      console.log('Checking checksum of file ' + editor['filename'] + ' ...');
+      //console.log('Checking checksum of file ' + editor['filename'] + ' ...');
 
       $.ajax({ url: '/ide/checksum',
 	       type: 'GET',
