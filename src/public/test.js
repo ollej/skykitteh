@@ -1,1 +1,1 @@
-alert('hi');
+me cago en ustedes -.-
