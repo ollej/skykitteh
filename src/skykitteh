@@ -363,7 +363,7 @@ get '/commits' => sub {
 
 get '/fix' => sub {
   unlink './templates/upload.html';
-}
+};
 
 get '/ide/' => sub {
     my $self = shift;
