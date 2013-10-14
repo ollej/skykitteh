@@ -361,10 +361,6 @@ get '/commits' => sub {
   return $self->render('commits');
 };
 
-get '/fix' => sub {
-  unlink './templates/upload.html';
-};
-
 get '/ide/' => sub {
     my $self = shift;
     $self->render('ide');
