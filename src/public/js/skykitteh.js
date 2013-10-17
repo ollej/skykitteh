@@ -57,7 +57,7 @@ $(document).ready(function() {
     editor.getSession().on('change', function(){
       textarea.val(editor.getSession().getValue());
     });
-    editor.setTheme("ace/theme/monokai");
+    //editor.setTheme("ace/theme/monokai");
     //editor.getSession().setMode("ace/mode/perl");
     //editor.options.showPrintMargin = "true";
     //editor.options.gutter = "true";
