@@ -58,7 +58,7 @@ $(document).ready(function() {
       textarea.val(editor.getSession().getValue());
     });
     editor.setTheme("ace/theme/monokai");
-    editor.getSession().setMode("ace/mode/perl");
+    //editor.getSession().setMode("ace/mode/perl");
     //editor.options.showPrintMargin = "true";
     //editor.options.gutter = "true";
     //editor.transformTextarea(document.getElementById('skykitteh-editcode'));
