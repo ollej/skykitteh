@@ -51,7 +51,12 @@ $(document).ready(function() {
 
   // Setup ACE editor.
   $('#aceeditor').click(function() {
-    var editor = ace.edit("skykitteh-editcode");
+    var editor = ace.edit("skykitteh-editcode-div");
+    var textarea = $('#skykitteh-editcode').hide();
+    editor.getSession().setValue(textarea.val());
+    editor.getSession().on('change', function(){
+      textarea.val(editor.getSession().getValue());
+    });
     editor.setTheme("ace/theme/monokai");
     editor.getSession().setMode("ace/mode/perl");
     //editor.options.showPrintMargin = "true";
