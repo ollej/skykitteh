@@ -4,6 +4,7 @@
 <%= form_for '/' => (method => 'post', id => 'editForm') => begin %>
 <div style="display: block; padding: 4px">
 <%= text_area 'code', rows => '35', id => 'skykitteh-editcode', class => 'skykitteh-editcode', spellcheck => 'false', begin %><%= $code %><% end %>
+<div id="skykitteh-editcode-div"></div>
 </div>
 %= hidden_field 'base', $code;
 %= hidden_field 'filename', $filename;
