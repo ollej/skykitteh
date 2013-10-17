@@ -15,7 +15,7 @@
 	%= javascript '/js/jquery.nyroModal.custom.js';
 	%= javascript '/js/jquery.alerts.js';
 	%= javascript '/js/jquery.md5.js';
-	%= javascript 'http://ajaxorg.github.com/ace/build/textarea/src/ace.js';
+	%= javascript 'http://ajaxorg.github.io/ace/build/src-min-noconflict/ace.js';
 	%= javascript 'http://ajaxorg.github.com/ace/build/textarea/src/mode-perl.js';
 	%= javascript '/js/skykitteh.js';
 </head>
