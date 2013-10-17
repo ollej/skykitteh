@@ -51,10 +51,12 @@ $(document).ready(function() {
 
   // Setup ACE editor.
   $('#aceeditor').click(function() {
-    var ace = window.__ace_shadowed__;
-    ace.options.showPrintMargin = "true";
-    ace.options.gutter = "true";
-    ace.transformTextarea(document.getElementById('skykitteh-editcode'));
+    var editor = ace.edit("skykitteh-editcode");
+    editor.setTheme("ace/theme/monokai");
+    editor.getSession().setMode("ace/mode/perl");
+    //editor.options.showPrintMargin = "true";
+    //editor.options.gutter = "true";
+    //editor.transformTextarea(document.getElementById('skykitteh-editcode'));
     return false;
   });
 
